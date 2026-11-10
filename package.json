@@ -25,7 +25,9 @@
     "seed:content": "tsx prisma/seed-content.ts",
     "prod:seed:content": "tsx --env-file=.env.production.local prisma/seed-content.ts",
     "seed:memory": "tsx prisma/seed-memory.ts",
-    "prod:seed:memory": "tsx --env-file=.env.production.local prisma/seed-memory.ts"
+    "prod:seed:memory": "tsx --env-file=.env.production.local prisma/seed-memory.ts",
+    "seed:branches": "tsx prisma/seed-branches.ts",
+    "prod:seed:branches": "tsx --env-file=.env.production.local prisma/seed-branches.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.7.0",
