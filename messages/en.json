@@ -236,6 +236,10 @@
     "calendar": {
       "title": "Calendar of memorable dates",
       "description": "Anniversaries of events, organizations and people of East Kazakhstan — from the archive’s official calendar."
+    },
+    "fundRegistry": {
+      "title": "List of funds",
+      "description": "All funds of the East Kazakhstan State Archive: number, title, date range and volume."
     }
   },
   "NotFound": {
@@ -306,7 +310,9 @@
     "allFunds": "All fonds",
     "sheets": "{count} sh.",
     "loading": "Loading results…",
-    "closeFilters": "Close filters"
+    "closeFilters": "Close filters",
+    "registryTitle": "Full list of the archive’s funds",
+    "registryText": "{count} funds with numbers, date ranges and volume — register as of 2018."
   },
   "Document": {
     "fields": "Document details",
@@ -664,5 +670,28 @@
     },
     "sizeMb": "{size} MB",
     "enNotice": "The documents are published by the archive in Kazakh and Russian."
+  },
+  "FundRegistry": {
+    "sourceNote": "Register of the archive’s funds as of 2018 (tables from the old website e-arhiv.vko.gov.kz). Information on classified funds is not published.",
+    "ruOnly": "Fund titles are given in the original Russian.",
+    "searchLabel": "Search the list of funds",
+    "searchPlaceholder": "Fund number (Р-25, 1П) or title",
+    "search": "Search",
+    "seriesLabel": "Fund series",
+    "series": {
+      "all": "All funds",
+      "R": "Soviet and modern period",
+      "P": "Party funds"
+    },
+    "categoryLabel": "Category",
+    "category": "Category {n}",
+    "reset": "Reset",
+    "found": "{count, plural, one {# fund found} other {# funds found}}",
+    "empty": "Nothing found. Try another number or part of the title.",
+    "error": "The list is temporarily unavailable.",
+    "fundN": "F. {number}",
+    "years": "{from}–{to}",
+    "units": "Volume: {units} storage units",
+    "history": "{count, plural, one {# title} other {All # titles}}"
   }
 }

@@ -29,7 +29,9 @@
     "seed:branches": "tsx prisma/seed-branches.ts",
     "prod:seed:branches": "tsx --env-file=.env.production.local prisma/seed-branches.ts",
     "seed:calendar": "tsx prisma/seed-calendar.ts",
-    "prod:seed:calendar": "tsx --env-file=.env.production.local prisma/seed-calendar.ts"
+    "prod:seed:calendar": "tsx --env-file=.env.production.local prisma/seed-calendar.ts",
+    "seed:funds": "tsx prisma/seed-fund-registry.ts",
+    "prod:seed:funds": "tsx --env-file=.env.production.local prisma/seed-fund-registry.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.7.0",

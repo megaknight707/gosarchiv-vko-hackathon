@@ -23,15 +23,18 @@ export async function CatalogPagination({
   filters,
   page,
   pageCount,
+  buildHref,
 }: {
   locale: Locale;
-  filters: CatalogFilters;
+  filters?: CatalogFilters;
   page: number;
   pageCount: number;
+  /** Своя ссылка на страницу (например, для перечня фондов); по умолчанию — каталог */
+  buildHref?: (page: number) => string;
 }) {
   if (pageCount <= 1) return null;
   const t = await getTranslations({ locale, namespace: "Catalog" });
-  const href = (n: number) => `/catalog${serializeCatalogFilters({ ...filters, page: n })}`;
+  const href = buildHref ?? ((n: number) => `/catalog${serializeCatalogFilters({ ...(filters ?? {}), page: n } as CatalogFilters)}`);
   const cell = "grid h-10 min-w-10 place-items-center rounded-[10px] border border-border bg-surface px-3 font-bold";
 
   return (

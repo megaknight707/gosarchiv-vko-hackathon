@@ -1,16 +1,18 @@
 // Вид каталога «Фонды»: структура архива Фонд → Опись → Дело → Документ.
 // Без параметра — список фондов по тематическим группам; с ?fund=<id> — описи и дела фонда.
-import { ChevronRight, FolderOpen, User } from "lucide-react";
+import { BookOpenText, ChevronRight, FolderOpen, User } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { db } from "@/lib/db";
 import { pickLocale } from "@/lib/i18n/pick-locale";
+import { countFundRegistry } from "@/lib/funds/fund-registry";
 import { Breadcrumbs } from "@/components/archive/breadcrumbs";
 import { AccessStamp } from "@/components/archive/access-stamp";
 
 export async function FundsList({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "Catalog" });
+  const registryCount = await countFundRegistry();
   const funds = await db.fund.findMany({
     where: { status: "PUBLISHED" },
     orderBy: [{ category: { sortOrder: "asc" } }, { number: "asc" }],
@@ -30,6 +32,16 @@ export async function FundsList({ locale }: { locale: Locale }) {
 
   return (
     <div>
+      {registryCount > 0 && (
+        <Link href="/catalog/funds" className="group mb-8 flex items-center gap-4 rounded-[16px] border border-border bg-surface p-5 hover:border-primary">
+          <BookOpenText aria-hidden className="size-8 shrink-0 text-primary" />
+          <span className="flex-1">
+            <span className="block font-serif text-xl font-bold group-hover:text-primary">{t("registryTitle")}</span>
+            <span className="text-muted-ink">{t("registryText", { count: registryCount })}</span>
+          </span>
+          <ChevronRight aria-hidden className="size-5 text-muted-ink" />
+        </Link>
+      )}
       <p className="mb-6 max-w-3xl text-muted-ink">{t("fundsIntro")}</p>
       <div className="space-y-8">
         {[...groups.entries()].map(([key, group]) => (
