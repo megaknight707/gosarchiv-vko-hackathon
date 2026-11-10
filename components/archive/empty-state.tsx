@@ -9,12 +9,14 @@ export function EmptyState({
   action,
   Icon = Archive,
   className,
+  children,
 }: {
   title: string;
   text?: string;
   action?: { href: string; label: string };
   Icon?: LucideIcon;
   className?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <div className={cn("flex flex-col items-center rounded-2xl border border-dashed border-border bg-surface px-6 py-12 text-center", className)}>
@@ -23,6 +25,7 @@ export function EmptyState({
       </span>
       <p className="font-serif text-xl font-bold">{title}</p>
       {text && <p className="mt-2 max-w-md text-muted-ink">{text}</p>}
+      {children}
       {action && (
         <Link
           href={action.href}

@@ -14,6 +14,8 @@ export type DocumentCardData = {
   docType: "PHOTO" | "TEXT" | "MAP_DRAWING" | "AUDIO_VIDEO" | "PERSONAL" | "ORGANIZATION" | "HISTORICAL";
   yearLabel?: string | null;
   placeName?: string | null;
+  /** Дополнительная метка, например «12 л.» */
+  extraLabel?: string | null;
   accessStatus: AccessStatus;
   previewUrl?: string | null;
   isDemo?: boolean;
@@ -53,6 +55,7 @@ export function DocumentCard({ doc, showDemo = false, className }: { doc: Docume
           <li className="rounded-md bg-chip px-2 py-0.5 text-muted-ink">{t(`docType.${doc.docType}`)}</li>
           {doc.yearLabel && <li className="rounded-md bg-chip px-2 py-0.5 text-muted-ink">{doc.yearLabel}</li>}
           {doc.placeName && <li className="rounded-md bg-chip px-2 py-0.5 text-muted-ink">{doc.placeName}</li>}
+          {doc.extraLabel && <li className="rounded-md bg-chip px-2 py-0.5 text-muted-ink">{doc.extraLabel}</li>}
         </ul>
         {showDemo && doc.isDemo && <p className="text-[11px] text-muted-ink italic">{tDemo("record")}</p>}
       </div>

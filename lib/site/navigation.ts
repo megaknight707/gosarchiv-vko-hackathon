@@ -21,6 +21,7 @@ export const secondaryNav: NavItem[] = [
   { key: "news", href: "/news" },
   { key: "faq", href: "/faq" },
   { key: "feedback", href: "/feedback" },
+  { key: "favorites", href: "/favorites" },
 ];
 
 /** Активен ли пункт меню для текущего пути (без префикса языка) */
