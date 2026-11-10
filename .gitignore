@@ -1,0 +1,51 @@
+# зависимости
+node_modules/
+.pnp
+.pnp.*
+
+# сборка Next.js
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# секреты: все .env*, кроме шаблона
+.env*
+!.env.example
+
+# загруженные файлы (кроме .gitkeep)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# данные Docker / PostgreSQL
+docker-data/
+.pgdata/
+postgres-data/
+
+# временная папка create-next-app
+_tmp-next/
+
+# тесты и отчёты
+coverage/
+playwright-report/
+test-results/
+
+# логи
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Vercel
+.vercel
+
+# системное и редакторы
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# локальные настройки Claude Code
+.claude/settings.local.json
