@@ -119,7 +119,42 @@
     "title": "The history of East Kazakhstan in documents, photographs and lives",
     "lead": "Fonds, inventories and digitised materials of the State Archive and its branches. Search by reference code — or just ask in your own words.",
     "featuredTitle": "History in documents",
-    "featuredSubtitle": "A selection of open materials"
+    "featuredSubtitle": "A selection of open materials",
+    "askLabel": "Ask the archive",
+    "askPlaceholder": "For example: photos of Ust-Kamenogorsk in the 1960s",
+    "askSubmit": "Search",
+    "aiTag": "Smart search",
+    "chip1": "Photos of Oskemen, 1960s",
+    "chip2": "Documents on the Great Patriotic War",
+    "chip3": "Virgin Lands campaign",
+    "chip4": "Where is the nearest branch?",
+    "quickLinks": "Quick links",
+    "heroCaption": "Illustration · an archival photograph from the fonds will appear here",
+    "statsTitle": "The archive in numbers",
+    "statFunds": "archival fonds",
+    "statUnits": "storage units",
+    "statAv": "audiovisual records",
+    "statBranches": "branches in the region",
+    "statsNote": "Archive data as of 01.01.2020",
+    "exhibitionsTitle": "Online exhibitions",
+    "exhibitionsSubtitle": "Virtual exhibitions — no need to visit in person",
+    "allExhibitions": "All exhibitions",
+    "openExhibition": "Open exhibition",
+    "branchesTitle": "Our branches",
+    "branchesSubtitle": "Choose a branch and get directions",
+    "allBranches": "All branches and directions",
+    "newsTitle": "News and events",
+    "allNews": "All news",
+    "usefulTitle": "Useful information",
+    "usefulSubtitle": "Understand the archive in 5 minutes",
+    "useful1Title": "How to use the catalogue",
+    "useful1Text": "Search, filters and the document page — step by step.",
+    "useful2Title": "Fonds → inventory → file",
+    "useful2Text": "How the archive is organised and what each level means.",
+    "useful3Title": "How to read a reference code",
+    "useful3Text": "Ф. 1520 · Оп. 2 · Д. 14",
+    "useful4Title": "Access statuses",
+    "useful4Text": "What can be viewed online and what has a description only."
   },
   "Pages": {
     "about": {
@@ -318,5 +353,178 @@
     "count": "{count, plural, one {# document} other {# documents}}",
     "loading": "Loading favourites…",
     "unavailable": "Some documents are no longer available and are hidden from the list."
+  },
+  "Content": {
+    "needsReview": "This wording needs to be checked by archive staff",
+    "inProgress": "This section is being prepared — details are being confirmed with the archive.",
+    "sections": "Page sections"
+  },
+  "Branches": {
+    "mapLabel": "Map of the archive and branches",
+    "searchLabel": "Search by name or place",
+    "searchPlaceholder": "For example: Ridder",
+    "typeFilter": "Type",
+    "types": {
+      "ALL": "All",
+      "MAIN": "Main building",
+      "BUILDING": "Archive building",
+      "BRANCH": "Branches",
+      "PERSONNEL": "Personnel records"
+    },
+    "viewList": "List",
+    "viewMap": "Map",
+    "count": "{count, plural, one {# location} other {# locations}}",
+    "nothingFound": "Nothing found. Try another name or place.",
+    "approximate": "The location on the map is approximate",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "workHours": "Opening hours",
+    "readingRoom": "Reading room",
+    "servedArea": "Service area",
+    "funds": "Fonds and focus",
+    "about": "About",
+    "coordinates": "Coordinates",
+    "route": "Directions",
+    "routeFrom": "From",
+    "myLocation": "From my location",
+    "locating": "Detecting your location…",
+    "geoDenied": "We could not detect your location. Enter a starting address:",
+    "addressLabel": "Starting address",
+    "addressPlaceholder": "City, street, building",
+    "findAddress": "Find",
+    "addressNotFound": "Address not found on the map. The Google Maps link will still build a route from the address you entered.",
+    "fromAddress": "From: {address}",
+    "fromMyLocation": "From your location",
+    "distance": "≈ {km} km in a straight line",
+    "mode": "Travel mode",
+    "modes": {
+      "walking": "Walking",
+      "driving": "Driving",
+      "transit": "Public transport"
+    },
+    "open2gis": "Open in 2GIS",
+    "openGoogle": "Open in Google Maps",
+    "showOnMap": "Show on map",
+    "selectHint": "Choose a location in the list or on the map",
+    "mainBadge": "Main building"
+  },
+  "About": {
+    "branchesTitle": "Branches",
+    "branchesText": "Addresses, phone numbers and opening hours of the archive and its branches — on an interactive map with directions.",
+    "openBranches": "Open the branch map"
+  },
+  "Help": {
+    "purposeTitle": "What you can do on this website",
+    "purposeText": "The website of the East Kazakhstan State Archive is for information: you can find details about the archive and its branches, search the online catalogue, view open digital copies, online exhibitions and Memory Archive materials. You cannot submit requests or order certificates here — use the egov.kz portal for that.",
+    "navTitle": "How the website is organised",
+    "navItems": "Catalogue — search for documents · Memory Archive and Exhibitions — the region's history in documents · Branches — addresses and directions · Help and FAQ — answers to common questions · “Ask the archive” AI assistant — tells you where to look.",
+    "schemeTitle": "How the archive is organised",
+    "schemeHint": "Click a level to see what it means",
+    "levels": {
+      "archive": {
+        "title": "Archive",
+        "text": "The institution that keeps the records. The East Kazakhstan State Archive has a main building and branches in several towns of the region."
+      },
+      "fund": {
+        "title": "Fonds",
+        "text": "All records of one organisation or one person. For example, the fonds of the Ust-Kamenogorsk Titanium and Magnesium Plant or a writer's personal fonds."
+      },
+      "inventory": {
+        "title": "Inventory",
+        "text": "A list of files within a fonds. Inventories group files by year, record type or department."
+      },
+      "unit": {
+        "title": "File",
+        "text": "A folder of documents on one matter — a storage unit. The sheets in a file are numbered."
+      },
+      "document": {
+        "title": "Document",
+        "text": "A specific record: minutes, a letter, a photograph or a map. Every document on the site has a page with its description."
+      }
+    },
+    "searchTitle": "How to search the catalogue",
+    "searchSteps": {
+      "s1": "Type in your own words: “photos of Ust-Kamenogorsk in the 1960s”. The site recognises the document type, place and period.",
+      "s2": "Refine the results with filters: type, period, place, digital copy, topic.",
+      "s3": "Know the reference code? Paste it into the search box — the document will open.",
+      "s4": "Share a link to the results — the filters are saved in the page address."
+    },
+    "openCatalog": "Go to the catalogue",
+    "cipherTitle": "How to read a reference code",
+    "cipherParts": {
+      "fund": "fonds number",
+      "inventory": "inventory number",
+      "unit": "file number"
+    },
+    "cipherText": "The reference code is the exact address of a document in the archive. It is cited in research and when you visit the reading room.",
+    "typesTitle": "Types of records",
+    "typesText": "The catalogue includes photographs, written documents, maps and drawings, audio and video recordings, personal papers and records of organisations. Thematic selections are in the Memory Archive and Exhibitions sections.",
+    "accessTitle": "Access statuses",
+    "access": {
+      "OPEN": "The description and the digital copy (if any) are available online.",
+      "DESCRIPTION_ONLY": "The description is published; the document can be consulted in the archive reading room.",
+      "RESTRICTED": "Access is restricted by the law of Kazakhstan (for example, personal data); only the description is online."
+    },
+    "contactsTitle": "Contacts and opening hours",
+    "linksTitle": "Useful resources",
+    "links": {
+      "adilet": "Legal acts (adilet.zan.kz)",
+      "egov": "eGov portal (egov.kz) — official requests and services",
+      "govkz": "Department of Digitalization and Archives of East Kazakhstan (gov.kz)"
+    }
+  },
+  "Faq": {
+    "searchLabel": "Search questions",
+    "searchPlaceholder": "For example: reference code, favourites, directions",
+    "noResults": "Nothing found. Try another word or write to us via the feedback form.",
+    "count": "{count, plural, one {# question} other {# questions}}"
+  },
+  "News": {
+    "categories": {
+      "ALL": "All",
+      "EXHIBITION": "Exhibitions",
+      "CONFERENCE": "Conferences",
+      "EVENT": "Events",
+      "RESEARCH": "Research",
+      "BRANCH": "Branches"
+    },
+    "categoryFilter": "Category",
+    "searchLabel": "Search news",
+    "sortNewest": "Newest first",
+    "sortOldest": "Oldest first",
+    "empty": "No news found",
+    "source": "Source: archive website",
+    "readMore": "Read more",
+    "more": "More news",
+    "branch": "Branch: {name}"
+  },
+  "Feedback": {
+    "notice": "This is not an official request or application. For official requests, please use the eGov portal",
+    "kind": "Message type",
+    "kinds": {
+      "REVIEW": "Review",
+      "SUGGESTION": "Suggestion",
+      "WISH": "Wish"
+    },
+    "message": "Message",
+    "messageHint": "10 to 2000 characters. Please do not include personal data.",
+    "name": "Name",
+    "email": "Email for a reply",
+    "optional": "optional",
+    "consent": "I agree to the processing of the data provided in accordance with the",
+    "consentLink": "privacy policy",
+    "submit": "Send",
+    "sending": "Sending…",
+    "success": "Thank you! Your message has been sent — archive staff will read it.",
+    "another": "Send another",
+    "errors": {
+      "validation": "Please check the form fields.",
+      "message": "Please write 10 to 2000 characters.",
+      "email": "Please check the email address.",
+      "consent": "Consent to data processing is required.",
+      "rateLimited": "Too many submissions. Please try again in a few minutes.",
+      "server": "Could not send. Please try again later."
+    }
   }
 }
