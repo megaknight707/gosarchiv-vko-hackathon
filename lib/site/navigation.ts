@@ -18,6 +18,7 @@ export const mainNav: NavItem[] = [
 
 /** Дополнительные разделы — в бургер-меню и подвале */
 export const secondaryNav: NavItem[] = [
+  { key: "services", href: "/services" },
   { key: "news", href: "/news" },
   { key: "faq", href: "/faq" },
   { key: "feedback", href: "/feedback" },
@@ -36,4 +37,15 @@ export const govLinks = [
   { key: "egov", href: "https://egov.kz" },
   { key: "adilet", href: "https://adilet.zan.kz" },
   { key: "govkz", href: "https://www.gov.kz/memleket/entities/vko-uca" },
+] as const;
+
+/** Справочные разделы по «Дополнениям к ТЗ» — блок на странице «Справка» и в подвале */
+export const referencePages = [
+  { key: "services", href: "/services" },
+  { key: "stateService", href: "/services/state" },
+  { key: "paidServices", href: "/services/paid" },
+  { key: "legalActs", href: "/help/legal-acts" },
+  { key: "readingRoom", href: "/help/reading-room" },
+  { key: "symbols", href: "/help/symbols" },
+  { key: "usefulLinks", href: "/help/links" },
 ] as const;

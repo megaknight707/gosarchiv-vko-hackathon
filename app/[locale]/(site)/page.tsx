@@ -74,8 +74,10 @@ const STATS = [
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const locale = (await params).locale as Locale;
-  const [t, tCommon, tNews, featured, branches, { news, exhibitions }] = await Promise.all([
+  const [t, tServices, tPages, tCommon, tNews, featured, branches, { news, exhibitions }] = await Promise.all([
     getTranslations({ locale, namespace: "Home" }),
+    getTranslations({ locale, namespace: "Services" }),
+    getTranslations({ locale, namespace: "Pages" }),
     getTranslations({ locale, namespace: "Common" }),
     getTranslations({ locale, namespace: "News" }),
     getFeaturedDocuments(locale),
@@ -250,6 +252,27 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             </li>
           ))}
         </ul>
+      </section>
+
+      {/* ── Как получить архивную справку (Дополнения к ТЗ §9) — только справочная информация ── */}
+      <section aria-labelledby="how-certificate" className="mx-auto max-w-7xl px-4 pt-12 sm:px-8 sm:pt-16">
+        <div className="flex flex-col gap-5 rounded-[18px] border border-border bg-surface p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <h2 id="how-certificate" className="font-serif text-2xl font-bold">
+              {tServices("howTitle")}
+            </h2>
+            <p className="mt-2 text-muted-ink">{tServices("howText")}</p>
+            <p className="mt-2 text-sm text-muted-ink">{tServices("infoOnly")}</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/services/state" className="rounded-[10px] bg-primary px-[18px] py-2.5 font-bold text-primary-foreground hover:opacity-90">
+              {tPages("stateService.title")}
+            </Link>
+            <Link href="/services/paid" className="rounded-[10px] border border-border bg-bg px-[18px] py-2.5 font-bold hover:bg-chip">
+              {tPages("paidServices.title")}
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* ── Полезная информация ── */}

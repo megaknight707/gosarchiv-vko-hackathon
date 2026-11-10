@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getBranches } from "@/lib/site/branches";
+import { referencePages } from "@/lib/site/navigation";
 import { pageMetadata } from "@/lib/site/page-metadata";
 import { AccessStamp } from "@/components/archive/access-stamp";
 import { Breadcrumbs } from "@/components/archive/breadcrumbs";
@@ -20,13 +21,14 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/help">):
 
 export default async function HelpPage({ params }: PageProps<"/[locale]/help">) {
   const locale = (await params).locale as Locale;
-  const [t, tNav, tPages, tContent, tBranches, tCommon, branches] = await Promise.all([
+  const [t, tNav, tPages, tContent, tBranches, tCommon, tServices, branches] = await Promise.all([
     getTranslations({ locale, namespace: "Help" }),
     getTranslations({ locale, namespace: "Nav" }),
     getTranslations({ locale, namespace: "Pages" }),
     getTranslations({ locale, namespace: "Content" }),
     getTranslations({ locale, namespace: "Branches" }),
     getTranslations({ locale, namespace: "Common" }),
+    getTranslations({ locale, namespace: "Services" }),
     getBranches(locale),
   ]);
 
@@ -40,6 +42,7 @@ export default async function HelpPage({ params }: PageProps<"/[locale]/help">) 
     { id: "access", title: t("accessTitle") },
     { id: "contacts", title: t("contactsTitle") },
     { id: "links", title: t("linksTitle") },
+    { id: "reference", title: tServices("moreInfo") },
   ];
   const title = (id: string) => sections.find((s) => s.id === id)!.title;
   const h2 = "mb-4 font-serif text-2xl font-bold";
@@ -168,6 +171,19 @@ export default async function HelpPage({ params }: PageProps<"/[locale]/help">) 
                     {t(`links.${key}`)}
                     <ExternalLink aria-hidden className="size-3.5" />
                   </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section id="reference" className="scroll-mt-6">
+            <h2 className={h2}>{tServices("moreInfo")}</h2>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {referencePages.map((page) => (
+                <li key={page.href}>
+                  <Link href={page.href} className="block rounded-[12px] border border-border bg-surface px-4 py-3 font-bold hover:border-primary hover:text-primary">
+                    {tPages(`${page.key}.title`)}
+                  </Link>
                 </li>
               ))}
             </ul>

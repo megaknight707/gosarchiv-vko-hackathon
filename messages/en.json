@@ -28,7 +28,8 @@
     "feedback": "Feedback",
     "privacy": "Privacy policy",
     "mobileLabel": "Quick sections",
-    "favorites": "Favourites"
+    "favorites": "Favourites",
+    "services": "Services"
   },
   "Header": {
     "skipToContent": "Skip to content",
@@ -240,6 +241,34 @@
     "fundRegistry": {
       "title": "List of funds",
       "description": "All funds of the East Kazakhstan State Archive: number, title, date range and volume."
+    },
+    "services": {
+      "title": "Services and how to apply",
+      "description": "How to obtain an archival certificate, copy or extract: the state service, paid services of the archive, official documents and links."
+    },
+    "stateService": {
+      "title": "State service",
+      "description": "Issuing archival certificates, copies of archival documents or archival extracts: rules, ways to apply, reports."
+    },
+    "paidServices": {
+      "title": "Paid services",
+      "description": "Price list of the state archives of the East Kazakhstan Region (Akimat Resolution No. 289) — for reference."
+    },
+    "legalActs": {
+      "title": "Legislation and regulations",
+      "description": "Laws and rules on archival affairs with links to the official texts in the Adilet database."
+    },
+    "readingRoom": {
+      "title": "Reading room",
+      "description": "Rules for researchers, opening hours and equipment of the EKR State Archive reading room."
+    },
+    "symbols": {
+      "title": "State symbols of Kazakhstan",
+      "description": "Official materials about the Flag, Emblem and Anthem of the Republic of Kazakhstan."
+    },
+    "usefulLinks": {
+      "title": "Useful links",
+      "description": "Verified links to government resources, the Latin script converter and the weather."
     }
   },
   "NotFound": {
@@ -1294,5 +1323,61 @@
         "publish": "publish"
       }
     }
+  },
+  "Services": {
+    "infoOnly": "This website is for information only: you cannot apply for, order or pay for a service here. Use the official services instead — their links are marked as external.",
+    "external": "external",
+    "verified": "Checked against official sources on {date}.",
+    "stateCard": "How to obtain an archival certificate, a copy or an extract — free of charge, online or at a public service centre.",
+    "paidCard": "Official price list: copying, consultations, arranging documents and other work.",
+    "howTitle": "How to get an archival certificate",
+    "howText": "Archival certificates, copies of archival documents and archival extracts are issued as a state service — free of charge.",
+    "channels": "Where to apply",
+    "documents": "Official documents",
+    "stats": "2025 in figures",
+    "statsTotal": "services provided",
+    "statsElectronic": "electronically",
+    "statsIndividuals": "to individuals",
+    "statsLegal": "to organisations",
+    "statsSource": "According to the archive's report on the state service for 2025.",
+    "complaints": "Service quality",
+    "apostille": "Apostille on an archival certificate for use abroad — an eGov service.",
+    "fromAdilet": "Adilet database",
+    "fromArchive": "archive website",
+    "download": "File",
+    "actTitle": "Legal act",
+    "openAdilet": "Official text in Adilet",
+    "openScan": "Scan of the resolution (PDF)",
+    "basisTitle": "Legal basis",
+    "priceTitle": "Price list",
+    "priceHint": "Prices are in tenge and exclude the storage medium unless stated otherwise. Published for reference: the archive determines the cost of work.",
+    "priceSearch": "Search the price list",
+    "pricePlaceholder": "e.g. копия (copy), консультация (consultation)",
+    "colIndex": "Index",
+    "colName": "Works and services",
+    "colUnit": "Unit",
+    "colPrice": "Price, KZT",
+    "priceFound": "{count, plural, one {# item} other {# items}}",
+    "priceNothing": "Nothing found in the price list. Try another word or open the full text in Adilet.",
+    "notesTitle": "Discounts and notes",
+    "sourceLanguage": "The official price list exists in Kazakh and Russian only; the Russian text is shown.",
+    "popularTitle": "Frequently asked",
+    "legalIntro": "Key acts the archive works under. Titles are given in English for orientation; the official texts are in Kazakh and Russian. Check the current version in Adilet before use.",
+    "legalTopics": {
+      "archive": "Archival affairs",
+      "services": "State and paid services",
+      "region": "Acts of the East Kazakhstan Region",
+      "data": "Personal data and information security"
+    },
+    "legalAll": "Full list of acts published by the archive",
+    "readingIntro": "The reading room in the main building serves researchers. There is no online booking or ordering of files — please check the procedure by phone.",
+    "readingHours": "Opening hours",
+    "readingRules": "Rules",
+    "readingEquipment": "For researchers",
+    "readingAddress": "Address",
+    "readingContacts": "Check the procedure",
+    "symbolsIntro": "The official description of the state symbols is published on the website of the President of Kazakhstan.",
+    "linksIntro": "Links were checked on 10 November 2026 and open in a new tab.",
+    "moreInfo": "Reference pages"
   }
 }
