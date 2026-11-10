@@ -1,0 +1,617 @@
+// Схема базы данных Госархива ВКО.
+// Многоязычные поля — суффиксы Kz / Ru / En (titleKz, titleRu, titleEn).
+// Публичный сайт показывает только записи со статусом PUBLISHED.
+// Строки подключения задаются в prisma.config.ts (Prisma 7).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ───────────────────────────── Перечисления ─────────────────────────────
+
+/// Роли сотрудников (ТЗ §6.1)
+enum Role {
+  SUPER_ADMIN // Главный администратор
+  SITE_ADMIN // Администратор сайта
+  EDITOR // Редактор
+  ARCHIVIST // Сотрудник архива
+  BRANCH_ADMIN // Администратор филиала
+  MODERATOR // Модератор
+  ANALYST // Аналитик
+}
+
+/// Статусы согласования публикаций (ТЗ §6.7)
+enum PublicationStatus {
+  DRAFT
+  IN_REVIEW
+  NEEDS_CHANGES
+  APPROVED
+  PUBLISHED
+  ARCHIVED
+}
+
+/// Статус доступа к документу
+enum AccessStatus {
+  OPEN // открыт, цифровая копия может быть показана
+  DESCRIPTION_ONLY // опубликовано только описание
+  RESTRICTED // ограниченный доступ
+}
+
+/// Тип архивного документа (категории каталога ТЗ §5.3)
+enum DocType {
+  PHOTO // фотографии
+  TEXT // письменные источники
+  MAP_DRAWING // карты и чертежи
+  AUDIO_VIDEO // аудио- и видеоматериалы
+  PERSONAL // документы личного происхождения
+  ORGANIZATION // документы организаций и предприятий
+  HISTORICAL // исторические документы
+}
+
+enum BranchType {
+  MAIN // центральное здание
+  BUILDING // дополнительное здание центрального архива
+  BRANCH // филиал
+  PERSONNEL // филиал по личному составу
+}
+
+enum FileKind {
+  IMAGE
+  PDF
+  AUDIO
+  VIDEO
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum NewsCategory {
+  EXHIBITION
+  CONFERENCE
+  EVENT
+  RESEARCH
+  BRANCH
+}
+
+enum FeedbackKind {
+  REVIEW
+  SUGGESTION
+  WISH
+}
+
+enum SearchSource {
+  CATALOG
+  AI
+}
+
+// ───────────────────────────── Пользователи ─────────────────────────────
+
+model User {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  passwordHash     String
+  name             String
+  role             Role
+  branchId         String?
+  branch           Branch?   @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  isActive         Boolean   @default(true)
+  failedLoginCount Int       @default(0)
+  lockedUntil      DateTime?
+  lastLoginAt      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  auditLogs          AuditLog[]
+  moderationComments ModerationComment[]
+}
+
+// ───────────────────────────── Филиалы ─────────────────────────────
+
+model Branch {
+  id                     String     @id @default(cuid())
+  slug                   String     @unique
+  type                   BranchType
+  nameKz                 String
+  nameRu                 String
+  nameEn                 String
+  cityKz                 String
+  cityRu                 String
+  cityEn                 String
+  addressKz              String
+  addressRu              String
+  addressEn              String
+  phone                  String?
+  email                  String?
+  workHoursKz            String?
+  workHoursRu            String?
+  workHoursEn            String?
+  readingRoomHoursKz     String?
+  readingRoomHoursRu     String?
+  readingRoomHoursEn     String?
+  descriptionKz          String?
+  descriptionRu          String?
+  descriptionEn          String?
+  servedAreaKz           String?
+  servedAreaRu           String?
+  servedAreaEn           String?
+  fundsInfoKz            String?
+  fundsInfoRu            String?
+  fundsInfoEn            String?
+  latitude               Float
+  longitude              Float
+  coordinatesApproximate Boolean    @default(true)
+  photoUrl               String?
+  isMain                 Boolean    @default(false)
+  isVisibleOnMap         Boolean    @default(true)
+  sortOrder              Int        @default(0)
+  createdAt              DateTime   @default(now())
+  updatedAt              DateTime   @updatedAt
+
+  users     User[]
+  funds     Fund[]
+  documents ArchiveDocument[]
+  news      News[]
+}
+
+// ───────────────────────────── Каталог: Фонд → Опись → Дело → Документ ─────────────────────────────
+
+/// Тематическая группа фондов (промышленность, энергетика, …)
+model Category {
+  id        String @id @default(cuid())
+  slug      String @unique
+  nameKz    String
+  nameRu    String
+  nameEn    String
+  sortOrder Int    @default(0)
+  funds     Fund[]
+}
+
+model Fund {
+  id            String            @id @default(cuid())
+  number        String // номер фонда («1520», «Р-12»)
+  titleKz       String
+  titleRu       String
+  titleEn       String
+  descriptionKz String?
+  descriptionRu String?
+  descriptionEn String?
+  dateFrom      Int? // год
+  dateTo        Int?
+  categoryId    String?
+  category      Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  branchId      String?
+  branch        Branch?           @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  isPersonal    Boolean           @default(false)
+  status        PublicationStatus @default(DRAFT)
+  isDemo        Boolean           @default(false)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  inventories Inventory[]
+  persons     HistoricalPerson[]
+
+  @@unique([number])
+  @@index([status])
+}
+
+model Inventory {
+  id        String            @id @default(cuid())
+  fundId    String
+  fund      Fund              @relation(fields: [fundId], references: [id], onDelete: Cascade)
+  number    String
+  titleKz   String
+  titleRu   String
+  titleEn   String
+  status    PublicationStatus @default(DRAFT)
+  isDemo    Boolean           @default(false)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  storageUnits StorageUnit[]
+
+  @@unique([fundId, number])
+}
+
+/// Дело (единица хранения)
+model StorageUnit {
+  id          String            @id @default(cuid())
+  inventoryId String
+  inventory   Inventory         @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  number      String
+  titleKz     String
+  titleRu     String
+  titleEn     String
+  dateFrom    Int?
+  dateTo      Int?
+  sheetsCount Int?
+  status      PublicationStatus @default(DRAFT)
+  isDemo      Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  documents ArchiveDocument[]
+
+  @@unique([inventoryId, number])
+}
+
+model ArchiveDocument {
+  id               String                   @id @default(cuid())
+  storageUnitId    String
+  storageUnit      StorageUnit              @relation(fields: [storageUnitId], references: [id], onDelete: Cascade)
+  titleKz          String
+  titleRu          String
+  titleEn          String
+  /// Архивный шифр «Ф. 1520 · Оп. 2 · Д. 14» — вычисляется из фонда/описи/дела при сохранении
+  cipher           String
+  dateExact        DateTime?                @db.Date
+  yearFrom         Int?
+  yearTo           Int?
+  periodLabelKz    String?
+  periodLabelRu    String?
+  periodLabelEn    String?
+  docType          DocType
+  language         String? // «ru», «kk», «ru,kk»
+  sheetsCount      Int?
+  historicalNoteKz String?
+  historicalNoteRu String?
+  historicalNoteEn String?
+  summaryKz        String?
+  summaryRu        String?
+  summaryEn        String?
+  placeName        String?
+  placeId          String?
+  place            Place?                   @relation(fields: [placeId], references: [id], onDelete: SetNull)
+  author           String? // автор или организация
+  accessStatus     AccessStatus             @default(OPEN)
+  hasDigitalCopy   Boolean                  @default(false)
+  branchId         String?
+  branch           Branch?                  @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  featured         Boolean                  @default(false) // «История в документах» на главной
+  status           PublicationStatus        @default(DRAFT)
+  isDemo           Boolean                  @default(false)
+  /// Полнотекстовый вектор — заполняется триггером в БД (см. миграцию init_search)
+  searchVector     Unsupported("tsvector")?
+  createdAt        DateTime                 @default(now())
+  updatedAt        DateTime                 @updatedAt
+
+  files       DigitalFile[]
+  tags        Tag[]
+  collections Collection[]
+  persons     HistoricalPerson[]
+  events      HistoricalEvent[]
+  exhibits    Exhibit[]
+
+  @@index([status, docType])
+  @@index([yearFrom, yearTo])
+  @@index([placeId])
+  @@index([cipher])
+  @@index([searchVector], type: Gin)
+  // нечёткий поиск (опечатки) — расширение pg_trgm создаётся в миграции init
+  @@index([titleRu(ops: raw("gin_trgm_ops"))], type: Gin, map: "ArchiveDocument_titleRu_trgm_idx")
+  @@index([titleKz(ops: raw("gin_trgm_ops"))], type: Gin, map: "ArchiveDocument_titleKz_trgm_idx")
+  @@index([titleEn(ops: raw("gin_trgm_ops"))], type: Gin, map: "ArchiveDocument_titleEn_trgm_idx")
+}
+
+model DigitalFile {
+  id          String          @id @default(cuid())
+  documentId  String
+  document    ArchiveDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  kind        FileKind
+  url         String // полноразмерная (облегчённая) копия для просмотра
+  previewUrl  String? // миниатюра
+  originalUrl String? // мастер-копия (TIFF/PDF), если есть
+  pageNumber  Int             @default(1)
+  width       Int?
+  height      Int?
+  sizeBytes   Int?
+  mimeType    String
+  createdAt   DateTime        @default(now())
+
+  @@index([documentId, pageNumber])
+}
+
+/// Населённые пункты с вариантами названий (Өскемен / Усть-Каменогорск / Ust-Kamenogorsk)
+model Place {
+  id        String            @id @default(cuid())
+  slug      String            @unique
+  nameKz    String
+  nameRu    String
+  nameEn    String
+  /// Все варианты написания в нижнем регистре, включая исторические названия
+  aliases   String[]
+  latitude  Float?
+  longitude Float?
+  documents ArchiveDocument[]
+}
+
+/// Тематика (теги) документов
+model Tag {
+  id        String            @id @default(cuid())
+  slug      String            @unique
+  nameKz    String
+  nameRu    String
+  nameEn    String
+  documents ArchiveDocument[]
+}
+
+// ───────────────────────────── Архив памяти ─────────────────────────────
+
+/// Тематическая коллекция («Освоение целинных и залежных земель…»)
+model Collection {
+  id            String            @id @default(cuid())
+  slug          String            @unique
+  titleKz       String
+  titleRu       String
+  titleEn       String
+  descriptionKz String?
+  descriptionRu String?
+  descriptionEn String?
+  theme         String? // направление «Архива памяти»
+  periodLabelKz String?
+  periodLabelRu String?
+  periodLabelEn String?
+  sourceNoteKz  String?
+  sourceNoteRu  String?
+  sourceNoteEn  String?
+  coverUrl      String?
+  sortOrder     Int               @default(0)
+  status        PublicationStatus @default(DRAFT)
+  isDemo        Boolean           @default(false)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  documents ArchiveDocument[]
+}
+
+model HistoricalPerson {
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  nameKz      String
+  nameRu      String
+  nameEn      String
+  lifeYears   String?
+  bioKz       String?
+  bioRu       String?
+  bioEn       String?
+  fundId      String?
+  fund        Fund?             @relation(fields: [fundId], references: [id], onDelete: SetNull)
+  portraitUrl String?
+  status      PublicationStatus @default(DRAFT)
+  isDemo      Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  documents ArchiveDocument[]
+}
+
+/// Событие для хронологии
+model HistoricalEvent {
+  id            String            @id @default(cuid())
+  year          Int
+  dateExact     DateTime?         @db.Date
+  titleKz       String
+  titleRu       String
+  titleEn       String
+  descriptionKz String?
+  descriptionRu String?
+  descriptionEn String?
+  theme         String? // «archive», «industry», «war» …
+  imageUrl      String?
+  sourceNoteKz  String?
+  sourceNoteRu  String?
+  sourceNoteEn  String?
+  status        PublicationStatus @default(DRAFT)
+  isDemo        Boolean           @default(false)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  documents ArchiveDocument[]
+
+  @@index([year])
+}
+
+// ───────────────────────────── Выставки ─────────────────────────────
+
+model Exhibition {
+  id            String            @id @default(cuid())
+  slug          String            @unique
+  titleKz       String
+  titleRu       String
+  titleEn       String
+  descriptionKz String?
+  descriptionRu String?
+  descriptionEn String?
+  coverUrl      String?
+  theme         String?
+  periodLabelKz String?
+  periodLabelRu String?
+  periodLabelEn String?
+  sortOrder     Int               @default(0)
+  status        PublicationStatus @default(DRAFT)
+  isDemo        Boolean           @default(false)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  exhibits Exhibit[]
+}
+
+model Exhibit {
+  id           String           @id @default(cuid())
+  exhibitionId String
+  exhibition   Exhibition       @relation(fields: [exhibitionId], references: [id], onDelete: Cascade)
+  order        Int
+  titleKz      String
+  titleRu      String
+  titleEn      String
+  textKz       String?
+  textRu       String?
+  textEn       String?
+  mediaUrl     String?
+  mediaType    MediaType        @default(IMAGE)
+  documentId   String?
+  document     ArchiveDocument? @relation(fields: [documentId], references: [id], onDelete: SetNull)
+  sourceNoteKz String?
+  sourceNoteRu String?
+  sourceNoteEn String?
+
+  @@index([exhibitionId, order])
+}
+
+// ───────────────────────────── Контент ─────────────────────────────
+
+model News {
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  titleKz     String
+  titleRu     String
+  titleEn     String
+  excerptKz   String?
+  excerptRu   String?
+  excerptEn   String?
+  bodyKz      String?
+  bodyRu      String?
+  bodyEn      String?
+  coverUrl    String?
+  videoUrl    String?
+  sourceUrl   String? // ссылка на первоисточник новости
+  category    NewsCategory      @default(EVENT)
+  branchId    String?
+  branch      Branch?           @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  publishedAt DateTime?
+  status      PublicationStatus @default(DRAFT)
+  isDemo      Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+/// Информационные страницы («Об архиве», «Справка» …), редактируются в админке
+model Page {
+  id        String            @id @default(cuid())
+  slug      String            @unique
+  section   String // «about», «help», «privacy»
+  titleKz   String
+  titleRu   String
+  titleEn   String
+  bodyKz    String?
+  bodyRu    String?
+  bodyEn    String?
+  sortOrder Int               @default(0)
+  status    PublicationStatus @default(DRAFT)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model FaqItem {
+  id         String            @id @default(cuid())
+  questionKz String
+  questionRu String
+  questionEn String
+  answerKz   String
+  answerRu   String
+  answerEn   String
+  order      Int               @default(0)
+  status     PublicationStatus @default(PUBLISHED)
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+}
+
+/// Отзывы и предложения — единственная публичная форма. Минимум персональных данных.
+model Feedback {
+  id          String       @id @default(cuid())
+  name        String?
+  email       String?
+  message     String
+  kind        FeedbackKind
+  locale      String
+  isReviewed  Boolean      @default(false)
+  isPublished Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+
+  @@index([createdAt])
+}
+
+// ───────────────────────────── Журнал, модерация, аналитика ─────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action     String // «login», «create», «update», «delete», «status_change» …
+  entityType String?
+  entityId   String?
+  details    Json?
+  ip         String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([userId])
+  @@index([entityType, entityId])
+}
+
+model ModerationComment {
+  id         String             @id @default(cuid())
+  entityType String
+  entityId   String
+  authorId   String?
+  author     User?              @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  fromStatus PublicationStatus?
+  toStatus   PublicationStatus?
+  text       String
+  createdAt  DateTime           @default(now())
+
+  @@index([entityType, entityId])
+}
+
+/// Журнал поисковых запросов — БЕЗ IP и персональных данных
+model SearchLog {
+  id            String       @id @default(cuid())
+  query         String
+  locale        String
+  parsedFilters Json?
+  resultsCount  Int
+  source        SearchSource
+  createdAt     DateTime     @default(now())
+
+  @@index([createdAt])
+  @@index([resultsCount])
+}
+
+/// Счётчик просмотров разделов по дням (без персональных данных)
+model PageView {
+  id     String   @id @default(cuid())
+  path   String
+  locale String
+  day    DateTime @db.Date
+  count  Int      @default(0)
+
+  @@unique([path, locale, day])
+}
+
+model AiCache {
+  id        String   @id @default(cuid())
+  queryHash String
+  locale    String
+  response  Json
+  createdAt DateTime @default(now())
+
+  @@unique([queryHash, locale])
+}
+
+model RateLimit {
+  id          String   @id @default(cuid())
+  key         String // хэш IP + назначение («assistant:…», «feedback:…»)
+  windowStart DateTime
+  count       Int      @default(0)
+
+  @@unique([key, windowStart])
+}

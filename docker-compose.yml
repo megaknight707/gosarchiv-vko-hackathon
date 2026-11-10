@@ -1,0 +1,24 @@
+# Локальная база данных для разработки.
+# Запуск: npm run db:up   Остановка: npm run db:down
+# Порт 5433 на компьютере → 5432 в контейнере (чтобы не конфликтовать с локальным PostgreSQL).
+services:
+  db:
+    image: postgres:18-alpine
+    container_name: gosarchiv-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gosarchiv
+      POSTGRES_PASSWORD: gosarchiv
+      POSTGRES_DB: gosarchiv
+    ports:
+      - "5433:5432"
+    volumes:
+      - gosarchiv-pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gosarchiv -d gosarchiv"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  gosarchiv-pgdata:
