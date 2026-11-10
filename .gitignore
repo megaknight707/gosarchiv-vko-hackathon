@@ -49,3 +49,6 @@ Thumbs.db
 
 # локальные настройки Claude Code
 .claude/settings.local.json
+
+# клиент Prisma генерируется командой prisma generate (postinstall)
+lib/generated/

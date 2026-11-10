@@ -1,0 +1,129 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Тёмная тема включается классом .dark на <html> (next-themes) */
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   Дизайн-система «Бумага и чернила» — токены (CLAUDE.md §4).
+   Чтобы поменять цвет на всём сайте — поменяйте одну переменную здесь.
+   ========================================================================== */
+:root {
+  --bg: #f7f3ea;
+  --surface: #fffdf8;
+  --text: #1e1a15;
+  --muted: #6b6257;
+  --border: #e2d9c8;
+  --accent: #8e2a1f; /* сургуч */
+  --accent-ink: #fff8ee;
+  --accent-2: #1f5e6b; /* бирюза */
+  --accent-2-soft: #e3eeef;
+  --chip: #efe8da;
+  --ok: #2f6b3a;
+  --ok-soft: #e2efe2;
+  --lock: #8a5a12;
+  --lock-soft: #f6ead3;
+  --danger: #a3271b;
+
+  --radius: 0.625rem;
+}
+
+.dark {
+  --bg: #15130f;
+  --surface: #1f1c17;
+  --text: #ede6d8;
+  --muted: #a89f90;
+  --border: #2e2a23;
+  --accent: #d9a44a; /* янтарь */
+  --accent-ink: #1b1508;
+  --accent-2: #5fb3bf;
+  --accent-2-soft: #1c2b2d;
+  --chip: #29251e;
+  --ok: #8fcb98;
+  --ok-soft: #1d2a1f;
+  --lock: #e6b866;
+  --lock-soft: #2d2416;
+  --danger: #f08a7e;
+}
+
+/* Связь наших токенов с переменными shadcn/ui и утилитами Tailwind */
+@theme inline {
+  /* наши имена: bg-surface, text-muted-ink, bg-accent-2 и т. д. */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--text);
+  --color-muted-ink: var(--muted);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-soft: var(--accent-2-soft);
+  --color-chip: var(--chip);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-lock: var(--lock);
+  --color-lock-soft: var(--lock-soft);
+
+  /* имена shadcn/ui → наши токены */
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--text);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-ink);
+  --color-secondary: var(--chip);
+  --color-secondary-foreground: var(--text);
+  --color-muted: var(--chip);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--accent-2-soft);
+  --color-accent-foreground: var(--text);
+  --color-destructive: var(--danger);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--accent-2);
+
+  /* шрифты подключаются в app/layout.tsx через next/font */
+  --font-sans: var(--font-pt-sans), system-ui, sans-serif;
+  --font-heading: var(--font-pt-serif), Georgia, serif;
+  --font-serif: var(--font-pt-serif), Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+  }
+  /* Видимый фокус у всех интерактивных элементов (WCAG 2.2) */
+  :focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  /* Фото в тёмной теме не инвертируем и не затемняем */
+  img {
+    filter: none;
+  }
+}
