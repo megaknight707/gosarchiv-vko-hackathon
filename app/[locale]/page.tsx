@@ -16,6 +16,8 @@ import { DocumentCard, type DocumentCardData } from "@/components/archive/docume
 import { SectionHeading } from "@/components/archive/section-heading";
 import { HeroIllustration } from "@/components/home/hero-illustration";
 import { HomeBranches } from "@/components/home/home-branches";
+import { SocialIcon } from "@/components/layout/social-icon";
+import { socials } from "@/lib/site/socials";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -68,7 +70,6 @@ const STATS = [
   { value: 1005, key: "statFunds" },
   { value: 610492, key: "statUnits" },
   { value: 7839, key: "statAv" },
-  { value: 4, key: "statBranches" },
 ] as const;
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
@@ -82,6 +83,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     getHomeData(locale),
   ]);
   const number = new Intl.NumberFormat(htmlLang[locale]);
+  const branchCount = branches.filter((b) => !b.isMain).length;
   const date = new Intl.DateTimeFormat(htmlLang[locale], { day: "2-digit", month: "short" });
 
   const chips = [
@@ -150,10 +152,14 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           {t("statsTitle")}
         </h2>
         <div className="mx-auto grid max-w-7xl grid-cols-2 px-4 sm:px-8 lg:grid-cols-4">
-          {STATS.map((stat, i) => (
+          {[
+            ...STATS.map((stat) => ({ key: stat.key, value: stat.value, label: t(stat.key) })),
+            // Филиалы считаются по базе (все подразделения, кроме центрального здания)
+            { key: "statBranches", value: branchCount, label: t("statBranches", { count: branchCount }) },
+          ].map((stat, i) => (
             <div key={stat.key} className={`py-5 pl-4 ${i > 0 ? "lg:border-l" : ""} ${i % 2 ? "border-l lg:border-l" : ""} ${i < 2 ? "border-b lg:border-b-0" : ""} border-border`}>
               <p className="font-serif text-2xl font-bold text-primary sm:text-[32px]">{number.format(stat.value)}</p>
-              <p className="text-sm text-muted-ink">{t(stat.key)}</p>
+              <p className="text-sm text-muted-ink">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -226,6 +232,24 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             ))}
           </ul>
         </div>
+      </section>
+
+      {/* ── Соцсети архива (ТЗ §5.12) ── */}
+      <section className="mx-auto max-w-7xl px-4 pt-12 sm:px-8 sm:pt-16">
+        <SectionHeading title={t("socialTitle")} subtitle={t("socialSubtitle")} />
+        <ul className="flex flex-wrap gap-3">
+          {socials.map((s) => (
+            <li key={s.key}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-[14px] border border-border bg-surface px-5 py-3 hover:border-primary">
+                <SocialIcon name={s.key} className="size-6 text-primary" />
+                <span>
+                  <b className="block">{s.label}</b>
+                  <span className="text-sm text-muted-ink">{s.handle}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* ── Полезная информация ── */}

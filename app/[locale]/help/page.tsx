@@ -143,6 +143,7 @@ export default async function HelpPage({ params }: PageProps<"/[locale]/help">) 
                     {b.name}
                   </Link>
                   <p className="mt-1">{b.address ?? <span className="text-muted-ink italic">{tCommon("toBeConfirmed")}</span>}</p>
+                  {b.headName && <p>{tBranches("head")}: {b.headName}</p>}
                   {b.phone && <p>{tBranches("phone")}: {b.phone}</p>}
                   {b.email && <p>{tBranches("email")}: {b.email}</p>}
                   <p>

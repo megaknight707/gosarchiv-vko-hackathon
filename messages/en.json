@@ -39,7 +39,8 @@
     "menu": "Menu",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "askArchive": "Ask the archive"
+    "askArchive": "Ask the archive",
+    "socials": "The archive on social media"
   },
   "Language": {
     "label": "Site language",
@@ -78,7 +79,8 @@
     "akorda": "President of Kazakhstan",
     "egov": "eGov portal",
     "adilet": "Legal acts database",
-    "govkz": "Department of Digitalization and Archives"
+    "govkz": "Department of Digitalization and Archives",
+    "socials": "Social media"
   },
   "Common": {
     "toBeConfirmed": "To be confirmed",
@@ -134,8 +136,8 @@
     "statFunds": "archival fonds",
     "statUnits": "storage units",
     "statAv": "audiovisual records",
-    "statBranches": "branches in the region",
-    "statsNote": "Archive data as of 01.01.2020",
+    "statBranches": "{count, plural, one {branch} other {branches}} in the region",
+    "statsNote": "Fonds — archive data as of 01.01.2020; branches — as of 2026",
     "exhibitionsTitle": "Online exhibitions",
     "exhibitionsSubtitle": "Virtual exhibitions — no need to visit in person",
     "allExhibitions": "All exhibitions",
@@ -154,7 +156,9 @@
     "useful3Title": "How to read a reference code",
     "useful3Text": "Ф. 1520 · Оп. 2 · Д. 14",
     "useful4Title": "Access statuses",
-    "useful4Text": "What can be viewed online and what has a description only."
+    "useful4Text": "What can be viewed online and what has a description only.",
+    "socialTitle": "Follow us",
+    "socialSubtitle": "News, exhibitions and archival finds"
   },
   "Pages": {
     "about": {
@@ -415,7 +419,8 @@
     "openGoogle": "Open in Google Maps",
     "showOnMap": "Show on map",
     "selectHint": "Choose a location in the list or on the map",
-    "mainBadge": "Main building"
+    "mainBadge": "Main building",
+    "head": "Head"
   },
   "About": {
     "branchesTitle": "Branches",

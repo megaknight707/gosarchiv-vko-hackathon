@@ -32,7 +32,7 @@ export function HomeBranches({ branches }: { branches: BranchView[] }) {
         />
       </div>
       <div className="flex flex-col p-3">
-        <ul className="space-y-1.5">
+        <ul className="max-h-[300px] space-y-1.5 overflow-y-auto pr-1 sm:max-h-[340px]">
           {branches.map((branch) => {
             const selected = branch.slug === selectedSlug;
             return (

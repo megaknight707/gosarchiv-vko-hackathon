@@ -9,6 +9,8 @@ import { knownValue } from "@/lib/archive/todo";
 import { pickLocale } from "@/lib/i18n/pick-locale";
 import { getMainBranch, phoneHref } from "@/lib/site/main-branch";
 import { govLinks, mainNav, secondaryNav } from "@/lib/site/navigation";
+import { socials } from "@/lib/site/socials";
+import { SocialIcon } from "./social-icon";
 
 export async function SiteFooter({ locale }: { locale: Locale }) {
   const [t, tNav, tBrand, branch] = await Promise.all([
@@ -63,6 +65,15 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
                 </p>
               )}
             </address>
+            <ul aria-label={t("socials")} className="mt-4 flex gap-2">
+              {socials.map((s) => (
+                <li key={s.key}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="grid size-9 place-items-center rounded-full border border-[#3A342B] hover:border-[#CFC6B6] hover:text-[#FFF8EE]">
+                    <SocialIcon name={s.key} className="size-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </section>
 
           <nav aria-labelledby="footer-sections">

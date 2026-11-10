@@ -4,7 +4,7 @@
 // с маршрутом. На телефоне — переключатель «Список / Карта».
 // Выбранный филиал пишется в адрес (?b=ridder) — ссылкой можно поделиться.
 import dynamic from "next/dynamic";
-import { Building2, Clock, Mail, MapPin, Phone, Search } from "lucide-react";
+import { Building2, Clock, Mail, MapPin, Phone, Search, UserRound } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { BranchView } from "@/lib/site/branches";
@@ -164,6 +164,12 @@ export function BranchesExplorer({ branches, initialSlug }: { branches: BranchVi
                 <dd>{selected.phone ? <a href={`tel:${selected.phone.replace(/[^\d+]/g, "")}`} className="hover:text-primary hover:underline">{selected.phone}</a> : unknown}</dd>
                 <dt className="flex items-center gap-1.5 text-muted-ink"><Mail aria-hidden className="size-4" />{t("email")}</dt>
                 <dd>{selected.email ? <a href={`mailto:${selected.email}`} className="hover:text-primary hover:underline">{selected.email}</a> : unknown}</dd>
+                {selected.headName && (
+                  <>
+                    <dt className="flex items-center gap-1.5 text-muted-ink"><UserRound aria-hidden className="size-4" />{t("head")}</dt>
+                    <dd>{selected.headName}</dd>
+                  </>
+                )}
                 <dt className="flex items-center gap-1.5 text-muted-ink"><Clock aria-hidden className="size-4" />{t("workHours")}</dt>
                 <dd>{selected.workHours ?? unknown}</dd>
                 {selected.readingRoomHours && (

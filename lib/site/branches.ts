@@ -15,6 +15,7 @@ export type BranchView = {
   address: string | null;
   phone: string | null;
   email: string | null;
+  headName: string | null;
   workHours: string | null;
   readingRoomHours: string | null;
   description: string | null;
@@ -45,6 +46,7 @@ export const getBranches = cache(async (locale: Locale): Promise<BranchView[]> =
         address: knownValue(pickLocale(b, "address", locale)),
         phone: knownValue(b.phone),
         email: knownValue(b.email),
+        headName: knownValue(b.headName),
         workHours: knownValue(pickLocale(b, "workHours", locale)),
         readingRoomHours: knownValue(pickLocale(b, "readingRoomHours", locale)),
         description: knownValue(pickLocale(b, "description", locale)),

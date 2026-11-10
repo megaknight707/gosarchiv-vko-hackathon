@@ -14,6 +14,8 @@ import { MainNav } from "./main-nav";
 import { MobileMenu } from "./mobile-menu";
 import { SearchDialog } from "./search-dialog";
 import { ThemeToggle } from "./theme-toggle";
+import { SocialIcon } from "./social-icon";
+import { socials } from "@/lib/site/socials";
 
 export async function SiteHeader({ locale }: { locale: Locale }) {
   const [t, tBrand, branch] = await Promise.all([
@@ -58,8 +60,18 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
               </li>
             )}
           </ul>
-          {/* Соцсети архива появятся, когда заказчик предоставит ссылки (ТЗ §5.12) */}
-          <LowVisionToggle />
+          <div className="flex items-center gap-4">
+            <LowVisionToggle />
+            <ul aria-label={t("socials")} className="flex items-center gap-2">
+              {socials.map((s) => (
+                <li key={s.key}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={`${s.label} ${s.handle}`} className="grid size-6 place-items-center rounded-md hover:text-ink">
+                    <SocialIcon name={s.key} className="size-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 

@@ -7,11 +7,18 @@ import { useTranslations } from "next-intl";
 import { isTodo } from "@/lib/archive/todo";
 import { cn } from "@/lib/utils";
 
-/** Ссылки вида https://… и домены *.kz превращаем в кликабельные */
+/** E-mail → mailto:, ссылки https://… и домены *.kz → кликабельные ссылки */
 function linkify(text: string) {
-  const parts = text.split(/(https?:\/\/[^\s,;]+|\b[a-z0-9.-]+\.(?:kz|gov\.kz)\b)/gi);
+  const parts = text.split(/([\w.+-]+@[\w-]+(?:\.[\w-]+)+|https?:\/\/[^\s,;]+|(?<![@\w.])[a-z0-9-]+(?:\.[a-z0-9-]+)*\.kz\b)/gi);
   return parts.map((part, i) => {
     if (i % 2 === 0) return part;
+    if (part.includes("@")) {
+      return (
+        <a key={i} href={`mailto:${part}`} className="text-primary underline-offset-4 hover:underline">
+          {part}
+        </a>
+      );
+    }
     const href = part.startsWith("http") ? part : `https://${part}`;
     return (
       <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="font-bold text-primary underline-offset-4 hover:underline">
