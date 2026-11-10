@@ -47,6 +47,26 @@
   --danger: #f08a7e;
 }
 
+/* Версия для слабовидящих (класс low-vision на <html>): крупнее шрифт,
+   максимальный контраст текста и рамок, подчёркнутые ссылки */
+html.low-vision {
+  font-size: 125%;
+  --text: #000000;
+  --muted: #2b2620;
+  --border: #6b6253;
+  --bg: #fffdf8;
+}
+html.low-vision.dark {
+  --text: #ffffff;
+  --muted: #e6dfd2;
+  --border: #8f8574;
+  --bg: #000000;
+}
+html.low-vision main a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* Связь наших токенов с переменными shadcn/ui и утилитами Tailwind */
 @theme inline {
   /* наши имена: bg-surface, text-muted-ink, bg-accent-2 и т. д. */
