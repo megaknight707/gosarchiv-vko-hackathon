@@ -31,7 +31,8 @@
     "seed:calendar": "tsx prisma/seed-calendar.ts",
     "prod:seed:calendar": "tsx --env-file=.env.production.local prisma/seed-calendar.ts",
     "seed:funds": "tsx prisma/seed-fund-registry.ts",
-    "prod:seed:funds": "tsx --env-file=.env.production.local prisma/seed-fund-registry.ts"
+    "prod:seed:funds": "tsx --env-file=.env.production.local prisma/seed-fund-registry.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.7.0",
@@ -72,6 +73,7 @@
     "prisma": "^7.10.1",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.12"
   }
 }

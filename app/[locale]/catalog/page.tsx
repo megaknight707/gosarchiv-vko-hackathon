@@ -61,6 +61,7 @@ export default async function CatalogPage({ params, searchParams }: PageProps<"/
         let changed = false;
         if (parsed.filters.type.length) [merged.type, changed] = [parsed.filters.type, true];
         if (parsed.filters.place.length) [merged.place, changed] = [parsed.filters.place, true];
+        if (parsed.filters.topic.length) [merged.topic, changed] = [parsed.filters.topic, true];
         if (parsed.filters.from !== undefined) [merged.from, merged.to, changed] = [parsed.filters.from, parsed.filters.to, true];
         if (changed) redirect(`/${locale}/catalog${serializeCatalogFilters(merged)}`);
       }
@@ -142,6 +143,10 @@ export default async function CatalogPage({ params, searchParams }: PageProps<"/
     for (const slug of recognized.place.filter((v) => filters.place.includes(v))) {
       const label = result?.facets.place.find((p) => p.value === slug)?.label ?? slug;
       chips.push({ key: `place-${slug}`, label, href: remove({ place: filters.place.filter((v) => v !== slug) }) });
+    }
+    for (const slug of recognized.topic.filter((v) => filters.topic.includes(v))) {
+      const label = result?.facets.topic.find((p) => p.value === slug)?.label ?? slug;
+      chips.push({ key: `topic-${slug}`, label, href: remove({ topic: filters.topic.filter((v) => v !== slug) }) });
     }
     if (recognized.from !== undefined && filters.from === recognized.from && filters.to === recognized.to) {
       const label = recognized.from === recognized.to ? String(recognized.from) : t("chipPeriod", { from: recognized.from, to: recognized.to! });

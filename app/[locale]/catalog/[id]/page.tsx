@@ -17,6 +17,7 @@ import { ArchiveCipher } from "@/components/archive/archive-cipher";
 import { Breadcrumbs } from "@/components/archive/breadcrumbs";
 import { DocumentCard } from "@/components/archive/document-card";
 import { SectionHeading } from "@/components/archive/section-heading";
+import { AiSummary } from "@/components/document/ai-summary";
 import { DocumentActions } from "@/components/document/document-actions";
 import { DocumentViewer } from "@/components/document/document-viewer";
 
@@ -209,6 +210,8 @@ export default async function DocumentPage({ params }: PageProps<"/[locale]/cata
               <p className="mt-2 leading-relaxed text-muted-ink">{pickLocale(doc, "historicalNote", locale)}</p>
             </section>
           )}
+
+          <AiSummary id={doc.id} />
 
           <div className="mt-6 border-t border-border pt-5">
             <DocumentActions id={doc.id} title={title} url={pageUrl} />

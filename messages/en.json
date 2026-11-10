@@ -693,5 +693,30 @@
     "years": "{from}–{to}",
     "units": "Volume: {units} storage units",
     "history": "{count, plural, one {# title} other {All # titles}}"
+  },
+  "Assistant": {
+    "title": "Archive assistant",
+    "disclaimer": "Helps with the website and catalogue. Does not accept applications or requests.",
+    "greeting": "Hello! I can help you find open documents, photos and maps, and tell you branch addresses and where things are on the site. Ask in your own words.",
+    "tryAsking": "Try asking",
+    "example1": "Photos of Ust-Kamenogorsk in the 1960s",
+    "example2": "What documents are there about the Virgin Lands campaign?",
+    "example3": "Where is the Ridder branch and what are its hours?",
+    "placeholder": "Your question…",
+    "inputLabel": "Question for the assistant",
+    "send": "Send",
+    "close": "Close the assistant",
+    "newChat": "New conversation",
+    "thinking": "Searching the archive…",
+    "offlineMode": "Running in simplified mode",
+    "foundDocuments": "Documents found",
+    "error": "Could not get an answer. Please try again.",
+    "rateLimited": "Too many questions in a row. Please wait a few minutes.",
+    "footnote": "Answers are based on catalogue data. The assistant can make mistakes — check the document card.",
+    "summaryButton": "AI summary",
+    "summaryLoading": "Preparing a summary…",
+    "summaryTitle": "AI summary",
+    "summaryFacts": "Key dates, names and events",
+    "summarySource": "Source: this document card. AI can make mistakes."
   }
 }

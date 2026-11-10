@@ -15,7 +15,7 @@ import { SkipLink } from "@/components/layout/skip-link";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { MobileTabBar } from "@/components/layout/mobile-tab-bar";
-import { AskArchiveButton } from "@/components/layout/ask-archive-button";
+import { AssistantPanel } from "@/components/assistant/assistant-panel";
 import { LOW_VISION_INIT_SCRIPT } from "@/components/layout/low-vision-toggle";
 import "../globals.css";
 
@@ -95,7 +95,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
               {children}
             </main>
             <SiteFooter locale={locale} />
-            <AskArchiveButton />
+            <AssistantPanel />
             <MobileTabBar />
           </ThemeProvider>
         </NextIntlClientProvider>
