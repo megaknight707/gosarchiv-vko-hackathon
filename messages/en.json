@@ -232,6 +232,10 @@
     "collection": {
       "title": "Collection",
       "description": "A thematic collection of the Memory Archive."
+    },
+    "calendar": {
+      "title": "Calendar of memorable dates",
+      "description": "Anniversaries of events, organizations and people of East Kazakhstan — from the archive’s official calendar."
     }
   },
   "NotFound": {
@@ -612,7 +616,9 @@
     "personsText": "Creators of the archive's personal fonds.",
     "open": "Open",
     "source": "Source",
-    "allInCatalog": "All materials in the catalogue"
+    "allInCatalog": "All materials in the catalogue",
+    "calendarCard": "Calendar of memorable dates",
+    "calendarText": "Anniversaries of the region’s events and people, month by month."
   },
   "Timeline": {
     "themeFilter": "Theme",
@@ -637,5 +643,26 @@
     "noFund": "This fonds has not been described in the online catalogue yet.",
     "bioNote": "This note is based on archive data. A full biography is being prepared.",
     "more": "Read more"
+  },
+  "Calendar": {
+    "year": "Year",
+    "month": "Month",
+    "allMonths": "All months",
+    "yearOnly": "Dates known by year only",
+    "count": "{count, plural, one {# memorable date} other {# memorable dates}}",
+    "noDates": "No memorable dates this month.",
+    "empty": "The calendar is being prepared.",
+    "enNotice": "The archive publishes this calendar in Kazakh and Russian. An English translation is not available yet, so the Russian text is shown.",
+    "source": "Source: “Calendar of memorable dates for {year}”, State Archive of East Kazakhstan Region."
+  },
+  "Compliance": {
+    "officer": "Compliance officer",
+    "documents": "Documents",
+    "lang": {
+      "kz": "Kazakh",
+      "ru": "Russian"
+    },
+    "sizeMb": "{size} MB",
+    "enNotice": "The documents are published by the archive in Kazakh and Russian."
   }
 }

@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Form from "next/form";
-import { CalendarRange, Hourglass, LayoutGrid, List, Users } from "lucide-react";
+import { CalendarDays, CalendarRange, Hourglass, LayoutGrid, List, Users } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -49,11 +49,12 @@ export default async function MemoryPage({ params, searchParams }: PageProps<"/[
       <Breadcrumbs className="mb-4" items={[{ label: tNav("home"), href: "/" }, { label: tPages("memory.title") }]} />
       <SectionHeading as="h1" title={tPages("memory.title")} subtitle={tPages("memory.description")} />
 
-      {/* Хронология и личности */}
-      <div className="mb-12 grid gap-4 sm:grid-cols-2">
+      {/* Хронология, личности, календарь памятных дат */}
+      <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {[
           { href: "/memory/timeline", title: t("timelineCard"), text: t("timelineText"), Icon: CalendarRange },
           { href: "/memory/persons", title: t("personsCard"), text: t("personsText"), Icon: Users },
+          { href: "/memory/calendar", title: t("calendarCard"), text: t("calendarText"), Icon: CalendarDays },
         ].map((card) => (
           <Link key={card.href} href={card.href} className="group flex items-start gap-4 rounded-[16px] border border-border bg-surface p-5 hover:border-primary">
             <card.Icon aria-hidden className="size-8 shrink-0 text-primary" />

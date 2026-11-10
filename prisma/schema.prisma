@@ -617,3 +617,22 @@ model RateLimit {
 
   @@unique([key, windowStart])
 }
+
+/// Календарь памятных дат Госархива ВКО (из официальных файлов архива, на KZ и RU).
+/// Английского перевода в источнике нет — EN-версия показывает русский текст с пометкой.
+model MemorableDate {
+  id           String            @id @default(cuid())
+  calendarYear Int // год календаря (2022 … 2026)
+  month        Int? // 1–12; null — для дат, известных только по году
+  day          Int?
+  dateLabelKz  String
+  dateLabelRu  String
+  textKz       String
+  textRu       String
+  sortOrder    Int               @default(0)
+  status       PublicationStatus @default(PUBLISHED)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([calendarYear, month])
+}

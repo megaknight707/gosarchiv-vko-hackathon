@@ -17,6 +17,7 @@ import { demoPageCount, documents, hasDemoScans, scanSize, type DemoDocType } fr
 import { news } from "./demo-data/news";
 import { seedContent } from "./seed-content";
 import { seedMemory } from "./seed-memory";
+import { seedCalendar } from "./seed-calendar";
 
 config({ path: ".env.local", quiet: true });
 config({ quiet: true });
@@ -295,6 +296,7 @@ async function main() {
 
   const content = await seedContent(db);
   const memory = await seedMemory(db);
+  const memorableDates = await seedCalendar(db);
   const credentials = await seedUsers(branchIds);
 
   const ukgPhotos60s = documents.filter(
@@ -304,7 +306,7 @@ async function main() {
   console.log("✅ Демо-данные загружены:");
   console.log(`   филиалов: ${branches.length}, мест: ${places.length}, фондов: ${funds.length}`);
   console.log(`   документов: ${documents.length} (фото Усть-Каменогорска 1960-х: ${ukgPhotos60s}), страниц сканов: ${scannedPages}`);
-  console.log(`   новостей: ${news.length}, страниц: ${content.pages}, FAQ: ${content.faq}, выставок: ${memory.exhibitions}, пользователей: ${credentials.length}`);
+  console.log(`   новостей: ${news.length}, страниц: ${content.pages}, FAQ: ${content.faq}, выставок: ${memory.exhibitions}, памятных дат: ${memorableDates}, пользователей: ${credentials.length}`);
   console.log("\n🔑 Учётные записи админки (НЕ сохраняйте в git):");
   console.table(credentials);
   console.log("\nℹ️  Файлы демо-сканов: npm run scans (локально) / npm run scans:upload (Supabase)");
