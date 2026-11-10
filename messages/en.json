@@ -220,6 +220,14 @@
     "favorites": {
       "title": "Favourites",
       "description": "Documents you have saved. The list is stored only in this browser, no registration needed."
+    },
+    "persons": {
+      "title": "Historical figures",
+      "description": "Writers, scholars and local historians whose personal fonds are kept in the archive."
+    },
+    "collection": {
+      "title": "Collection",
+      "description": "A thematic collection of the Memory Archive."
     }
   },
   "NotFound": {
@@ -526,5 +534,103 @@
       "rateLimited": "Too many submissions. Please try again in a few minutes.",
       "server": "Could not send. Please try again later."
     }
+  },
+  "Exhibitions": {
+    "themeFilter": "Theme",
+    "periodFilter": "Period",
+    "themes": {
+      "all": "All themes",
+      "city": "City",
+      "war": "War",
+      "industry": "Industry",
+      "persons": "People"
+    },
+    "periods": {
+      "all": "All periods",
+      "before1950": "before 1950",
+      "mid": "1950–1980",
+      "after1980": "after 1980"
+    },
+    "exhibitsCount": "{count, plural, one {# exhibit} other {# exhibits}}",
+    "open": "Open exhibition",
+    "empty": "No exhibitions match the selected filters",
+    "start": "Start viewing",
+    "scrollHint": "Scroll down",
+    "progress": "Exhibition sections",
+    "source": "Source",
+    "sourceDoc": "Catalogue record: {cipher}",
+    "noImage": "Digital copy not published — see the description in the catalogue",
+    "enlarge": "Enlarge: {title}",
+    "lightbox": "Exhibit viewer",
+    "close": "Close",
+    "prev": "Previous exhibit",
+    "next": "Next exhibit",
+    "counter": "{n} of {total}",
+    "other": "Other exhibitions",
+    "demoNote": "Demo exhibition: the exhibits are demo catalogue records marked “DEMO”.",
+    "end": "End of the exhibition"
+  },
+  "Memory": {
+    "directionsTitle": "Themes",
+    "directionsSubtitle": "The region's digital history by theme",
+    "directions": {
+      "region": "History of East Kazakhstan Region",
+      "city": "Ust-Kamenogorsk and other towns",
+      "industry": "History of industrial enterprises",
+      "persons": "Notable people of the region",
+      "education": "Education and science",
+      "culture": "Culture and arts",
+      "military": "Military history",
+      "ww2": "The Great Patriotic War",
+      "family": "Family and generations",
+      "public": "Public organisations",
+      "periods": "Stages of the region's development"
+    },
+    "preparing": "Materials in preparation",
+    "materials": "{count, plural, one {# item} other {# items}}",
+    "collectionsTitle": "Thematic collections",
+    "collectionsSubtitle": "Selections from the archive's fonds",
+    "searchTitle": "Search the materials",
+    "searchSubtitle": "Topic, period and place",
+    "topic": "Topic",
+    "place": "Place",
+    "any": "Any",
+    "yearFrom": "From year",
+    "yearTo": "To year",
+    "search": "Show",
+    "view": "View",
+    "gallery": "Gallery",
+    "list": "List",
+    "timelineCard": "Timeline of events",
+    "timelineText": "Milestones in the history of the region and the archive, year by year.",
+    "personsCard": "Historical figures",
+    "personsText": "Creators of the archive's personal fonds.",
+    "open": "Open",
+    "source": "Source",
+    "allInCatalog": "All materials in the catalogue"
+  },
+  "Timeline": {
+    "themeFilter": "Theme",
+    "themes": {
+      "all": "All events",
+      "archive": "Archive history",
+      "region": "Regional history",
+      "war": "War"
+    },
+    "decades": "Decades",
+    "related": "Related documents",
+    "noEvents": "No events for the selected theme",
+    "source": "Source",
+    "showDocs": "Documents",
+    "hideDocs": "Hide documents",
+    "openCatalog": "Open in catalogue"
+  },
+  "Persons": {
+    "fund": "Personal fonds no. {number}",
+    "openFund": "Open the fonds in the catalogue",
+    "docs": "Documents from the fonds",
+    "noFund": "This fonds has not been described in the online catalogue yet.",
+    "bioNote": "This note is based on archive data. A full biography is being prepared.",
+    "more": "Read more"
   }
 }
