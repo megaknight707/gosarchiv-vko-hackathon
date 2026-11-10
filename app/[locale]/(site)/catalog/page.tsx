@@ -90,7 +90,13 @@ export default async function CatalogPage({ params, searchParams }: PageProps<"/
       <Breadcrumbs className="mb-4" items={[{ label: tNav("home"), href: "/" }, { label: tPages("catalog.title") }]} />
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <SectionHeading as="h1" title={tPages("catalog.title")} className="mb-0" />
-        {viewTabs}
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Дополнения к ТЗ §2: удобная точка перехода к личным фондам */}
+          <Link href="/catalog?view=funds#group-personal" className="text-sm font-bold text-primary underline-offset-4 hover:underline">
+            {t("personalFundsLink")}
+          </Link>
+          {viewTabs}
+        </div>
       </div>
     </>
   );

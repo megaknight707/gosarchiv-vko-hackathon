@@ -20,7 +20,7 @@ export const getPageSections = cache(async (section: string, locale: Locale): Pr
 export const getFaq = cache(async (locale: Locale) => {
   try {
     const items = await db.faqItem.findMany({ where: { status: "PUBLISHED" }, orderBy: { order: "asc" } });
-    return items.map((item) => ({ id: item.id, question: pickLocale(item, "question", locale), answer: pickLocale(item, "answer", locale) }));
+    return items.map((item) => ({ id: item.id, topic: item.topic, question: pickLocale(item, "question", locale), answer: pickLocale(item, "answer", locale) }));
   } catch (error) {
     console.error("Не удалось загрузить FAQ:", error);
     return [];

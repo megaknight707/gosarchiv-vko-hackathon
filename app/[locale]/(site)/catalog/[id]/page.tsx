@@ -3,7 +3,7 @@
 // «В избранное», связанные материалы. Хлебные крошки: Каталог / Фонд / Опись / Дело.
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { FileLock2, FileText, Info } from "lucide-react";
+import { FileLock2, FileText, Info, Languages } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { htmlLang, type Locale } from "@/i18n/routing";
@@ -67,6 +67,8 @@ export default async function DocumentPage({ params }: PageProps<"/[locale]/cata
   const inventory = unit.inventory;
   const fund = inventory.fund;
   const title = pickLocale(doc, "title", locale);
+  const suffix = locale === "kz" ? "Kz" : "En";
+  const translationMissing = locale !== "ru" && (!doc[`title${suffix}`]?.trim() || (Boolean(doc.summaryRu) && !doc[`summary${suffix}`]?.trim()));
   // Сканы-изображения листаются в просмотрщике, PDF-копии (загруженные в админке) — ссылками
   const imagePages = doc.files.filter((f) => f.kind === "IMAGE");
   const pdfFiles = doc.files.filter((f) => f.kind === "PDF");
@@ -149,6 +151,14 @@ export default async function DocumentPage({ params }: PageProps<"/[locale]/cata
           <span>
             <b>{tDemo("record")}.</b> {t("demoNotice")}
           </span>
+        </p>
+      )}
+
+      {/* Дополнения к ТЗ §3.3: нет проверенного перевода — показываем оригинал и честно об этом говорим */}
+      {translationMissing && (
+        <p role="note" lang={htmlLang[locale]} className="mb-5 flex items-start gap-2 rounded-[12px] border border-border bg-chip px-4 py-3 text-sm">
+          <Languages aria-hidden className="mt-0.5 size-4 shrink-0 text-muted-ink" />
+          <span>{t("translationMissing")}</span>
         </p>
       )}
 

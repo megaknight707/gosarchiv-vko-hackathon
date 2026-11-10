@@ -9,15 +9,17 @@ import { knownValue } from "@/lib/archive/todo";
 import { pickLocale } from "@/lib/i18n/pick-locale";
 import { getMainBranch, phoneHref } from "@/lib/site/main-branch";
 import { govLinks, mainNav, secondaryNav } from "@/lib/site/navigation";
+import { getPublicViews } from "@/lib/site/public-stats";
 import { socials } from "@/lib/site/socials";
 import { SocialIcon } from "./social-icon";
 
 export async function SiteFooter({ locale }: { locale: Locale }) {
-  const [t, tNav, tBrand, branch] = await Promise.all([
+  const [t, tNav, tBrand, branch, views] = await Promise.all([
     getTranslations({ locale, namespace: "Footer" }),
     getTranslations({ locale, namespace: "Nav" }),
     getTranslations({ locale, namespace: "Brand" }),
     getMainBranch(),
+    getPublicViews(),
   ]);
 
   const address = branch ? knownValue(pickLocale(branch, "address", locale)) : null;
@@ -130,7 +132,10 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
               {tNav("privacy")}
             </Link>
           </p>
-          <p>{t("informational")}</p>
+          <p>
+            {t("informational")}
+            {views !== null && views > 0 && <> · {t("views", { count: views })}</>}
+          </p>
         </div>
       </div>
     </footer>

@@ -60,10 +60,12 @@ export const faqConfig: EntityConfig = {
   fields: [
     { name: "question", type: "text", localized: true, required: true, max: 400, wide: true },
     { name: "answer", type: "textarea", localized: true, required: true, max: 5000, wide: true },
+    { name: "topic", type: "select", options: ["services", "catalog", "access", "branches", "memory", "site"], labels: "FaqTopic", required: true },
     { name: "order", type: "number", integer: true, min: 0, max: 10000 },
   ],
   columns: [
     { name: "order", sortable: true },
+    { name: "topic", format: "enum", labels: "FaqTopic", sortable: true },
     { name: "question", localized: true, sortable: true },
     { name: "status", format: "status", sortable: true },
   ],

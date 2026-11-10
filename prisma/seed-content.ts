@@ -37,6 +37,7 @@ export async function seedContent(db: PrismaClient) {
       answerKz: item.answer.kz,
       answerRu: item.answer.ru,
       answerEn: item.answer.en,
+      topic: item.topic,
       status: "PUBLISHED" as const,
     })),
   });

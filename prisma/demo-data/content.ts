@@ -232,53 +232,65 @@ This data stays in your browser and is not sent to the server.`,
   },
 ];
 
-export const faq: { question: Localized; answer: Localized }[] = [
+export const faq: { question: Localized; answer: Localized; topic: string }[] = [
   {
     question: { ru: "Можно ли через сайт заказать архивную справку или копию документа?", kz: "Сайт арқылы архив анықтамасына немесе құжат көшірмесіне тапсырыс беруге бола ма?", en: "Can I order an archival certificate or a copy of a document through the website?" },
-    answer: { ru: "Нет. Сайт носит информационный характер: здесь можно найти сведения о фондах и открытых материалах. Официальные запросы подаются через портал электронного правительства egov.kz или в архив в установленном порядке.", kz: "Жоқ. Сайт ақпараттық сипатта: мұнда қорлар мен ашық материалдар туралы мәліметтерді табуға болады. Ресми сұраулар egov.kz электрондық үкімет порталы арқылы немесе архивке белгіленген тәртіппен беріледі.", en: "No. The website is for information only: here you can find details about fonds and open materials. Official requests are submitted via the egov.kz portal or to the archive under the established procedure." },
+    answer: { ru: "Нет. Сайт носит информационный характер. Архивные справки, копии и выписки — бесплатная государственная услуга: она оформляется через портал egov.kz, портал e-vko или ЦОН. Порядок, правила и официальный прейскурант платных работ — в разделе «Услуги».", kz: "Жоқ. Сайт ақпараттық сипатта. Архивтік анықтамалар, көшірмелер мен үзінділер — тегін мемлекеттік қызмет: ол egov.kz порталы, e-vko порталы немесе ХҚКО арқылы ресімделеді. Тәртібі, қағидалары және ақылы жұмыстардың ресми прейскуранты — «Қызметтер» бөлімінде.", en: "No. The website is for information only. Archival certificates, copies and extracts are a free state service applied for via egov.kz, the e-vko portal or a public service centre. The procedure, rules and the official price list of paid works are in the “Services” section." },
+    topic: "services",
   },
   {
     question: { ru: "Как найти документ, если я не знаю шифр?", kz: "Шифрді білмесем, құжатты қалай табамын?", en: "How can I find a document if I don't know its reference code?" },
     answer: { ru: "Напишите в строке поиска каталога своими словами, например «фотографии Усть-Каменогорска 1960-х». Сайт сам распознает тип, место и период и применит фильтры. Затем уточните результаты фильтрами слева.", kz: "Каталогтың іздеу жолына өз сөзіңізбен жазыңыз, мысалы «1960-жылдардағы Өскемен фотосуреттері». Сайт түрін, орнын және кезеңін өзі анықтап, сүзгілерді қолданады. Содан кейін нәтижелерді сол жақтағы сүзгілермен нақтылаңыз.", en: "Type what you are looking for in your own words, for example “photos of Ust-Kamenogorsk in the 1960s”. The site recognises the type, place and period and applies filters. Then refine the results with the filters on the left." },
+    topic: "catalog",
   },
   {
     question: { ru: "Что означает архивный шифр «Ф. 1520 · Оп. 2 · Д. 14»?", kz: "«Ф. 1520 · Оп. 2 · Д. 14» архив шифры нені білдіреді?", en: "What does the reference code “Ф. 1520 · Оп. 2 · Д. 14” mean?" },
     answer: { ru: "Это «адрес» документа в архиве: фонд № 1520, опись № 2, дело № 14. По шифру документ можно точно найти в каталоге — просто вставьте его в строку поиска.", kz: "Бұл құжаттың архивтегі «мекенжайы»: № 1520 қор, № 2 тізімдеме, № 14 іс. Шифр бойынша құжатты каталогтан дәл табуға болады — оны іздеу жолына қойыңыз.", en: "It is the document's “address” in the archive: fonds no. 1520, inventory no. 2, file no. 14. You can find the exact document by pasting the code into the catalogue search." },
+    topic: "catalog",
   },
   {
     question: { ru: "Почему у некоторых документов нет цифровой копии?", kz: "Неліктен кейбір құжаттардың цифрлық көшірмесі жоқ?", en: "Why do some documents have no digital copy?" },
     answer: { ru: "Оцифровка идёт постепенно. Кроме того, некоторые документы имеют ограниченный доступ по закону (например, содержат персональные данные). Для них на сайте показано описание и условия доступа.", kz: "Цифрландыру біртіндеп жүргізіледі. Сонымен қатар кейбір құжаттарға заң бойынша қолжетімділік шектелген (мысалы, дербес деректер бар). Олар үшін сайтта сипаттамасы мен қолжетімділік шарттары көрсетілген.", en: "Digitisation is gradual. In addition, access to some documents is restricted by law (for example, they contain personal data). For these, the website shows the description and access conditions." },
+    topic: "access",
   },
   {
     question: { ru: "Чем отличаются статусы «Открытый доступ», «Только описание» и «Ограниченный доступ»?", kz: "«Ашық қолжетімділік», «Тек сипаттама» және «Шектеулі қолжетімділік» мәртебелерінің айырмашылығы неде?", en: "What is the difference between “Open access”, “Description only” and “Restricted access”?" },
     answer: { ru: "Открытый доступ — описание и цифровая копия (если она есть) доступны на сайте. Только описание — на сайте опубликованы сведения о документе, сам документ можно изучить в читальном зале. Ограниченный доступ — доступ ограничен законодательством, на сайте только описание.", kz: "Ашық қолжетімділік — сипаттама және цифрлық көшірме (бар болса) сайтта қолжетімді. Тек сипаттама — сайтта құжат туралы мәліметтер жарияланған, құжаттың өзімен оқу залында танысуға болады. Шектеулі қолжетімділік — қолжетімділік заңнамамен шектелген, сайтта тек сипаттама.", en: "Open access — the description and the digital copy (if any) are available online. Description only — information about the document is published, and the document itself can be consulted in the reading room. Restricted access — access is limited by law; only the description is online." },
+    topic: "access",
   },
   {
     question: { ru: "Как поделиться найденным документом?", kz: "Табылған құжатпен қалай бөлісуге болады?", en: "How do I share a document I found?" },
     answer: { ru: "В карточке документа нажмите «Поделиться ссылкой» или выберите Telegram, WhatsApp, Facebook. Ссылки на результаты поиска тоже можно отправлять — фильтры сохраняются в адресе страницы.", kz: "Құжат карточкасында «Сілтемемен бөлісу» батырмасын басыңыз немесе Telegram, WhatsApp, Facebook таңдаңыз. Іздеу нәтижелерінің сілтемелерін де жіберуге болады — сүзгілер бет мекенжайында сақталады.", en: "On the document page, click “Share link” or choose Telegram, WhatsApp or Facebook. You can also share search results — the filters are saved in the page address." },
+    topic: "site",
   },
   {
     question: { ru: "Где хранится моё «Избранное»?", kz: "Менің «Таңдаулыларым» қайда сақталады?", en: "Where are my Favourites stored?" },
     answer: { ru: "Только в вашем браузере — регистрация не нужна. Если очистить данные браузера или открыть сайт на другом устройстве, список будет пустым.", kz: "Тек сіздің браузеріңізде — тіркелу қажет емес. Браузер деректерін тазаласаңыз немесе сайтты басқа құрылғыда ашсаңыз, тізім бос болады.", en: "Only in your browser — no registration is needed. If you clear browser data or open the site on another device, the list will be empty." },
+    topic: "site",
   },
   {
     question: { ru: "Как найти ближайший филиал архива и построить маршрут?", kz: "Архивтің ең жақын филиалын қалай табуға және бағыт құруға болады?", en: "How do I find the nearest branch and get directions?" },
     answer: { ru: "Откройте раздел «Филиалы»: выберите филиал на карте или в списке и нажмите «Открыть в 2GIS» или «Открыть в Google Maps». Можно указать свой адрес или разрешить определение местоположения.", kz: "«Филиалдар» бөлімін ашыңыз: картадан немесе тізімнен филиалды таңдап, «2GIS-те ашу» немесе «Google Maps-те ашу» батырмасын басыңыз. Өз мекенжайыңызды көрсетуге немесе орналасқан жеріңізді анықтауға рұқсат беруге болады.", en: "Open the Branches section, choose a branch on the map or in the list and click “Open in 2GIS” or “Open in Google Maps”. You can enter your address or allow location detection." },
+    topic: "branches",
   },
   {
     question: { ru: "Как переключить язык и тёмную тему?", kz: "Тілді және қараңғы тақырыпты қалай ауыстыруға болады?", en: "How do I switch the language and the dark theme?" },
     answer: { ru: "Переключатель KZ / RU / EN и кнопка темы находятся в шапке сайта. Выбор запоминается: при следующем визите сайт откроется так же.", kz: "KZ / RU / EN ауыстырғышы мен тақырып батырмасы сайттың жоғарғы жағында орналасқан. Таңдау есте сақталады: келесі жолы сайт дәл солай ашылады.", en: "The KZ / RU / EN switcher and the theme button are in the site header. Your choice is remembered for your next visit." },
+    topic: "site",
   },
   {
     question: { ru: "Есть ли версия для слабовидящих?", kz: "Нашар көретіндерге арналған нұсқа бар ма?", en: "Is there a low vision version?" },
     answer: { ru: "Да. Нажмите «Версия для слабовидящих» в верхней строке сайта (на телефоне — в меню): шрифт станет крупнее, контраст — выше.", kz: "Иә. Сайттың жоғарғы жолындағы (телефонда — мәзірде) «Нашар көретіндерге арналған нұсқа» батырмасын басыңыз: қаріп ірілейді, контраст жоғарылайды.", en: "Yes. Click “Low vision mode” in the top bar (in the menu on phones): the text becomes larger and the contrast higher." },
+    topic: "site",
   },
   {
     question: { ru: "Как оставить отзыв или предложение о работе сайта?", kz: "Сайттың жұмысы туралы пікір немесе ұсынысты қалай қалдыруға болады?", en: "How can I leave feedback or a suggestion about the website?" },
     answer: { ru: "Через форму «Отзывы и предложения». Это не официальное обращение — для обращений используйте egov.kz. Имя и e-mail указывать необязательно.", kz: "«Пікірлер мен ұсыныстар» нысаны арқылы. Бұл ресми өтініш емес — өтініштер үшін egov.kz пайдаланыңыз. Аты мен e-mail міндетті емес.", en: "Use the Feedback form. It is not an official request — for those, please use egov.kz. Your name and email are optional." },
+    topic: "site",
   },
   {
     question: { ru: "Что такое «Архив памяти» и онлайн-выставки?", kz: "«Жад архиві» және онлайн көрмелер дегеніміз не?", en: "What are the Memory Archive and online exhibitions?" },
     answer: { ru: "Это тематические подборки архивных документов и фотографий об истории Восточного Казахстана: коллекции, хронология, истории людей. Каждый материал ведёт к карточке в каталоге с указанием источника.", kz: "Бұл Шығыс Қазақстан тарихы туралы архив құжаттары мен фотосуреттерінің тақырыптық іріктемелері: топтамалар, хронология, адамдар тағдыры. Әр материал дереккөзі көрсетілген каталог карточкасына апарады.", en: "They are thematic selections of archival documents and photographs on the history of East Kazakhstan: collections, a timeline and personal stories. Each item links to a catalogue record with its source." },
+    topic: "memory",
   },
 ];

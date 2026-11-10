@@ -81,7 +81,8 @@
     "egov": "eGov portal",
     "adilet": "Legal acts database",
     "govkz": "Department of Digitalization and Archives",
-    "socials": "Social media"
+    "socials": "Social media",
+    "views": "views in 30 days: {count}"
   },
   "Common": {
     "toBeConfirmed": "To be confirmed",
@@ -341,7 +342,8 @@
     "loading": "Loading results…",
     "closeFilters": "Close filters",
     "registryTitle": "Full list of the archive’s funds",
-    "registryText": "{count} funds with numbers, date ranges and volume — register as of 2018."
+    "registryText": "{count} funds with numbers, date ranges and volume — register as of 2018.",
+    "personalFundsLink": "Personal fonds →"
   },
   "Document": {
     "fields": "Document details",
@@ -381,7 +383,8 @@
     "favoritesRemoveLabel": "Remove from favourites",
     "related": "Related materials",
     "relatedSubtitle": "Same fonds, place, topic or period",
-    "pdfCopy": "PDF copy of the document, part {number}"
+    "pdfCopy": "PDF copy of the document, part {number}",
+    "translationMissing": "This card has not been translated yet — some of the text is shown in Russian."
   },
   "Viewer": {
     "label": "Digital copy viewer",
@@ -531,7 +534,16 @@
     "searchLabel": "Search questions",
     "searchPlaceholder": "For example: reference code, favourites, directions",
     "noResults": "Nothing found. Try another word or write to us via the feedback form.",
-    "count": "{count, plural, one {# question} other {# questions}}"
+    "count": "{count, plural, one {# question} other {# questions}}",
+    "topics": {
+      "services": "Certificates and services",
+      "catalog": "Searching the catalogue",
+      "access": "Access to documents",
+      "branches": "Branches and directions",
+      "memory": "Memory archive and exhibitions",
+      "site": "Using the website",
+      "other": "Other"
+    }
   },
   "News": {
     "categories": {
@@ -909,6 +921,14 @@
         "about": "About",
         "help": "Help",
         "privacy": "Privacy"
+      },
+      "FaqTopic": {
+        "services": "Certificates and services",
+        "catalog": "Searching the catalogue",
+        "access": "Access to documents",
+        "branches": "Branches and directions",
+        "memory": "Memory archive and exhibitions",
+        "site": "Using the website"
       }
     },
     "fields": {
@@ -995,7 +1015,8 @@
       "summaryRu": "Summary (RU)",
       "summaryKz": "Summary (KZ)",
       "summaryEn": "Summary (EN)",
-      "place": "Place"
+      "place": "Place",
+      "topic": "Topic"
     },
     "help": {
       "fundNumber": "As in the archive: “1520”, “Р-12”.",
@@ -1110,7 +1131,11 @@
         "password_reset": "Password reset",
         "feedback_update": "Feedback processed",
         "ai_recommendations": "AI recommendations"
-      }
+      },
+      "objectId": "Object ID",
+      "result": "Result",
+      "ok": "success",
+      "fail": "denied"
     },
     "files": {
       "title": "Digital copies",

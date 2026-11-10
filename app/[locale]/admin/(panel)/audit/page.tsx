@@ -11,6 +11,8 @@ import type { Prisma } from "@/lib/generated/prisma/client";
 import { loose } from "@/lib/admin/loose-translator";
 
 const PAGE_SIZE = 50;
+// Операции, завершившиеся отказом (для колонки «Результат»)
+const FAILED = ["login_failed", "login_locked"];
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/admin/audit">) {
   const t = loose(await getTranslations({ locale: (await params).locale as Locale, namespace: "Admin.nav" }));
@@ -110,13 +112,15 @@ export default async function AdminAuditPage({ params, searchParams }: PageProps
       <p className="text-sm text-muted-ink">{t("table.found", { count: total })}</p>
 
       <div className="overflow-x-auto rounded-[12px] border border-border bg-surface">
-        <table className="w-full min-w-[720px] text-sm">
+        <table className="w-full min-w-[900px] text-sm">
           <thead className="border-b border-border bg-chip/60 text-left">
             <tr>
               <th scope="col" className="px-3 py-2">{t("audit.when")}</th>
               <th scope="col" className="px-3 py-2">{t("audit.user")}</th>
               <th scope="col" className="px-3 py-2">{t("audit.action")}</th>
               <th scope="col" className="px-3 py-2">{t("audit.section")}</th>
+              <th scope="col" className="px-3 py-2">{t("audit.objectId")}</th>
+              <th scope="col" className="px-3 py-2">{t("audit.result")}</th>
               <th scope="col" className="px-3 py-2">{t("audit.details")}</th>
             </tr>
           </thead>
@@ -138,6 +142,10 @@ export default async function AdminAuditPage({ params, searchParams }: PageProps
                     ) : (
                       "—"
                     )}
+                  </td>
+                  <td className="px-3 py-2 font-mono text-[11px] break-all text-muted-ink">{row.entityId ?? "—"}</td>
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    {FAILED.includes(row.action) ? <span className="text-primary">✕ {t("audit.fail")}</span> : <span className="text-ok">✓ {t("audit.ok")}</span>}
                   </td>
                   <td className="px-3 py-2 break-words text-muted-ink">{describe(row.details, (code) => (t.has(`status.${code}`) ? t(`status.${code}`) : code))}</td>
                 </tr>

@@ -45,8 +45,8 @@ export async function FundsList({ locale }: { locale: Locale }) {
       <p className="mb-6 max-w-3xl text-muted-ink">{t("fundsIntro")}</p>
       <div className="space-y-8">
         {[...groups.entries()].map(([key, group]) => (
-          <section key={key} aria-labelledby={`group-${key}`}>
-            <h2 id={`group-${key}`} className="mb-3 text-[13px] font-bold tracking-[.06em] text-muted-ink uppercase">
+          <section key={key} id={`group-${key}`} aria-labelledby={`group-title-${key}`} className="scroll-mt-6">
+            <h2 id={`group-title-${key}`} className="mb-3 text-[13px] font-bold tracking-[.06em] text-muted-ink uppercase">
               {group.title}
             </h2>
             <ul className="grid gap-3 md:grid-cols-2">

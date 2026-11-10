@@ -532,6 +532,8 @@ model FaqItem {
   answerKz   String
   answerRu   String
   answerEn   String
+  /// Тема вопроса для группировки на странице FAQ: services, catalog, access, branches, site, memory
+  topic      String            @default("site")
   order      Int               @default(0)
   status     PublicationStatus @default(PUBLISHED)
   createdAt  DateTime          @default(now())

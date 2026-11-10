@@ -1,13 +1,16 @@
 "use client";
 
-// Вопросы и ответы: поиск по вопросам и доступный аккордеон (button + aria-expanded).
+// Вопросы и ответы: поиск, группировка по темам (тема задаётся в админке) и доступный аккордеон.
 import { ChevronDown, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-export type FaqEntry = { id: string; question: string; answer: string };
+export type FaqEntry = { id: string; topic: string; question: string; answer: string };
+
+/** Порядок тем на странице (темы назначаются в админке) */
+export const FAQ_TOPICS = ["services", "catalog", "access", "branches", "memory", "site"] as const;
 
 export function FaqAccordion({ items }: { items: FaqEntry[] }) {
   const t = useTranslations("Faq");
@@ -55,30 +58,43 @@ export function FaqAccordion({ items }: { items: FaqEntry[] }) {
           </Link>
         </p>
       ) : (
-        <ul className="divide-y divide-border rounded-[14px] border border-border bg-surface">
-          {filtered.map((item) => {
-            const expanded = open.has(item.id) || Boolean(query.trim());
+        <div className="space-y-8">
+          {[...FAQ_TOPICS, "other"].map((topic) => {
+            const group = filtered.filter((item) => (FAQ_TOPICS as readonly string[]).includes(item.topic) ? item.topic === topic : topic === "other");
+            if (!group.length) return null;
             return (
-              <li key={item.id}>
-                <h2>
-                  <button
-                    type="button"
-                    aria-expanded={expanded}
-                    aria-controls={`faq-${item.id}`}
-                    onClick={() => toggle(item.id)}
-                    className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left font-serif text-[17px] font-bold hover:text-primary"
-                  >
-                    {item.question}
-                    <ChevronDown aria-hidden className={cn("mt-1 size-5 shrink-0 transition-transform", expanded && "rotate-180")} />
-                  </button>
+              <section key={topic} aria-labelledby={`faq-topic-${topic}`}>
+                <h2 id={`faq-topic-${topic}`} className="mb-3 text-[13px] font-bold tracking-[.06em] text-muted-ink uppercase">
+                  {t(`topics.${topic as (typeof FAQ_TOPICS)[number] | "other"}`)}
                 </h2>
-                <div id={`faq-${item.id}`} hidden={!expanded} className="px-5 pb-5 leading-relaxed text-muted-ink">
-                  {item.answer}
-                </div>
-              </li>
+                <ul className="divide-y divide-border rounded-[14px] border border-border bg-surface">
+                  {group.map((item) => {
+                    const expanded = open.has(item.id) || Boolean(query.trim());
+                    return (
+                      <li key={item.id}>
+                        <h3>
+                          <button
+                            type="button"
+                            aria-expanded={expanded}
+                            aria-controls={`faq-${item.id}`}
+                            onClick={() => toggle(item.id)}
+                            className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left font-serif text-[17px] font-bold hover:text-primary"
+                          >
+                            {item.question}
+                            <ChevronDown aria-hidden className={cn("mt-1 size-5 shrink-0 transition-transform", expanded && "rotate-180")} />
+                          </button>
+                        </h3>
+                        <div id={`faq-${item.id}`} hidden={!expanded} className="px-5 pb-5 leading-relaxed text-muted-ink">
+                          {item.answer}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
             );
           })}
-        </ul>
+        </div>
       )}
     </div>
   );
