@@ -28,12 +28,16 @@ function inline(text: string, onNavigate?: () => void): ReactNode[] {
     }
     if (/^\*\*[^*]+\*\*$/.test(part)) return <b key={i}>{part.slice(2, -2)}</b>;
     if (/^`[^`]+`$/.test(part)) return <code key={i} className="rounded bg-chip px-1 font-mono text-[0.85em]">{part.slice(1, -1)}</code>;
-    // Голые https-ссылки (например, egov.kz)
-    return part.split(/(https:\/\/[^\s)]+)/g).map((piece, j) =>
+    // Голые ссылки: https://egov.kz и пути нашего сайта вида /ru/branches
+    return part.split(/(https:\/\/[^\s)]+|(?<![\w/])\/(?:kz|ru|en)(?:\/[\w\-/?=&%]*)?(?=[\s.,;:!)]|$))/g).map((piece, j) =>
       piece.startsWith("https://") ? (
-        <a key={`${i}-${j}`} href={piece} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+        <a key={`${i}-${j}`} href={piece.replace(/[.,;:]+$/, "")} target="_blank" rel="noopener noreferrer" className="text-primary underline">
           {piece}
         </a>
+      ) : /^\/(kz|ru|en)(\/|$)/.test(piece) ? (
+        <Link key={`${i}-${j}`} href={piece} onClick={onNavigate} className="text-primary underline">
+          {piece}
+        </Link>
       ) : (
         <Fragment key={`${i}-${j}`}>{piece}</Fragment>
       ),
