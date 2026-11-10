@@ -1,0 +1,11 @@
+// Типизация next-intl: TypeScript проверяет, что ключ перевода существует
+// (опечатка в t("Nav.hom") станет ошибкой сборки).
+import type { routing } from "@/i18n/routing";
+import type messages from "./messages/ru.json";
+
+declare module "next-intl" {
+  interface AppConfig {
+    Locale: (typeof routing.locales)[number];
+    Messages: typeof messages;
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "Metadata": {
+    "siteName": "East Kazakhstan State Archive",
+    "titleTemplate": "%s · East Kazakhstan State Archive",
+    "description": "State Archive of East Kazakhstan Region: online catalogue, virtual exhibitions, the region's memory archive, branches and contacts."
+  },
+  "Brand": {
+    "name": "East Kazakhstan State Archive",
+    "tagline": "ШҚО мемлекеттік архиві",
+    "fullName": "State Archive of the Department of Digitalization and Archives of East Kazakhstan Region",
+    "home": "Go to home page"
+  },
+  "Demo": {
+    "banner": "Code Masters Hackathon 9.0 project — not the official website of the East Kazakhstan State Archive",
+    "record": "Demo record"
+  },
+  "Nav": {
+    "label": "Main menu",
+    "home": "Home",
+    "about": "About",
+    "catalog": "Catalogue",
+    "memory": "Memory Archive",
+    "exhibitions": "Exhibitions",
+    "branches": "Branches",
+    "help": "Help",
+    "news": "News",
+    "faq": "FAQ",
+    "feedback": "Feedback",
+    "privacy": "Privacy policy",
+    "mobileLabel": "Quick sections"
+  },
+  "Header": {
+    "skipToContent": "Skip to content",
+    "phone": "Phone",
+    "email": "Email",
+    "workHours": "Opening hours",
+    "catalogButton": "Catalogue",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "askArchive": "Ask the archive"
+  },
+  "Language": {
+    "label": "Site language",
+    "kz": "Қазақша",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "Theme": {
+    "toggle": "Toggle colour theme",
+    "light": "Light theme",
+    "dark": "Dark theme"
+  },
+  "A11y": {
+    "lowVision": "Low vision mode",
+    "lowVisionOn": "Turn on low vision mode: larger text and high contrast",
+    "lowVisionOff": "Standard view"
+  },
+  "Search": {
+    "open": "Search",
+    "title": "Search the archive",
+    "label": "What are you looking for?",
+    "placeholder": "For example: photos of Ust-Kamenogorsk in the 1960s",
+    "submit": "Search",
+    "hint": "Search by title, reference code, place or year. You can type in your own words.",
+    "close": "Close search"
+  },
+  "Footer": {
+    "contacts": "Contacts",
+    "workHours": "Opening hours",
+    "readingRoom": "Reading room",
+    "sections": "Sections",
+    "visitors": "For visitors",
+    "govResources": "Government resources",
+    "informational": "This website is for information only and provides no services",
+    "copyright": "© {year} East Kazakhstan State Archive",
+    "akorda": "President of Kazakhstan",
+    "egov": "eGov portal",
+    "adilet": "Legal acts database",
+    "govkz": "Department of Digitalization and Archives"
+  },
+  "Common": {
+    "toBeConfirmed": "To be confirmed",
+    "comingSoon": "Section in progress",
+    "comingSoonText": "Materials will appear here soon. In the meantime, explore the online catalogue.",
+    "goToCatalog": "Open the catalogue",
+    "goHome": "Go to home page",
+    "allCatalog": "Full catalogue",
+    "breadcrumbs": "Breadcrumb"
+  },
+  "Archive": {
+    "copyCipher": "Copy reference code",
+    "cipherCopied": "Reference code copied",
+    "copyFailed": "Could not copy",
+    "cipherLabel": "Archival reference code",
+    "fund": "Fonds",
+    "inventory": "Inventory",
+    "unit": "File",
+    "document": "Document",
+    "access": {
+      "OPEN": "Open access",
+      "DESCRIPTION_ONLY": "Description only",
+      "RESTRICTED": "Restricted access"
+    },
+    "docType": {
+      "PHOTO": "Photo",
+      "TEXT": "Text",
+      "MAP_DRAWING": "Map / drawing",
+      "AUDIO_VIDEO": "Audio / video",
+      "PERSONAL": "Personal document",
+      "ORGANIZATION": "Organisational record",
+      "HISTORICAL": "Historical document"
+    },
+    "noPreview": "No digital copy"
+  },
+  "Home": {
+    "eyebrow": "A digital space for the region's memory",
+    "title": "The history of East Kazakhstan in documents, photographs and lives",
+    "lead": "Fonds, inventories and digitised materials of the State Archive and its branches. Search by reference code — or just ask in your own words.",
+    "featuredTitle": "History in documents",
+    "featuredSubtitle": "A selection of open materials"
+  },
+  "Pages": {
+    "about": { "title": "About the archive", "description": "History of the East Kazakhstan State Archive, its activities, management and structure." },
+    "catalog": { "title": "Online catalogue", "description": "Search the archive's fonds, inventories, files and documents by title, reference code, year, place and type." },
+    "document": { "title": "Document record", "description": "Description of an archival document, its reference code and digital copy." },
+    "memory": { "title": "Memory Archive", "description": "The region's digital history: thematic collections, people and a timeline of events." },
+    "timeline": { "title": "Timeline", "description": "Events in the history of East Kazakhstan and the archive, year by year." },
+    "person": { "title": "Historical figure", "description": "Biographical note and documents from a personal fonds." },
+    "exhibitions": { "title": "Online exhibitions", "description": "Virtual exhibitions of archival documents and photographs." },
+    "exhibition": { "title": "Exhibition", "description": "An online exhibition of the archive." },
+    "branches": { "title": "Branches and contacts", "description": "Map of the archive and its branches, addresses, phone numbers, opening hours and directions." },
+    "news": { "title": "News and events", "description": "News from the archive and its branches: exhibitions, events and research." },
+    "newsItem": { "title": "News item", "description": "News from the East Kazakhstan State Archive." },
+    "help": { "title": "Help", "description": "How the archive is organised, how to search the catalogue and read a reference code." },
+    "faq": { "title": "FAQ", "description": "Answers to common questions about using the website and finding information." },
+    "feedback": { "title": "Feedback and suggestions", "description": "Share your impressions of the website and ideas for improving it." },
+    "privacy": { "title": "Privacy policy", "description": "What data the website collects and how it is used." }
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "text": "The link may be out of date or the address may contain a typo. Try searching the catalogue or go back to the home page.",
+    "code": "Error 404"
+  }
+}
