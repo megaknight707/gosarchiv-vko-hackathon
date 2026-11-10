@@ -221,10 +221,12 @@ export async function executeArchiveTool(name: string, input: unknown, locale: L
     }
     case "get_site_sections": {
       const t = await getTranslations({ locale, namespace: "Pages" });
-      const keys = ["catalog", "fundRegistry", "memory", "timeline", "calendar", "exhibitions", "branches", "about", "help", "faq", "news", "feedback"] as const;
+      const keys = ["catalog", "fundRegistry", "memory", "timeline", "calendar", "exhibitions", "branches", "about", "help", "faq", "news", "feedback", "services", "stateService", "paidServices", "legalActs", "readingRoom", "symbols", "usefulLinks"] as const;
       const paths: Record<(typeof keys)[number], string> = {
         catalog: "/catalog", fundRegistry: "/catalog/funds", memory: "/memory", timeline: "/memory/timeline", calendar: "/memory/calendar",
         exhibitions: "/exhibitions", branches: "/branches", about: "/about", help: "/help", faq: "/faq", news: "/news", feedback: "/feedback",
+        services: "/services", stateService: "/services/state", paidServices: "/services/paid", legalActs: "/help/legal-acts",
+        readingRoom: "/help/reading-room", symbols: "/help/symbols", usefulLinks: "/help/links",
       };
       return {
         content: JSON.stringify(keys.map((k) => ({ title: t(`${k}.title`), description: t(`${k}.description`), url: `/${locale}${paths[k]}` }))),

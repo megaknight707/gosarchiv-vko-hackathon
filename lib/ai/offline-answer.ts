@@ -19,7 +19,7 @@ const BRANCH_INTENT = /(филиал\p{L}*|адрес\p{L}*|режим\p{L}*|ч�
 const T = {
   ru: {
     refusal:
-      "Этот сайт информационный: здесь нельзя подать заявление, архивный запрос или заказать справку и копии. Социально-правовые запросы (например, о стаже) подаются через портал https://egov.kz. Контакты архива: Усть-Каменогорск, ул. Бейбітшілік, 26/1, тел. 8 (7232) 25-59-76, arhiv-ukg@yandex.kz. Филиалы — [на странице «Филиалы»](/ru/branches).",
+      "Этот сайт информационный: здесь нельзя подать заявление, архивный запрос или заказать справку и копии. Архивные справки, копии и выписки — бесплатная государственная услуга: подаётся через https://egov.kz, портал e-vko или ЦОН; подробнее — [«Государственная услуга»](/ru/services/state), цены на платные работы — [«Платные услуги»](/ru/services/paid). Контакты архива: Усть-Каменогорск, ул. Бейбітшілік, 26/1, тел. 8 (7232) 25-59-76, arhiv-ukg@yandex.kz. Филиалы — [на странице «Филиалы»](/ru/branches).",
     found: (n: number) => `Нашёл ${n} ${plural(n, ["запись", "записи", "записей"])} в каталоге. Первые результаты:`,
     none: "По этому запросу в каталоге ничего не нашлось. Попробуйте другое написание населённого пункта, более широкий период или другой тип документов.",
     all: "Все результаты с фильтрами",
@@ -29,7 +29,7 @@ const T = {
   },
   kz: {
     refusal:
-      "Бұл сайт ақпараттық: мұнда өтініш, архивтік сұрау беру немесе анықтама мен көшірме тапсырыс беру мүмкін емес. Әлеуметтік-құқықтық сұраулар (мысалы, еңбек өтілі туралы) https://egov.kz порталы арқылы беріледі. Архив байланыстары: Өскемен, Бейбітшілік к-сі, 26/1, тел. 8 (7232) 25-59-76, arhiv-ukg@yandex.kz. Филиалдар — [«Филиалдар» бетінде](/kz/branches).",
+      "Бұл сайт ақпараттық: мұнда өтініш, архивтік сұрау беру немесе анықтама мен көшірме тапсырыс беру мүмкін емес. Архивтік анықтамалар, көшірмелер мен үзінділер — тегін мемлекеттік қызмет: https://egov.kz, e-vko порталы немесе ХҚКО арқылы беріледі; толығырақ — [«Мемлекеттік көрсетілетін қызмет»](/kz/services/state), ақылы жұмыстардың бағасы — [«Ақылы қызметтер»](/kz/services/paid). Архив байланыстары: Өскемен, Бейбітшілік к-сі, 26/1, тел. 8 (7232) 25-59-76, arhiv-ukg@yandex.kz. Филиалдар — [«Филиалдар» бетінде](/kz/branches).",
     found: (n: number) => `Каталогтан ${n} жазба табылды. Алғашқы нәтижелер:`,
     none: "Бұл сұрау бойынша каталогта ештеңе табылмады. Елді мекен атауын басқаша жазып, кезеңді кеңейтіп немесе басқа құжат түрін таңдап көріңіз.",
     all: "Сүзгілері бар барлық нәтижелер",
@@ -39,7 +39,7 @@ const T = {
   },
   en: {
     refusal:
-      "This website is information-only: it cannot accept applications, archival requests or orders for certificates and copies. Social and legal requests (for example, proof of employment) are submitted via the eGov portal https://egov.kz. Archive contacts: Ust-Kamenogorsk, Beibitshilik St. 26/1, phone 8 (7232) 25-59-76, arhiv-ukg@yandex.kz. Branches — [see the Branches page](/en/branches).",
+      "This website is information-only: it cannot accept applications, archival requests or orders for certificates and copies. Archival certificates, copies and extracts are a free state service applied for via https://egov.kz, the e-vko portal or a public service centre; see [State service](/en/services/state) and the price list in [Paid services](/en/services/paid). Archive contacts: Ust-Kamenogorsk, Beibitshilik St. 26/1, phone 8 (7232) 25-59-76, arhiv-ukg@yandex.kz. Branches — [see the Branches page](/en/branches).",
     found: (n: number) => `I found ${n} ${n === 1 ? "record" : "records"} in the catalogue. Top results:`,
     none: "Nothing was found for this query. Try another spelling of the town, a wider period or another document type.",
     all: "All results with filters",

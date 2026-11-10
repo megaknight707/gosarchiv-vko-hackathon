@@ -13,7 +13,7 @@ import { AdminAccessError, requireAdminAction } from "@/lib/auth/require-role";
 import type { AdminUser } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { Prisma, type PublicationStatus } from "@/lib/generated/prisma/client";
-import { deleteFile } from "@/lib/storage";
+import { deleteFile, deletePrivateFile } from "@/lib/storage";
 import { diffFields, writeAuditLog } from "./audit-log";
 import type { EntityConfig } from "./entity-config";
 import { getEntityConfig } from "./entity-configs";
@@ -157,7 +157,7 @@ export async function deleteEntityAction(key: string, id: string, locale: Locale
 
   await delegate.delete({ where: { id } });
   // Файлы сканов удаляем из хранилища (записи о них база удалила каскадом)
-  for (const file of (existing.files as { url: string; previewUrl: string | null; originalUrl: string | null }[] | undefined) ?? []) {
+  for (const file of (existing.files as StoredFile[] | undefined) ?? []) {
     await removeStoredFiles(file);
   }
   await writeAuditLog({ userId: user.id, action: "delete", entityType: config.key, entityId: id, details: { title: recordTitle(config, existing, "ru") } });
@@ -250,8 +250,17 @@ export async function bulkAction(key: string, locale: Locale, formData: FormData
 
 // ───────────── Цифровые копии документа ─────────────
 
-async function removeStoredFiles(file: { url: string; previewUrl: string | null; originalUrl: string | null }) {
-  // Удаляем только файлы, загруженные через админку (ключи «documents/…»), демо-сканы не трогаем
+type StoredFile = { url: string; previewUrl: string | null; originalUrl: string | null; isPrivate?: boolean; viewKey?: string | null; previewKey?: string | null; originalKey?: string | null };
+
+async function removeStoredFiles(file: StoredFile) {
+  // Приватные сканы — по ключам в хранилище
+  if (file.isPrivate) {
+    for (const key of new Set([file.viewKey, file.previewKey, file.originalKey])) {
+      if (key) await deletePrivateFile(key).catch(() => {});
+    }
+    return;
+  }
+  // Публичные файлы удаляем только загруженные через админку (ключи «documents/…»), демо-сканы не трогаем
   for (const url of new Set([file.url, file.previewUrl, file.originalUrl])) {
     const key = url?.match(/(?:\/uploads\/|\/archive-media\/)(documents\/[\w/.-]+)$/)?.[1];
     if (key) await deleteFile(key).catch(() => {});
@@ -278,22 +287,38 @@ export async function uploadDocumentFileAction(documentId: string, formData: For
   }
   const file = formData.get("file");
   if (!(file instanceof File)) return { ok: false, error: "empty" };
-  const result = await processUpload(file, `documents/${documentId}`);
+  // Сканы документов — только в приватное хранилище: выдача через /api/files/{id} с проверкой прав
+  const result = await processUpload(file, `documents/${documentId}`, { private: true });
   if (!result.ok) return result;
 
   const last = await db.digitalFile.aggregate({ where: { documentId }, _max: { pageNumber: true } });
-  const created = await db.digitalFile.create({
+  const isPdf = result.file.type === "application/pdf";
+  const draft = await db.digitalFile.create({
     data: {
       documentId,
-      kind: result.file.type === "application/pdf" ? "PDF" : "IMAGE",
-      url: result.file.url,
-      previewUrl: result.file.previewUrl,
-      originalUrl: result.file.originalUrl,
+      kind: isPdf ? "PDF" : "IMAGE",
+      url: "",
+      isPrivate: true,
+      viewKey: result.file.viewKey,
+      previewKey: result.file.previewKey,
+      originalKey: result.file.originalKey,
+      checksum: result.file.checksum,
+      originalName: file.name.slice(0, 200),
+      originalMime: result.file.type,
+      uploadedById: ctx.user.id,
       width: result.file.width,
       height: result.file.height,
       sizeBytes: result.file.sizeBytes,
-      mimeType: result.file.type === "application/pdf" ? "application/pdf" : "image/webp",
+      mimeType: isPdf ? "application/pdf" : "image/webp",
       pageNumber: (last._max.pageNumber ?? 0) + 1,
+    },
+  });
+  const created = await db.digitalFile.update({
+    where: { id: draft.id },
+    data: {
+      url: `/api/files/${draft.id}?v=view`,
+      previewUrl: isPdf ? null : `/api/files/${draft.id}?v=thumb`,
+      originalUrl: `/api/files/${draft.id}?v=original`,
     },
   });
   await db.archiveDocument.update({ where: { id: documentId }, data: { hasDigitalCopy: true } });
@@ -302,7 +327,7 @@ export async function uploadDocumentFileAction(documentId: string, formData: For
     action: "file_upload",
     entityType: "documents",
     entityId: documentId,
-    details: { title: ctx.doc.titleRu, file: file.name.slice(0, 120), type: result.file.type, page: created.pageNumber },
+    details: { title: ctx.doc.titleRu, file: file.name.slice(0, 120), type: result.file.type, page: created.pageNumber, sha256: result.file.checksum },
   });
   if (ctx.doc.status === "PUBLISHED") refreshPublicSite();
   return { ok: true, id: created.id };

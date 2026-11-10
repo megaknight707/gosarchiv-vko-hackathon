@@ -8,6 +8,7 @@
 // Важно: модуль использует SUPABASE_SERVICE_ROLE_KEY — импортировать его можно
 // только в серверном коде (Server Actions, Route Handlers, скрипты).
 import { promises as fs } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
@@ -95,6 +96,61 @@ export function getStorageDriverName(): StorageDriverName {
 
 export function getStorage(driver: StorageDriverName = getStorageDriverName()): StorageDriver {
   return driver === "supabase" ? supabaseDriver : localDriver;
+}
+
+// ───────────── приватное хранилище (сканы документов) ─────────────
+// Файлы без публичного адреса: выдаются только через /api/files/{id} после проверки прав.
+//   local    — папка вне проекта: PRIVATE_STORAGE_DIR или ~/.gosarchiv/private
+//              (внутри проекта dev-сервер Turbopack зацикливается на пересборке)
+//   supabase — закрытый bucket «archive-private», выдача по ссылке на 2 минуты
+
+export const PRIVATE_BUCKET = "archive-private";
+const PRIVATE_DIR = process.env.PRIVATE_STORAGE_DIR || path.join(os.homedir(), ".gosarchiv", "private");
+let privateBucketReady = false;
+
+async function ensurePrivateBucket(client: SupabaseClient) {
+  if (privateBucketReady) return;
+  const { error } = await client.storage.getBucket(PRIVATE_BUCKET);
+  if (error) {
+    const created = await client.storage.createBucket(PRIVATE_BUCKET, { public: false });
+    if (created.error && !/exists/i.test(created.error.message)) throw new Error(`Supabase Storage: ${created.error.message}`);
+  }
+  privateBucketReady = true;
+}
+
+export async function savePrivateFile(key: string, data: Buffer | Uint8Array, contentType: string): Promise<string> {
+  const safeKey = normalizeKey(key);
+  if (getStorageDriverName() === "supabase") {
+    const client = getSupabase();
+    await ensurePrivateBucket(client);
+    const { error } = await client.storage.from(PRIVATE_BUCKET).upload(safeKey, data, { contentType, upsert: true });
+    if (error) throw new Error(`Supabase Storage: ${error.message}`);
+  } else {
+    const filePath = path.join(PRIVATE_DIR, safeKey);
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, data);
+  }
+  return safeKey;
+}
+
+/** Содержимое приватного файла (local) или временная ссылка на него (supabase) */
+export async function readPrivateFile(key: string): Promise<{ data: Buffer } | { signedUrl: string }> {
+  const safeKey = normalizeKey(key);
+  if (getStorageDriverName() === "supabase") {
+    const { data, error } = await getSupabase().storage.from(PRIVATE_BUCKET).createSignedUrl(safeKey, 120);
+    if (error || !data) throw new Error(`Supabase Storage: ${error?.message ?? "нет ссылки"}`);
+    return { signedUrl: data.signedUrl };
+  }
+  return { data: await fs.readFile(path.join(PRIVATE_DIR, safeKey)) };
+}
+
+export async function deletePrivateFile(key: string): Promise<void> {
+  const safeKey = normalizeKey(key);
+  if (getStorageDriverName() === "supabase") {
+    await getSupabase().storage.from(PRIVATE_BUCKET).remove([safeKey]);
+  } else {
+    await fs.rm(path.join(PRIVATE_DIR, safeKey), { force: true });
+  }
 }
 
 export const saveFile: StorageDriver["saveFile"] = (key, data, contentType) =>

@@ -315,6 +315,17 @@ model DigitalFile {
   height      Int?
   sizeBytes   Int?
   mimeType    String
+  /// Файл в приватном хранилище: выдаётся только через /api/files/{id} с проверкой прав
+  isPrivate   Boolean         @default(false)
+  /// Ключи объектов в приватном хранилище (просмотр, миниатюра, мастер-копия)
+  viewKey     String?
+  previewKey  String?
+  originalKey String?
+  /// Сведения о мастер-файле: SHA-256 исходного файла, имя при загрузке, MIME оригинала, кто загрузил
+  checksum     String?
+  originalName String?
+  originalMime String?
+  uploadedById String?
   createdAt   DateTime        @default(now())
 
   @@index([documentId, pageNumber])

@@ -53,7 +53,7 @@ export async function answerWithClaude(history: ChatMessage[], locale: Locale, e
       max_tokens: 1500,
       output_config: { effort: "low" }, // короткие справочные ответы — минимальная глубина рассуждений
       // Системный промпт и инструменты не меняются → API кэширует этот префикс (дешевле и быстрее)
-      system: [{ type: "text", text: ASSISTANT_SYSTEM_PROMPT.replace("{locale}", locale), cache_control: { type: "ephemeral" } }],
+      system: [{ type: "text", text: ASSISTANT_SYSTEM_PROMPT.replaceAll("{locale}", locale), cache_control: { type: "ephemeral" } }],
       tools,
       // После 3 обращений к базе — только ответ, без новых вызовов
       tool_choice: round === MAX_TOOL_ROUNDS ? { type: "none" } : { type: "auto" },
