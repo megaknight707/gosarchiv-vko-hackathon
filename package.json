@@ -23,7 +23,9 @@
     "prod:seed:reset": "tsx --env-file=.env.production.local prisma/seed.ts --reset",
     "prod:scans:upload": "tsx --env-file=.env.production.local scripts/upload-demo-scans.ts",
     "seed:content": "tsx prisma/seed-content.ts",
-    "prod:seed:content": "tsx --env-file=.env.production.local prisma/seed-content.ts"
+    "prod:seed:content": "tsx --env-file=.env.production.local prisma/seed-content.ts",
+    "seed:memory": "tsx prisma/seed-memory.ts",
+    "prod:seed:memory": "tsx --env-file=.env.production.local prisma/seed-memory.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.7.0",
