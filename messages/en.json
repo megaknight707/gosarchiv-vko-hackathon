@@ -27,7 +27,8 @@
     "faq": "FAQ",
     "feedback": "Feedback",
     "privacy": "Privacy policy",
-    "mobileLabel": "Quick sections"
+    "mobileLabel": "Quick sections",
+    "favorites": "Favourites"
   },
   "Header": {
     "skipToContent": "Skip to content",
@@ -121,25 +122,201 @@
     "featuredSubtitle": "A selection of open materials"
   },
   "Pages": {
-    "about": { "title": "About the archive", "description": "History of the East Kazakhstan State Archive, its activities, management and structure." },
-    "catalog": { "title": "Online catalogue", "description": "Search the archive's fonds, inventories, files and documents by title, reference code, year, place and type." },
-    "document": { "title": "Document record", "description": "Description of an archival document, its reference code and digital copy." },
-    "memory": { "title": "Memory Archive", "description": "The region's digital history: thematic collections, people and a timeline of events." },
-    "timeline": { "title": "Timeline", "description": "Events in the history of East Kazakhstan and the archive, year by year." },
-    "person": { "title": "Historical figure", "description": "Biographical note and documents from a personal fonds." },
-    "exhibitions": { "title": "Online exhibitions", "description": "Virtual exhibitions of archival documents and photographs." },
-    "exhibition": { "title": "Exhibition", "description": "An online exhibition of the archive." },
-    "branches": { "title": "Branches and contacts", "description": "Map of the archive and its branches, addresses, phone numbers, opening hours and directions." },
-    "news": { "title": "News and events", "description": "News from the archive and its branches: exhibitions, events and research." },
-    "newsItem": { "title": "News item", "description": "News from the East Kazakhstan State Archive." },
-    "help": { "title": "Help", "description": "How the archive is organised, how to search the catalogue and read a reference code." },
-    "faq": { "title": "FAQ", "description": "Answers to common questions about using the website and finding information." },
-    "feedback": { "title": "Feedback and suggestions", "description": "Share your impressions of the website and ideas for improving it." },
-    "privacy": { "title": "Privacy policy", "description": "What data the website collects and how it is used." }
+    "about": {
+      "title": "About the archive",
+      "description": "History of the East Kazakhstan State Archive, its activities, management and structure."
+    },
+    "catalog": {
+      "title": "Online catalogue",
+      "description": "Search the archive's fonds, inventories, files and documents by title, reference code, year, place and type."
+    },
+    "document": {
+      "title": "Document record",
+      "description": "Description of an archival document, its reference code and digital copy."
+    },
+    "memory": {
+      "title": "Memory Archive",
+      "description": "The region's digital history: thematic collections, people and a timeline of events."
+    },
+    "timeline": {
+      "title": "Timeline",
+      "description": "Events in the history of East Kazakhstan and the archive, year by year."
+    },
+    "person": {
+      "title": "Historical figure",
+      "description": "Biographical note and documents from a personal fonds."
+    },
+    "exhibitions": {
+      "title": "Online exhibitions",
+      "description": "Virtual exhibitions of archival documents and photographs."
+    },
+    "exhibition": {
+      "title": "Exhibition",
+      "description": "An online exhibition of the archive."
+    },
+    "branches": {
+      "title": "Branches and contacts",
+      "description": "Map of the archive and its branches, addresses, phone numbers, opening hours and directions."
+    },
+    "news": {
+      "title": "News and events",
+      "description": "News from the archive and its branches: exhibitions, events and research."
+    },
+    "newsItem": {
+      "title": "News item",
+      "description": "News from the East Kazakhstan State Archive."
+    },
+    "help": {
+      "title": "Help",
+      "description": "How the archive is organised, how to search the catalogue and read a reference code."
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Answers to common questions about using the website and finding information."
+    },
+    "feedback": {
+      "title": "Feedback and suggestions",
+      "description": "Share your impressions of the website and ideas for improving it."
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "description": "What data the website collects and how it is used."
+    },
+    "favorites": {
+      "title": "Favourites",
+      "description": "Documents you have saved. The list is stored only in this browser, no registration needed."
+    }
   },
   "NotFound": {
     "title": "Page not found",
     "text": "The link may be out of date or the address may contain a typo. Try searching the catalogue or go back to the home page.",
     "code": "Error 404"
+  },
+  "Catalog": {
+    "searchLabel": "Search the catalogue",
+    "searchPlaceholder": "Title, reference code, place or year — e.g. photos of Ust-Kamenogorsk in the 1960s",
+    "submit": "Search",
+    "advanced": "Advanced search",
+    "advancedHide": "Hide advanced search",
+    "found": "{count, plural, one {# document} other {# documents}} found",
+    "sortLabel": "Sort",
+    "sort": {
+      "relevance": "by relevance",
+      "date_asc": "oldest first",
+      "date_desc": "newest first",
+      "title": "by title"
+    },
+    "filters": "Filters",
+    "filtersCount": "Filters ({count})",
+    "showResults": "Show results ({count})",
+    "reset": "Reset filters",
+    "group": {
+      "type": "Document type",
+      "period": "Period",
+      "place": "Place",
+      "access": "Access",
+      "digital": "Digital copy",
+      "branch": "Repository",
+      "topic": "Topic"
+    },
+    "digitalOnly": "Has a digital copy",
+    "yearFrom": "From year",
+    "yearTo": "To year",
+    "periodSlider": "Period: {from}–{to}",
+    "apply": "Apply",
+    "author": "Author or organisation",
+    "fundNumber": "Fonds no.",
+    "invNumber": "Inventory no.",
+    "unitNumber": "File no.",
+    "recognized": "We understood your query as:",
+    "removeFilter": "Remove filter “{label}”",
+    "chipPeriod": "{from}–{to}",
+    "cipherSearch": "Search by reference code: {cipher}",
+    "empty": "Nothing found",
+    "emptyHint": "Try removing some filters, check the spelling or start with these examples:",
+    "examples": "Example queries",
+    "example1": "photos of Oskemen in the 1960s",
+    "example2": "Ф. 1520 · Оп. 1 · Д. 3",
+    "example3": "virgin lands",
+    "pagination": "Result pages",
+    "prev": "Previous page",
+    "next": "Next page",
+    "pageN": "Page {page}",
+    "viewLabel": "Catalogue view",
+    "viewDocs": "Documents",
+    "viewFunds": "Fonds",
+    "fundsIntro": "Archive structure: fonds → inventory → file → document. Choose a fonds to see its inventories and files.",
+    "fundDocs": "{count, plural, one {# document} other {# documents}}",
+    "fundYears": "{from}–{to}",
+    "personalFund": "Personal fonds",
+    "inventoryN": "Inventory {number}",
+    "unitN": "File {number}",
+    "fundN": "Fonds {number}",
+    "allFunds": "All fonds",
+    "sheets": "{count} sh.",
+    "loading": "Loading results…",
+    "closeFilters": "Close filters"
+  },
+  "Document": {
+    "fields": "Document details",
+    "fund": "Fonds",
+    "inventory": "Inventory",
+    "unit": "File",
+    "date": "Date / period",
+    "docType": "Document type",
+    "language": "Language",
+    "sheets": "Number of sheets",
+    "storage": "Repository",
+    "place": "Place",
+    "author": "Author / organisation",
+    "topics": "Topics",
+    "access": "Access status",
+    "digitalCopy": "Digital copy",
+    "yes": "Yes",
+    "no": "No",
+    "historicalNote": "Historical note",
+    "summary": "Summary",
+    "languages": {
+      "ru": "Russian",
+      "kk": "Kazakh",
+      "en": "English"
+    },
+    "demoNotice": "The reference code and description were created to demonstrate the catalogue.",
+    "noCopyTitle": "Digital copy not published",
+    "noCopyDescriptionOnly": "Only the description of this document is published online. The original can be consulted in the archive reading room under the established procedure.",
+    "noCopyRestricted": "Access to this document is restricted under the legislation of the Republic of Kazakhstan (for example, it contains personal data). Only the description is shown online.",
+    "noCopyOpen": "A digital copy of this document has not been published online yet.",
+    "howAccess": "How access to documents works",
+    "share": "Share link",
+    "shareCopied": "Link copied",
+    "shareVia": "Send via",
+    "favoritesAdd": "Add to favourites",
+    "favoritesRemove": "In favourites",
+    "favoritesRemoveLabel": "Remove from favourites",
+    "related": "Related materials",
+    "relatedSubtitle": "Same fonds, place, topic or period"
+  },
+  "Viewer": {
+    "label": "Digital copy viewer",
+    "hint": "Mouse wheel or two fingers to zoom, drag to move, arrow keys ← → to turn sheets",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fit": "Fit to window",
+    "fullscreen": "Full screen",
+    "exitFullscreen": "Exit full screen",
+    "prev": "Previous sheet",
+    "next": "Next sheet",
+    "sheetOf": "Sheet {page} of {total}",
+    "thumbnails": "Document sheets",
+    "thumbnail": "Sheet {page}",
+    "pageAlt": "{title}, sheet {page}"
+  },
+  "Favorites": {
+    "empty": "No favourites yet",
+    "emptyText": "Click “Add to favourites” on a document page and it will appear here.",
+    "clear": "Clear favourites",
+    "count": "{count, plural, one {# document} other {# documents}}",
+    "loading": "Loading favourites…",
+    "unavailable": "Some documents are no longer available and are hidden from the list."
   }
 }
