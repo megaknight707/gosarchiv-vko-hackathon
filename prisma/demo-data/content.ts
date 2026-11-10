@@ -147,8 +147,36 @@ Objectives: ensure the preservation of records, develop the online catalogue and
 List of secondary legislation — TODO: уточнить на e-arhiv.vko.gov.kz.`,
     },
   },
-  { slug: "about-reports", section: "about", sortOrder: 7, title: { kz: "Қызмет туралы есептер", ru: "Отчёты о деятельности", en: "Activity reports" }, body: TODO },
-  { slug: "about-gallery", section: "about", sortOrder: 8, title: { kz: "Фотогалерея", ru: "Фотогалерея", en: "Photo gallery" }, body: TODO },
+  {
+    // Источник: файлы комплаенс-службы архива (ноябрь 2026). Комплаенс-офицер и список PDF —
+    // в lib/site/compliance-documents.ts, выводятся под текстом раздела.
+    slug: "about-compliance",
+    section: "about",
+    sortOrder: 7,
+    title: { kz: "Сыбайлас жемқорлыққа қарсы комплаенс қызметі", ru: "Антикоррупционная комплаенс-служба", en: "Anti-corruption compliance" },
+    body: {
+      ru: `Антикоррупционная комплаенс-служба архива обеспечивает соблюдение требований антикоррупционного законодательства Республики Казахстан, выявляет причины и условия, способствующие коррупционным правонарушениям, и принимает меры по их устранению.
+
+## Внутренний анализ коррупционных рисков
+С 11 сентября 2026 года архив провёл внутренний анализ коррупционных рисков в организационно-управленческой и основной деятельности. По его итогам подготовлены аналитическая справка, перечень должностей, подверженных коррупционным рискам, и план мероприятий по устранению выявленных причин и условий.
+
+Для исполнения плана назначены ответственные за организацию и проведение государственных закупок, а для предупреждения конфликта интересов при приёме на работу утверждён приказ «О работе кадровой службы».`,
+      kz: `Архивтің сыбайлас жемқорлыққа қарсы комплаенс қызметі Қазақстан Республикасының сыбайлас жемқорлыққа қарсы заңнамасы талаптарының сақталуын қамтамасыз етеді, сыбайлас жемқорлық құқық бұзушылықтарға ықпал ететін себептер мен жағдайларды анықтап, оларды жою шараларын қабылдайды.
+
+## Сыбайлас жемқорлық тәуекелдеріне ішкі талдау
+2026 жылғы 11 қыркүйектен бастап архив ұйымдық-басқарушылық және негізгі қызметте сыбайлас жемқорлық тәуекелдеріне ішкі талдау жүргізді. Оның нәтижелері бойынша талдау анықтамасы, сыбайлас жемқорлық тәуекелдеріне бейім лауазымдардың тізбесі және анықталған себептер мен жағдайларды жою жөніндегі іс-шаралар жоспары дайындалды.
+
+Жоспарды іске асыру үшін мемлекеттік сатып алуды ұйымдастыру мен өткізуге жауапты тұлғалар тағайындалды, ал жұмысқа қабылдау кезінде мүдделер қақтығысының алдын алу үшін «Кадр қызметінің жұмысы туралы» бұйрық бекітілді.`,
+      en: `The archive’s anti-corruption compliance service ensures compliance with the anti-corruption legislation of the Republic of Kazakhstan, identifies the causes and conditions that contribute to corruption offences and takes measures to eliminate them.
+
+## Internal analysis of corruption risks
+Starting on 11 September 2026, the archive carried out an internal analysis of corruption risks in its management and core activities. Based on its results, an analytical report, a list of positions exposed to corruption risks and an action plan to eliminate the identified causes and conditions were prepared.
+
+To implement the plan, staff responsible for organizing public procurement were appointed, and an order “On the work of the HR service” was approved to prevent conflicts of interest in recruitment.`,
+    },
+  },
+  { slug: "about-reports", section: "about", sortOrder: 8, title: { kz: "Қызмет туралы есептер", ru: "Отчёты о деятельности", en: "Activity reports" }, body: TODO },
+  { slug: "about-gallery", section: "about", sortOrder: 9, title: { kz: "Фотогалерея", ru: "Фотогалерея", en: "Photo gallery" }, body: TODO },
   {
     slug: "privacy",
     section: "privacy",

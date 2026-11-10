@@ -1,5 +1,5 @@
 // «Об архиве» (ТЗ §5.2): история, направления, миссия, руководство, структура,
-// нормативная база, отчёты, фотогалерея, филиалы. Тексты — из таблицы Page (админка).
+// нормативная база, комплаенс-служба, отчёты, фотогалерея, филиалы. Тексты — из таблицы Page (админка).
 import type { Metadata } from "next";
 import { MapPinned } from "lucide-react";
 import { getTranslations } from "next-intl/server";
@@ -10,6 +10,7 @@ import { getPageSections } from "@/lib/site/pages";
 import { Breadcrumbs } from "@/components/archive/breadcrumbs";
 import { SectionHeading } from "@/components/archive/section-heading";
 import { ContentBody } from "@/components/content/content-body";
+import { ComplianceDocuments } from "@/components/content/compliance-documents";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/about">): Promise<Metadata> {
   const { locale } = await params;
@@ -52,6 +53,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                 {section.title}
               </h2>
               <ContentBody body={section.body} className="max-w-3xl" />
+              {section.slug === "about-compliance" && <ComplianceDocuments locale={locale} />}
             </section>
           ))}
           <section id="branches" aria-labelledby="branches-title" className="scroll-mt-6">
