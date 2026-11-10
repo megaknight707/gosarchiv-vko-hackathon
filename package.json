@@ -17,7 +17,11 @@
     "seed": "tsx prisma/seed.ts",
     "seed:reset": "tsx prisma/seed.ts --reset",
     "scans": "tsx scripts/generate-demo-scans.ts",
-    "scans:upload": "tsx scripts/upload-demo-scans.ts"
+    "scans:upload": "tsx scripts/upload-demo-scans.ts",
+    "prod:migrate": "node --env-file=.env.production.local node_modules/prisma/build/index.js migrate deploy",
+    "prod:seed": "tsx --env-file=.env.production.local prisma/seed.ts",
+    "prod:seed:reset": "tsx --env-file=.env.production.local prisma/seed.ts --reset",
+    "prod:scans:upload": "tsx --env-file=.env.production.local scripts/upload-demo-scans.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.7.0",

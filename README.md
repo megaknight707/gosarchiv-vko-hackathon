@@ -62,6 +62,7 @@ npm run dev
 | `npm run scans` | Сгенерировать демо-сканы в `public/uploads/demo` |
 | `npm run scans:upload` | Загрузить демо-сканы в Supabase Storage |
 | `npm run typecheck` / `lint` / `build` | Проверки и сборка |
+| `npm run prod:migrate` / `prod:seed` / `prod:scans:upload` | То же для продакшена (Supabase); ключи берутся из `.env.production.local` |
 
 ## Структура
 
