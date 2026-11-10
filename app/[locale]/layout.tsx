@@ -1,5 +1,6 @@
-// Корневой шаблон всех страниц: <html> с языком, шрифты, тема, шапка, подвал,
-// мобильная навигация. Сегмент [locale] = kz | ru | en.
+// Корневой шаблон всех страниц: <html> с языком, шрифты, тема, переводы.
+// Сегмент [locale] = kz | ru | en. Шапка и подвал публичного сайта — в (site)/layout.tsx,
+// у админки (admin/) свой каркас.
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, PT_Sans, PT_Serif } from "next/font/google";
 import Script from "next/script";
@@ -10,12 +11,6 @@ import { htmlLang, routing } from "@/i18n/routing";
 import { isDemoMode, siteUrl } from "@/lib/site/config";
 import { languageAlternates } from "@/lib/site/page-metadata";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { DemoBanner } from "@/components/layout/demo-banner";
-import { SkipLink } from "@/components/layout/skip-link";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { MobileTabBar } from "@/components/layout/mobile-tab-bar";
-import { AssistantPanel } from "@/components/assistant/assistant-panel";
 import { LOW_VISION_INIT_SCRIPT } from "@/components/layout/low-vision-toggle";
 import "../globals.css";
 
@@ -85,19 +80,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           {LOW_VISION_INIT_SCRIPT}
         </Script>
       </head>
-      <body className="flex min-h-full flex-col pb-[calc(4rem+env(safe-area-inset-bottom))] sm:pb-0">
+      <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
-          <ThemeProvider>
-            <SkipLink />
-            {isDemoMode && <DemoBanner />}
-            <SiteHeader locale={locale} />
-            <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
-              {children}
-            </main>
-            <SiteFooter locale={locale} />
-            <AssistantPanel />
-            <MobileTabBar />
-          </ThemeProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

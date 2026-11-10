@@ -3,7 +3,7 @@
 // «В избранное», связанные материалы. Хлебные крошки: Каталог / Фонд / Опись / Дело.
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { FileLock2, Info } from "lucide-react";
+import { FileLock2, FileText, Info } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { htmlLang, type Locale } from "@/i18n/routing";
@@ -67,6 +67,9 @@ export default async function DocumentPage({ params }: PageProps<"/[locale]/cata
   const inventory = unit.inventory;
   const fund = inventory.fund;
   const title = pickLocale(doc, "title", locale);
+  // Сканы-изображения листаются в просмотрщике, PDF-копии (загруженные в админке) — ссылками
+  const imagePages = doc.files.filter((f) => f.kind === "IMAGE");
+  const pdfFiles = doc.files.filter((f) => f.kind === "PDF");
   const canShowCopy = doc.accessStatus === "OPEN" && doc.hasDigitalCopy && doc.files.length > 0;
   const languages = (doc.language ?? "")
     .split(",")
@@ -153,10 +156,26 @@ export default async function DocumentPage({ params }: PageProps<"/[locale]/cata
         {/* Левая колонка: просмотр копии или условия доступа */}
         <div className="lg:sticky lg:top-4">
           {canShowCopy ? (
-            <DocumentViewer
-              title={title}
-              pages={doc.files.map((f) => ({ url: f.url, previewUrl: f.previewUrl, width: f.width, height: f.height }))}
-            />
+            <div className="space-y-3">
+              {imagePages.length > 0 && (
+                <DocumentViewer
+                  title={title}
+                  pages={imagePages.map((f) => ({ url: f.url, previewUrl: f.previewUrl, width: f.width, height: f.height }))}
+                />
+              )}
+              {pdfFiles.map((f, i) => (
+                <a
+                  key={f.id}
+                  href={f.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-[14px] border border-border bg-surface p-4 font-bold hover:bg-chip"
+                >
+                  <FileText aria-hidden className="size-6 text-accent-2" />
+                  {t("pdfCopy", { number: i + 1 })}
+                </a>
+              ))}
+            </div>
           ) : (
             <div className="flex min-h-[320px] flex-col items-center justify-center rounded-[18px] border border-border bg-chip p-8 text-center">
               <span className="mb-4 grid size-16 place-items-center rounded-full bg-surface text-lock">

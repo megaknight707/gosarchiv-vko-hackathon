@@ -32,6 +32,8 @@
     "prod:seed:calendar": "tsx --env-file=.env.production.local prisma/seed-calendar.ts",
     "seed:funds": "tsx prisma/seed-fund-registry.ts",
     "prod:seed:funds": "tsx --env-file=.env.production.local prisma/seed-fund-registry.ts",
+    "staff:password": "tsx scripts/set-staff-password.ts",
+    "prod:staff:password": "tsx --env-file=.env.production.local scripts/set-staff-password.ts",
     "test": "vitest run"
   },
   "dependencies": {

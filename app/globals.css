@@ -147,3 +147,22 @@ html.low-vision main a {
     filter: none;
   }
 }
+
+/* Поля ввода админки — плотнее и нейтральнее публичного сайта */
+@utility admin-input {
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  &:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 1px;
+  }
+  &[aria-invalid="true"] {
+    border-color: var(--danger);
+  }
+}

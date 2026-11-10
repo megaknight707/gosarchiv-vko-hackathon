@@ -18,6 +18,12 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // Загрузка сканов в админке: файл до 20 МБ + служебные байты формы.
+  // (На Vercel тело запроса функции ограничено ~4,5 МБ — см. docs/roadmap.md.)
+  experimental: {
+    serverActions: { bodySizeLimit: "21mb" },
+    proxyClientMaxBodySize: "21mb",
+  },
   // sharp и pg — серверные нативные пакеты, не бандлим их
   serverExternalPackages: ["sharp", "pg"],
   images: {
