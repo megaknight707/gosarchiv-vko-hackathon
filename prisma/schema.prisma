@@ -130,6 +130,8 @@ model Branch {
   addressEn              String
   phone                  String?
   email                  String?
+  /// Руководитель подразделения (ФИО, как в официальном списке архива)
+  headName               String?
   workHoursKz            String?
   workHoursRu            String?
   workHoursEn            String?

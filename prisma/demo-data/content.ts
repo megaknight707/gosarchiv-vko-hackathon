@@ -6,6 +6,8 @@
 //
 // Факты — только из docs/real-archive-data.md (сайт e-arhiv.vko.gov.kz).
 
+import { leadershipBody, structureBody } from "./structure";
+
 type Localized = { kz: string; ru: string; en: string };
 export type DemoPage = { slug: string; section: string; sortOrder: number; title: Localized; body: Localized };
 
@@ -118,23 +120,10 @@ Objectives: ensure the preservation of records, develop the online catalogue and
     slug: "about-leadership",
     section: "about",
     sortOrder: 4,
-    title: { kz: "Басшылық", ru: "Руководство", en: "Management" },
-    body: {
-      ru: `- Директор — Жапаров Аскар Кенжебаевич, тел. 8 (7232) 25-13-22
-- Заместитель директора — Костина Елена Валерьевна, тел. 8 (7232) 57-00-15
-
-Приёмная / факс: 8 (7232) 25-59-76, e-mail: arhiv-ukg@yandex.kz`,
-      kz: `- Директор — Жапаров Аскар Кенжебаевич, тел. 8 (7232) 25-13-22
-- Директордың орынбасары — Костина Елена Валерьевна, тел. 8 (7232) 57-00-15
-
-Қабылдау бөлмесі / факс: 8 (7232) 25-59-76, e-mail: arhiv-ukg@yandex.kz`,
-      en: `- Director — Askar Kenzhebayevich Zhaparov, tel. 8 (7232) 25-13-22
-- Deputy Director — Yelena Valeryevna Kostina, tel. 8 (7232) 57-00-15
-
-Reception / fax: 8 (7232) 25-59-76, email: arhiv-ukg@yandex.kz`,
-    },
+    title: { kz: "Басшылық және байланыс", ru: "Руководство и контакты", en: "Management and contacts" },
+    body: leadershipBody,
   },
-  { slug: "about-structure", section: "about", sortOrder: 5, title: { kz: "Құрылымы", ru: "Структура", en: "Structure" }, body: TODO },
+  { slug: "about-structure", section: "about", sortOrder: 5, title: { kz: "Құрылымы", ru: "Структура", en: "Structure" }, body: structureBody },
   {
     slug: "about-legal",
     section: "about",
