@@ -26,7 +26,7 @@ async function main() {
   const users = arg === "--all"
     ? await db.user.findMany({ where: { email: { endsWith: "@gosarchiv.demo" } }, orderBy: { email: "asc" } })
     : await db.user.findMany({ where: { email: arg.toLowerCase() } });
-  if (!users.length) throw new Error(`Сотрудник не найден: ${arg}`);
+  if (!users.length) throw new Error(arg === "--all" ? "Демо-сотрудников в базе нет — сначала заполните её: npm run prod:seed:reset" : `Сотрудник не найден: ${arg}`);
 
   const rows: { email: string; role: string; password: string }[] = [];
   for (const user of users) {

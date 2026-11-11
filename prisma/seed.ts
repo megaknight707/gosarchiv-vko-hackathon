@@ -25,7 +25,25 @@ config({ quiet: true });
 
 const LOCAL_DB = "postgresql://gosarchiv:gosarchiv@localhost:5433/gosarchiv";
 const connectionString = process.env.DIRECT_URL ?? process.env.DATABASE_URL ?? LOCAL_DB;
-const db = new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+// Сиду хватает двух соединений. Таймаут обязателен: без него, если пул Supabase не выдаёт
+// соединение, Node завершался молча посреди заполнения базы.
+const db = new PrismaClient({
+  adapter: new PrismaPg({ connectionString, max: 2, connectionTimeoutMillis: 20_000, idleTimeoutMillis: 10_000 }),
+});
+
+// Шаги — в консоль, чтобы при сбое было видно, где он случился
+let step = "подключение";
+const progress = (name: string) => {
+  step = name;
+  console.log(`… ${name}`);
+};
+let finished = false;
+process.on("beforeExit", () => {
+  if (!finished && process.exitCode !== 1) {
+    console.error(`❌ Сид прервался на шаге «${step}» (соединение с базой закрыто). Запустите ещё раз: npm run prod:seed:reset`);
+    process.exitCode = 1;
+  }
+});
 
 const RESET = process.argv.includes("--reset");
 
@@ -101,10 +119,12 @@ async function main() {
     await resetDatabase();
   } else if ((await db.branch.count()) > 0) {
     console.log("ℹ️  База уже заполнена. Чтобы пересоздать демо-данные: npm run seed:reset");
+    finished = true;
     return;
   }
 
   // Филиалы
+  progress("филиалы");
   const branchIds = new Map<string, string>();
   for (const branch of branches) {
     const created = await db.branch.create({ data: branch });
@@ -112,6 +132,7 @@ async function main() {
   }
 
   // Справочники
+  progress("справочники");
   const placeById = new Map<string, { id: string; nameKz: string; nameRu: string; nameEn: string }>();
   for (const place of places) {
     const created = await db.place.create({ data: place });
@@ -127,6 +148,7 @@ async function main() {
   }
 
   // Фонды и описи
+  progress("фонды, описи, дела");
   const fundRecords = new Map<string, { id: string; number: string; inventories: Map<string, string>; nextUnit: Map<string, number> }>();
   for (const fund of funds) {
     const created = await db.fund.create({
@@ -173,6 +195,7 @@ async function main() {
   }
 
   // Документы
+  progress("документы");
   let scannedPages = 0;
   for (const [index, doc] of documents.entries()) {
     const fundMeta = funds.find((f) => f.key === doc.fund);
@@ -272,6 +295,7 @@ async function main() {
   }
 
   // Новости
+  progress("новости");
   for (const item of news) {
     await db.news.create({
       data: {
@@ -295,10 +319,15 @@ async function main() {
     });
   }
 
+  progress("страницы и FAQ");
   const content = await seedContent(db);
+  progress("архив памяти и выставки");
   const memory = await seedMemory(db);
+  progress("календарь памятных дат");
   const memorableDates = await seedCalendar(db);
+  progress("перечень фондов");
   const registryFunds = await seedFundRegistry(db);
+  progress("сотрудники");
   const credentials = await seedUsers(branchIds);
 
   const ukgPhotos60s = documents.filter(
@@ -311,12 +340,13 @@ async function main() {
   console.log(`   новостей: ${news.length}, страниц: ${content.pages}, FAQ: ${content.faq}, выставок: ${memory.exhibitions}, памятных дат: ${memorableDates}, фондов в реестре: ${registryFunds}, пользователей: ${credentials.length}`);
   console.log("\n🔑 Учётные записи админки (НЕ сохраняйте в git):");
   console.table(credentials);
+  finished = true;
   console.log("\nℹ️  Файлы демо-сканов: npm run scans (локально) / npm run scans:upload (Supabase)");
 }
 
 main()
   .catch((error) => {
-    console.error("❌ Ошибка сида:", error);
+    console.error(`❌ Ошибка сида на шаге «${step}»:`, error);
     process.exitCode = 1;
   })
   .finally(() => db.$disconnect());
