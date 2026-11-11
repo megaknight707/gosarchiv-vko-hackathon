@@ -60,6 +60,8 @@ const nextConfig: NextConfig = {
   },
   // Заголовок «X-Powered-By: Next.js» не раскрываем
   poweredByHeader: false,
+  // Без плавающего значка Next.js в режиме разработки (мешает скриншотам и демонстрации)
+  devIndicators: false,
   // sharp и pg — серверные нативные пакеты, не бандлим их
   serverExternalPackages: ["sharp", "pg"],
   images: {

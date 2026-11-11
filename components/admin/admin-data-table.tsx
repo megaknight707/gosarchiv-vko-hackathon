@@ -71,7 +71,7 @@ export async function AdminDataTable({
       case "enum":
         return value ? t(`enums.${column.labels}.${value}`) : "—";
       case "mono":
-        return <span className="font-mono text-xs">{String(value ?? "—")}</span>;
+        return <span className="font-mono text-xs whitespace-nowrap">{String(value ?? "—")}</span>;
       case "relation": {
         const related = column.relation ? (row[column.relation.include] as Record<string, string> | null) : null;
         if (!related || !column.relation) return "—";
