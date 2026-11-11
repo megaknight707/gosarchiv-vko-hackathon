@@ -57,3 +57,10 @@ lib/generated/
 # Playwright
 /test-results/
 /playwright-report/
+
+# Видеопрезентация: готовые ролики, записи экрана и кадры (большие файлы)
+/video/renders/
+/video/node_modules/
+/video/recordings/
+/video/.frames/
+/video/audio/*.wav
