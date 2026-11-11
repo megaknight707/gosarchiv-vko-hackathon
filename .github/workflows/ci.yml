@@ -1,0 +1,52 @@
+# Проверка каждого push и pull request: линтер, типы, unit-тесты, миграции на чистой базе,
+# демо-данные и production-сборка. База — временный PostgreSQL в контейнере (как локально в Docker),
+# ключей и доступа к Supabase/Claude CI не получает.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_USER: gosarchiv
+          POSTGRES_PASSWORD: gosarchiv
+          POSTGRES_DB: gosarchiv
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U gosarchiv"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://gosarchiv:gosarchiv@localhost:5432/gosarchiv
+      DIRECT_URL: postgresql://gosarchiv:gosarchiv@localhost:5432/gosarchiv
+      DEMO_MODE: "true"
+      AI_MODE: "offline"
+      STORAGE_DRIVER: local
+      AUTH_SECRET: ci-only-secret-not-used-in-production
+      # Пароль демо-сотрудников только для временной базы CI (в лог выводится заглушка, а не пароль)
+      SEED_ADMIN_PASSWORD: ci-temporary-database-only
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - name: Миграции на чистой базе
+        run: npx prisma migrate deploy
+      - name: Демо-данные
+        run: npm run seed
+      - run: npm run build
