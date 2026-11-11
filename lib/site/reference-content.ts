@@ -123,7 +123,8 @@ export const PAID_SERVICES = {
     en: "Resolution of the East Kazakhstan Regional Akimat No. 289 of 15 December 2023 approving the price list for goods (works, services) of the state archives of the East Kazakhstan Region",
   } satisfies L,
   adilet: { kz: "https://adilet.zan.kz/kaz/docs/G23V000289A", ru: "https://adilet.zan.kz/rus/docs/G23V000289A", en: "https://adilet.zan.kz/rus/docs/G23V000289A" } satisfies L,
-  scan: "/documents/services/preyskurant-289-ru.pdf",
+  // Сканы постановления переданы архивом: казахский и русский текст — отдельными файлами
+  scan: { kz: "/documents/services/preyskurant-289-kz.pdf", ru: "/documents/services/preyskurant-289-ru.pdf", en: "/documents/services/preyskurant-289-ru.pdf" } satisfies L,
   basis: {
     kz: "Мемлекеттік архивтердің ақылы қызмет түрлерін жүзеге асыру қағидалары — ҚР Мәдениет және ақпарат министрінің 10.07.2025 № 313-н/қ бұйрығы (қолданыстағы редакция).",
     ru: "Правила осуществления платных видов деятельности государственными архивами — приказ Министра культуры и информации РК от 10.07.2025 № 313-н/қ (действующая редакция).",

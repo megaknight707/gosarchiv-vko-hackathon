@@ -41,7 +41,7 @@ export default async function PaidServicesPage({ params }: PageProps<"/[locale]/
         <p className="mt-2 font-serif text-lg font-bold">{pick(PAID_SERVICES.act, locale)}</p>
         <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
           <ExternalLink href={pick(PAID_SERVICES.adilet, locale)}>{t("openAdilet")}</ExternalLink>
-          <ExternalLink href={PAID_SERVICES.scan}>{t("openScan")}</ExternalLink>
+          <ExternalLink href={pick(PAID_SERVICES.scan, locale)}>{t("openScan")}</ExternalLink>
         </p>
         <p className="mt-4 text-sm">
           <b>{t("basisTitle")}:</b> <ExternalLink href={PAID_SERVICES.basisHref} className="font-normal">{pick(PAID_SERVICES.basis, locale)}</ExternalLink>
