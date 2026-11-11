@@ -213,7 +213,7 @@ export function AssistantPanel() {
                         <Link href={doc.url} onClick={close} className="flex items-center gap-3 rounded-[12px] border border-border bg-surface p-2 hover:border-primary">
                           <span className="relative grid size-12 shrink-0 place-items-center overflow-hidden rounded-md bg-chip">
                             {doc.previewUrl ? (
-                              <Image src={doc.previewUrl} alt="" fill sizes="48px" className="object-cover" />
+                              <Image src={doc.previewUrl} alt="" fill unoptimized={doc.previewUrl.startsWith("/api/files/")} sizes="48px" className="object-cover" />
                             ) : (
                               <FileText aria-hidden className="size-5 text-muted-ink" />
                             )}

@@ -343,7 +343,8 @@
     "closeFilters": "Закрыть фильтры",
     "registryTitle": "Полный перечень фондов архива",
     "registryText": "{count} фондов с номерами, крайними датами и объёмом — реестр на 2018 год.",
-    "personalFundsLink": "Личные фонды →"
+    "personalFundsLink": "Личные фонды →",
+    "resultsHeading": "Результаты поиска"
   },
   "Document": {
     "fields": "Сведения о документе",

@@ -53,3 +53,7 @@ Thumbs.db
 # клиент Prisma генерируется командой prisma generate (postinstall)
 lib/generated/
 
+
+# Playwright
+/test-results/
+/playwright-report/

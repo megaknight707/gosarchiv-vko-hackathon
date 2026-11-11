@@ -1,3 +1,4 @@
+// Миниатюры сканов из /api/files/ уже сжаты (WebP 320 px) и проходят проверку доступа — их не оптимизируем повторно.
 // Карточка документа для списков (главная, каталог, связанные материалы):
 // превью, штамп доступа, название, шифр, тип / год / место.
 import Image from "next/image";
@@ -34,7 +35,7 @@ export function DocumentCard({ doc, showDemo = false, className }: { doc: Docume
     >
       <div className="relative h-[120px] bg-chip sm:h-[170px]">
         {doc.previewUrl ? (
-          <Image src={doc.previewUrl} alt="" fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
+          <Image src={doc.previewUrl} alt="" fill unoptimized={doc.previewUrl.startsWith("/api/files/")} sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
         ) : (
           <div className="flex h-full flex-col items-center justify-center gap-1 text-xs text-muted-ink">
             <FileImage aria-hidden className="size-6" />

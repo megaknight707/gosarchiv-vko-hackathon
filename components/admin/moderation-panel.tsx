@@ -16,7 +16,19 @@ export function ModerationPanel({ action, transitions }: { action: (state: Trans
   const t = loose(useTranslations("Admin"));
   const [state, formAction, pending] = useActionState(action, {} as TransitionState);
 
-  if (transitions.length === 0) return <p className="mt-3 text-sm text-muted-ink">{t("moderation.nothing")}</p>;
+  // После действия у автора может не остаться доступных переходов — подтверждение всё равно показываем
+  if (transitions.length === 0) {
+    return (
+      <>
+        {state.result === "ok" && (
+          <p role="status" className="mt-3 text-sm text-ok">
+            {t("moderation.done")}
+          </p>
+        )}
+        <p className="mt-3 text-sm text-muted-ink">{t("moderation.nothing")}</p>
+      </>
+    );
+  }
 
   return (
     <form action={formAction} key={state.version} className="mt-3 space-y-3">

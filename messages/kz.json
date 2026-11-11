@@ -343,7 +343,8 @@
     "closeFilters": "Сүзгілерді жабу",
     "registryTitle": "Архив қорларының толық тізбесі",
     "registryText": "Нөмірі, шекті күндері және көлемі көрсетілген {count} қор — 2018 жылғы тізілім.",
-    "personalFundsLink": "Жеке қорлар →"
+    "personalFundsLink": "Жеке қорлар →",
+    "resultsHeading": "Іздеу нәтижелері"
   },
   "Document": {
     "fields": "Құжат туралы мәліметтер",

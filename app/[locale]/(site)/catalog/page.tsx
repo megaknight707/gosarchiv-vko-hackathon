@@ -203,6 +203,8 @@ export default async function CatalogPage({ params, searchParams }: PageProps<"/
                 </div>
               </div>
 
+              {/* Заголовок для экранного диктора: карточки (h3) идут после h2 — правильная иерархия */}
+              <h2 className="sr-only">{t("resultsHeading")}</h2>
               {result.items.length > 0 ? (
                 <ul className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
                   {result.items.map((item) => (

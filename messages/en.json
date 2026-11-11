@@ -343,7 +343,8 @@
     "closeFilters": "Close filters",
     "registryTitle": "Full list of the archive’s funds",
     "registryText": "{count} funds with numbers, date ranges and volume — register as of 2018.",
-    "personalFundsLink": "Personal fonds →"
+    "personalFundsLink": "Personal fonds →",
+    "resultsHeading": "Search results"
   },
   "Document": {
     "fields": "Document details",

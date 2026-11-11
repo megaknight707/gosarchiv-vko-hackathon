@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/catalog/
   const doc = await getPublishedDocument(id);
   if (!doc) return {};
   const title = pickLocale(doc, "title", locale);
-  const description = pickLocale(doc, "summary", locale).slice(0, 200);
+  // Если краткого описания нет — описание страницы из названия и шифра (не пустое)
+  const description = (pickLocale(doc, "summary", locale) || `${title}. ${doc.cipher}`).slice(0, 200);
   const preview = doc.accessStatus === "OPEN" ? doc.files[0]?.previewUrl : null;
   return {
     title: `${title} · ${doc.cipher}`,
