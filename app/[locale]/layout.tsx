@@ -6,7 +6,7 @@ import { JetBrains_Mono, PT_Sans, PT_Serif } from "next/font/google";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { htmlLang, routing } from "@/i18n/routing";
 import { isDemoMode, siteUrl } from "@/lib/site/config";
 import { languageAlternates } from "@/lib/site/page-metadata";
@@ -51,7 +51,13 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     description: t("description"),
     applicationName: t("siteName"),
     alternates: { languages: languageAlternates("/") },
-    openGraph: { siteName: t("siteName"), locale: htmlLang[locale], type: "website" },
+    openGraph: {
+      siteName: t("siteName"),
+      locale: htmlLang[locale],
+      type: "website",
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: t("siteName") }],
+    },
+    twitter: { card: "summary_large_image", images: ["/og-image.png"] },
     // В демо-режиме сайт не индексируется поисковиками
     robots: isDemoMode ? { index: false, follow: false } : undefined,
   };
@@ -67,6 +73,9 @@ export const viewport: Viewport = {
 export default async function LocaleLayout({ children, params }: LayoutProps<"/[locale]">) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
+  // В браузер публичного сайта уходят переводы без раздела админки (~480 строк) —
+  // страница легче. Админка подключает полный набор в своём шаблоне.
+  const publicMessages = Object.fromEntries(Object.entries(await getMessages()).filter(([namespace]) => namespace !== "Admin"));
 
   return (
     <html
@@ -81,7 +90,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         </Script>
       </head>
       <body className="flex min-h-full flex-col">
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={publicMessages}>
           <ThemeProvider>{children}</ThemeProvider>
         </NextIntlClientProvider>
       </body>

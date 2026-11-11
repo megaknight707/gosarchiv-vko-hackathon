@@ -1405,5 +1405,13 @@
     "symbolsIntro": "The official description of the state symbols is published on the website of the President of Kazakhstan.",
     "linksIntro": "Links were checked on 10 November 2026 and open in a new tab.",
     "moreInfo": "Reference pages"
+  },
+  "Errors": {
+    "title": "Something went wrong",
+    "text": "The page did not load this time. Please refresh in a minute — your filters and query are kept in the address.",
+    "code": "Error code: {digest}",
+    "retry": "Try again",
+    "home": "Home page",
+    "loading": "Loading…"
   }
 }

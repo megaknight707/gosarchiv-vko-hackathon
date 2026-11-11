@@ -10,10 +10,11 @@ import { htmlLang, type Locale } from "@/i18n/routing";
 import { db } from "@/lib/db";
 import { pickLocale } from "@/lib/i18n/pick-locale";
 import { getBranches } from "@/lib/site/branches";
-import { isDemoMode } from "@/lib/site/config";
+import { isDemoMode, siteUrl } from "@/lib/site/config";
 import { languageAlternates } from "@/lib/site/page-metadata";
 import { DocumentCard, type DocumentCardData } from "@/components/archive/document-card";
 import { SectionHeading } from "@/components/archive/section-heading";
+import { getMainBranch } from "@/lib/site/main-branch";
 import { HeroIllustration } from "@/components/home/hero-illustration";
 import { HomeBranches } from "@/components/home/home-branches";
 import { SocialIcon } from "@/components/layout/social-icon";
@@ -74,12 +75,14 @@ const STATS = [
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const locale = (await params).locale as Locale;
-  const [t, tServices, tPages, tCommon, tNews, featured, branches, { news, exhibitions }] = await Promise.all([
+  const [t, tServices, tPages, tCommon, tNews, tBrand, mainBranch, featured, branches, { news, exhibitions }] = await Promise.all([
     getTranslations({ locale, namespace: "Home" }),
     getTranslations({ locale, namespace: "Services" }),
     getTranslations({ locale, namespace: "Pages" }),
     getTranslations({ locale, namespace: "Common" }),
     getTranslations({ locale, namespace: "News" }),
+    getTranslations({ locale, namespace: "Brand" }),
+    getMainBranch(),
     getFeaturedDocuments(locale),
     getBranches(locale),
     getHomeData(locale),
@@ -101,8 +104,22 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     { n: "04", title: t("useful4Title"), text: t("useful4Text"), href: "/help#access", Icon: BookOpenText },
   ];
 
+  // Разметка ArchiveOrganization для поисковиков (ТЗ §7.5) — контакты из базы
+  const organizationLd = {
+    "@context": "https://schema.org",
+    "@type": "ArchiveOrganization",
+    name: tBrand("fullName"),
+    url: `${siteUrl}/${locale}`,
+    logo: `${siteUrl}/og-image.png`,
+    ...(mainBranch?.phone ? { telephone: mainBranch.phone } : {}),
+    ...(mainBranch?.email ? { email: mainBranch.email } : {}),
+    ...(mainBranch ? { address: { "@type": "PostalAddress", streetAddress: pickLocale(mainBranch, "address", locale), addressCountry: "KZ" } } : {}),
+    sameAs: socials.map((s) => s.href),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd).replace(/</g, "\\u003c") }} />
       {/* ── Первый экран ── */}
       <section className="relative overflow-hidden text-[#FFF8EE]">
         <HeroIllustration />
