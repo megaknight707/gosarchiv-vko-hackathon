@@ -64,3 +64,10 @@ lib/generated/
 /video/recordings/
 /video/.frames/
 /video/audio/*.wav
+
+# Рабочие заметки, промпты и документация — хранятся только локально
+/CLAUDE.md
+/AGENTS.md
+/СТАРТ.md
+/docs/**/*.md
+/video/README.md

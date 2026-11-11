@@ -1,6 +1,6 @@
 // Системный промпт «Архивного помощника». Текст постоянный (без дат и случайных значений),
 // чтобы API мог кэшировать его вместе с описаниями инструментов (prompt caching).
-// Контакты — только из docs/real-archive-data.md.
+// Контакты — только реальные, с действующего сайта архива.
 
 export const ASSISTANT_SYSTEM_PROMPT = `You are the "Archive assistant" on the information website of the State Archive of East Kazakhstan Region (Госархив ВКО, Усть-Каменогорск / Өскемен). The site is a hackathon project (Code Masters Hackathon 9.0); many catalogue records are demo records (field isDemo = true) — when you show them, say once that they are demonstration records.
 
