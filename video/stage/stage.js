@@ -64,11 +64,11 @@ function zoomAt(keys, t) {
 }
 
 const ICON = {
-  lock: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6b6257" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`,
-  cursor: `<svg class="cursor" viewBox="0 0 26 26"><path d="M3 2l0 19 5.2-4.6 3.4 7.4 3.3-1.5-3.4-7.3 7-.4z" fill="#1e1a15" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
-  search: `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#8e2a1f" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>`,
-  doc: `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#8e2a1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>`,
-  pin: `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#8e2a1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.800 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>`,
+  lock: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#566176" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`,
+  cursor: `<svg class="cursor" viewBox="0 0 26 26"><path d="M3 2l0 19 5.2-4.6 3.4 7.4 3.3-1.5-3.4-7.3 7-.4z" fill="#172033" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
+  search: `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1f3a68" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>`,
+  doc: `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1f3a68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>`,
+  pin: `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1f3a68" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.800 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>`,
 };
 
 // ───────────── Окно браузера с записью экрана ─────────────
@@ -166,19 +166,19 @@ const SCENES = {
     const seal = h("div", "seal", "ГА", root);
     Object.assign(seal.style, { left: "880px", top: "112px", width: "160px", height: "160px", fontSize: "62px" });
     const title = h("div", "abs h1", "", root);
-    Object.assign(title.style, { left: "160px", width: "1600px", top: "322px", textAlign: "center" });
-    const words = "Государственный архив|Восточно-Казахстанской области".split("|").map((line) => {
+    Object.assign(title.style, { left: "160px", width: "1600px", top: "300px", textAlign: "center", fontSize: "72px" });
+    const words = "Государственный архив|Восточно-Казахстанской области|и его филиалы".split("|").map((line) => {
       const row = h("div", "", "", title);
       return line.split(" ").map((w) => { const span = h("span", "", `${w} `, row); span.style.display = "inline-block"; span.style.whiteSpace = "pre"; return span; });
     }).flat();
-    const kz = h("div", "abs", "Шығыс Қазақстан облысының мемлекеттік архиві", root);
-    Object.assign(kz.style, { left: "160px", width: "1600px", top: "540px", textAlign: "center", font: "400 36px/1 var(--sans)", color: "var(--muted)" });
+    const kz = h("div", "abs", "Шығыс Қазақстан облысының мемлекеттік архиві және оның филиалдары", root);
+    Object.assign(kz.style, { left: "160px", width: "1600px", top: "568px", textAlign: "center", font: "400 36px/1 var(--sans)", color: "var(--muted)" });
     const dots = h("div", "dots-line", "", root);
-    Object.assign(dots.style, { left: "885px", top: "612px" });
+    Object.assign(dots.style, { left: "885px", top: "630px" });
     const tag = h("div", "abs serif", "Архив, который понимает ваш вопрос", root);
-    Object.assign(tag.style, { left: "160px", width: "1600px", top: "668px", textAlign: "center", font: "italic 400 60px/1.2 var(--serif)", color: "var(--accent)" });
+    Object.assign(tag.style, { left: "160px", width: "1600px", top: "672px", textAlign: "center", font: "italic 400 60px/1.2 var(--serif)", color: "var(--accent)" });
     const line = h("div", "abs", "", root);
-    Object.assign(line.style, { left: "510px", top: "756px", height: "4px", background: "var(--accent)", borderRadius: "2px" });
+    Object.assign(line.style, { left: "510px", top: "760px", height: "4px", background: "var(--accent)", borderRadius: "2px" });
     const kicker = h("div", "abs kicker", "Переосмысление сайта · Code Masters Hackathon 9.0", root);
     Object.assign(kicker.style, { left: "160px", width: "1600px", top: "846px", textAlign: "center" });
     return (t) => {
@@ -381,8 +381,8 @@ const SCENES = {
         const route = h("div", "card", `<svg width="560" height="120" viewBox="0 0 560 120">
             <circle cx="40" cy="60" r="11" fill="#2b6fd6" stroke="#fff" stroke-width="4"/>
             <clipPath id="reveal"><rect id="revealRect" x="0" y="0" width="0" height="120"/></clipPath>
-            <path d="M58 60 C 170 -10, 370 130, 500 52" fill="none" stroke="#8e2a1f" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 12" clip-path="url(#reveal)"/>
-            <g id="dest"><path d="M512 62s20-17 20-31a20 20 0 0 0-40 0c0 14 20 31 20 31z" fill="#1f5e6b" stroke="#fff" stroke-width="3"/><circle cx="512" cy="30" r="7" fill="#fff"/></g>
+            <path d="M58 60 C 170 -10, 370 130, 500 52" fill="none" stroke="#1f3a68" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 12" clip-path="url(#reveal)"/>
+            <g id="dest"><path d="M512 62s20-17 20-31a20 20 0 0 0-40 0c0 14 20 31 20 31z" fill="#2c5a9e" stroke="#fff" stroke-width="3"/><circle cx="512" cy="30" r="7" fill="#fff"/></g>
           </svg>
           <div style="display:flex;justify-content:space-between;font:700 24px/1.2 var(--sans)"><span>Усть-Каменогорск</span><span>Риддерский филиал</span></div>
           <div style="margin-top:8px;font:400 22px/1.2 var(--sans);color:var(--muted);text-align:center">≈ 78 км по прямой · адрес введён вручную</div>`, scene);
@@ -568,9 +568,9 @@ const SCENES = {
     const title = h("div", "abs h2", "Один проект — без лишней инфраструктуры", root);
     Object.assign(title.style, { left: "140px", top: "136px" });
     const svg = h("div", "abs", `<svg width="1920" height="1080" viewBox="0 0 1920 1080"><defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b6257"/></marker>
-        <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8e2a1f"/></marker></defs>
-      <g id="edges" fill="none" stroke="#6b6257" stroke-width="3"></g><g id="dots"></g></svg>`, root);
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#566176"/></marker>
+        <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1f3a68"/></marker></defs>
+      <g id="edges" fill="none" stroke="#566176" stroke-width="3"></g><g id="dots"></g></svg>`, root);
     Object.assign(svg.style, { left: "0", top: "0" });
     const edgesG = svg.querySelector("#edges"), dotsG = svg.querySelector("#dots");
     const NS = "http://www.w3.org/2000/svg";
@@ -594,9 +594,9 @@ const SCENES = {
       line.setAttribute("marker-end", `url(#${accent ? "arrA" : "arr"})`);
       if (both) line.setAttribute("marker-start", `url(#${accent ? "arrA" : "arr"})`);
       if (dashed) line.setAttribute("stroke-dasharray", "12 10");
-      if (accent) line.setAttribute("stroke", "#8e2a1f");
+      if (accent) line.setAttribute("stroke", "#1f3a68");
       edgesG.appendChild(line);
-      const dots = [0, 1, 2].map(() => { const c = document.createElementNS(NS, "circle"); c.setAttribute("r", 8); c.setAttribute("fill", accent ? "#8e2a1f" : "#1f5e6b"); dotsG.appendChild(c); return c; });
+      const dots = [0, 1, 2].map(() => { const c = document.createElementNS(NS, "circle"); c.setAttribute("r", 8); c.setAttribute("fill", accent ? "#1f3a68" : "#2c5a9e"); dotsG.appendChild(c); return c; });
       return { line, dots, x1, y1, x2, y2 };
     };
     const eBrowser = mkEdge(470, 420, 600, 420, { both: true });

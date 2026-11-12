@@ -95,9 +95,10 @@ export class Recorder {
     }
   }
 
-  async press(key, { settle = 700 } = {}) {
+  async press(key, { settle = 700, wait } = {}) {
     await this.page.keyboard.press(key);
     await this.page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => {});
+    if (wait) await wait();
     await this.page.waitForTimeout(settle);
     this.push(await this.shot(), 2);
   }

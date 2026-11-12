@@ -5,6 +5,7 @@
 // Публичные сцены пишутся с рабочей ссылки; админка — с локального стенда (http://localhost:3000),
 // пароли демо-сотрудников берутся из файла VIDEO_STAFF_JSON (вне репозитория), в кадр логин не попадает.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium, devices } from "@playwright/test";
@@ -54,7 +55,13 @@ async function desktop(browser, options = {}) {
 const noWait = async () => {};
 /** Дождаться, пока картинки в выбранной области действительно загрузятся */
 const imagesReady = (page, selector) =>
-  page.waitForFunction((sel) => [...document.querySelectorAll(sel)].every((img) => img.complete && img.naturalWidth > 0), selector, { timeout: 20000 }).catch(() => {});
+  page
+    .waitForFunction(
+      (sel) => [...document.querySelectorAll(sel)].filter((img) => img.getBoundingClientRect().top < innerHeight).every((img) => img.complete && img.naturalWidth > 0),
+      selector,
+      { timeout: 20000 },
+    )
+    .catch(() => {});
 
 // ───────────── 02. Действующий сайт архива: три кадра «как сейчас» ─────────────
 async function scene02(browser) {
@@ -99,7 +106,7 @@ async function scene04(browser) {
   await rec.type("фотографии Усть-Каменогорска в 1960-х", { perChar: 0.068 });
   await rec.hold(0.35);
   await rec.mark("submit");
-  await rec.press("Enter", { settle: 900 });
+  await rec.press("Enter", { settle: 900, wait: () => imagesReady(page, "main img") });
   await settle(page);
   await rec.mark("chips", { bar: "main form[role=search] input[name=q]", box: "main div.bg-accent-2-soft", chips: "main div.bg-accent-2-soft a" });
   await rec.until(t.p(2) - 0.15);
@@ -323,6 +330,19 @@ async function scene09(browser) {
   return stats;
 }
 
+// Документ, который сцена 10 создаёт на локальном стенде. Перед записью удаляем копии от прошлых запусков —
+// только в локальной базе и только демо-записи с этим названием.
+const DEMO_TITLE = "Набережная Иртыша после реконструкции";
+async function removeEarlierDemoDocuments(title) {
+  if (!/^https?:\/\/(localhost|127\.0\.0\.1)(:|\/|$)/.test(LOCAL)) return;
+  const pg = createRequire(join(ROOT, "..", "package.json"))("pg");
+  const client = new pg.Client({ connectionString: process.env.VIDEO_LOCAL_DATABASE_URL ?? "postgresql://gosarchiv:gosarchiv@localhost:5433/gosarchiv" });
+  await client.connect();
+  const { rowCount } = await client.query('DELETE FROM "ArchiveDocument" WHERE "titleRu" = $1 AND "isDemo" = true', [title]);
+  await client.end();
+  if (rowCount) console.log(`  удалено прежних демо-документов «${title}»: ${rowCount}`);
+}
+
 // ───────────── 10. Админка (локальный стенд): документ → проверка → публикация → журнал → аналитика ─────────────
 async function scene10(browser) {
   const t = clock("10-admin");
@@ -345,6 +365,7 @@ async function scene10(browser) {
     for (let i = 0; i < n; i++) await fetch(`${LOCAL}/api/pageview`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ section, locale: "ru" }) }).catch(() => {});
   }
 
+  await removeEarlierDemoDocuments(DEMO_TITLE);
   const archivist = await login("archivist@gosarchiv.demo");
   const moderator = await login("moderator@gosarchiv.demo");
   const admin = await login("superadmin@gosarchiv.demo");
@@ -354,7 +375,7 @@ async function scene10(browser) {
   await form.goto(`${LOCAL}/ru/admin/documents/new`);
   await settle(form);
   await form.locator("#admin-main form select[name=storageUnitId]").selectOption({ index: 3 });
-  await form.locator("#admin-main form [name=titleRu]").fill("Набережная Иртыша после реконструкции");
+  await form.locator("#admin-main form [name=titleRu]").fill(DEMO_TITLE);
   await form.locator("#admin-main form [name=yearFrom]").fill("1965");
   await form.locator("#admin-main form [name=summaryRu]").fill("Демонстрационная запись: вид на набережную Иртыша в Усть-Каменогорске.");
   await form.evaluate(() => window.scrollTo(0, 0));

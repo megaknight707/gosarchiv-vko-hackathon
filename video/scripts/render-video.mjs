@@ -20,7 +20,7 @@ const value = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : un
 const SITE_URL = "https://gosarchiv-vko-hackathon.vercel.app";
 
 // QR-код рабочей ссылки для финального кадра
-writeFileSync(join(ROOT, "stage", "qr.svg"), await QRCode.toString(SITE_URL, { type: "svg", margin: 0, errorCorrectionLevel: "M", color: { dark: "#1e1a15", light: "#0000" } }));
+writeFileSync(join(ROOT, "stage", "qr.svg"), await QRCode.toString(SITE_URL, { type: "svg", margin: 0, errorCorrectionLevel: "M", color: { dark: "#172033", light: "#0000" } }));
 
 // Маленький статический сервер: сцена читает timeline.json, записи экрана и шрифты по HTTP
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".jpg": "image/jpeg", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".woff": "font/woff" };
