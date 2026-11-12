@@ -28,18 +28,18 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
   const phone = knownValue(branch?.phone);
   const email = knownValue(branch?.email);
 
-  const linkClass = "hover:text-[#FFF8EE] hover:underline underline-offset-4";
-  const headingClass = "mb-3 font-serif text-[15px] font-bold text-[#FFF8EE]";
+  const linkClass = "hover:text-[#FFFFFF] hover:underline underline-offset-4";
+  const headingClass = "mb-3 font-serif text-[15px] font-bold text-[#FFFFFF]";
 
   return (
-    <footer className="mt-16 bg-[#1E1A15] pt-10 pb-7 text-sm text-[#CFC6B6] sm:mt-20">
+    <footer className="mt-16 bg-[#0F1A2E] pt-10 pb-7 text-sm text-[#C3CCDB] sm:mt-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <section aria-labelledby="footer-contacts">
             <h2 id="footer-contacts" className={headingClass}>
               {tBrand("name")}
             </h2>
-            <p className="mb-3 text-[13px] text-[#A99F8E]">{tBrand("fullName")}</p>
+            <p className="mb-3 text-[13px] text-[#93A0B5]">{tBrand("fullName")}</p>
             <address className="space-y-1 not-italic">
               {address && <p>{address}</p>}
               {phone && (
@@ -70,7 +70,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             <ul aria-label={t("socials")} className="mt-4 flex gap-2">
               {socials.map((s) => (
                 <li key={s.key}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="grid size-9 place-items-center rounded-full border border-[#3A342B] hover:border-[#CFC6B6] hover:text-[#FFF8EE]">
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="grid size-9 place-items-center rounded-full border border-[#27344D] hover:border-[#C3CCDB] hover:text-[#FFFFFF]">
                     <SocialIcon name={s.key} className="size-4" />
                   </a>
                 </li>
@@ -125,7 +125,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           </nav>
         </div>
 
-        <div className="mt-8 flex flex-col gap-2 border-t border-[#3A342B] pt-4 text-[13px] text-[#A99F8E] sm:flex-row sm:justify-between">
+        <div className="mt-8 flex flex-col gap-2 border-t border-[#27344D] pt-4 text-[13px] text-[#93A0B5] sm:flex-row sm:justify-between">
           <p>
             {t("copyright", { year: new Date().getFullYear() })} ·{" "}
             <Link href="/privacy" className={linkClass}>

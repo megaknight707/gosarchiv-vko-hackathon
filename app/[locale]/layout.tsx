@@ -47,15 +47,15 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   const t = await getTranslations({ locale, namespace: "Metadata" });
   return {
     metadataBase: new URL(siteUrl),
-    title: { default: t("siteName"), template: t("titleTemplate") },
+    title: { default: t("fullSiteName"), template: t("titleTemplate") },
     description: t("description"),
     applicationName: t("siteName"),
     alternates: { languages: languageAlternates("/") },
     openGraph: {
-      siteName: t("siteName"),
+      siteName: t("fullSiteName"),
       locale: htmlLang[locale],
       type: "website",
-      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: t("siteName") }],
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: t("fullSiteName") }],
     },
     twitter: { card: "summary_large_image", images: ["/og-image.png"] },
     // В демо-режиме сайт не индексируется поисковиками
@@ -65,8 +65,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F7F3EA" },
-    { media: "(prefers-color-scheme: dark)", color: "#15130F" },
+    { media: "(prefers-color-scheme: light)", color: "#F3F5F8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0E1422" },
   ],
 };
 

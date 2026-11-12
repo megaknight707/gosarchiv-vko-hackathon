@@ -76,12 +76,15 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
       </div>
 
       {/* Основная строка */}
-      <div className="mx-auto flex h-15 max-w-7xl items-center gap-3 px-4 sm:h-[76px] sm:gap-6 sm:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:h-[88px] sm:gap-5 sm:px-8">
+        {/* Полное название архива — на двух языках; длинное, поэтому переносится в 2 строки */}
         <Link href="/" aria-label={tBrand("home")} className="flex min-w-0 items-center gap-2 sm:shrink-0 sm:gap-3">
-          <ArchiveSeal className="size-9 sm:size-11" />
-          <span className="min-w-0 leading-tight">
-            <strong className="block max-w-[120px] font-serif text-[13px] font-bold min-[400px]:max-w-[150px] sm:max-w-none sm:text-[15px]">{tBrand("name")}</strong>
-            <small className="hidden text-xs text-muted-ink sm:block" lang={locale === "kz" ? "ru" : "kk"}>
+          <ArchiveSeal className="size-9 shrink-0 sm:size-11" />
+          <span className="min-w-0 leading-[1.2]">
+            <strong className="line-clamp-3 max-w-[200px] font-serif text-[11px] leading-[1.18] font-bold text-balance min-[400px]:max-w-[230px] sm:line-clamp-2 sm:max-w-[290px] sm:text-[13.5px] sm:leading-[1.2] xl:max-w-[300px]">
+              {tBrand("name")}
+            </strong>
+            <small className="mt-0.5 hidden max-w-[290px] text-[11px] leading-[1.25] text-balance text-muted-ink sm:line-clamp-2 xl:max-w-[300px]" lang={locale === "kz" ? "ru" : "kk"}>
               {tBrand("tagline")}
             </small>
           </span>

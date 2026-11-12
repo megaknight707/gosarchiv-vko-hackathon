@@ -11,7 +11,7 @@ export function ExhibitionCardLink({ exhibition, large = false, priority = false
     <Link
       href={`/exhibitions/${exhibition.slug}`}
       className={cn(
-        "group relative flex h-full items-end overflow-hidden rounded-[16px] bg-[#4b3b29] p-5 text-[#FFF8EE]",
+        "group relative flex h-full items-end overflow-hidden rounded-[16px] bg-[#1B2B47] p-5 text-[#FFFFFF]",
         large ? "min-h-[360px] sm:min-h-[440px]" : "min-h-[220px]",
       )}
     >
@@ -25,13 +25,13 @@ export function ExhibitionCardLink({ exhibition, large = false, priority = false
           className="object-cover opacity-75 transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none"
         />
       )}
-      <span aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,16,12,0)_20%,rgba(20,16,12,.85)_90%)]" />
+      <span aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,16,30,0)_20%,rgba(10,16,30,.85)_90%)]" />
       <span className="relative">
         <span className="block text-xs tracking-[.12em] uppercase opacity-85">
           {exhibition.period} · {t("exhibitsCount", { count: exhibition.exhibitsCount })}
         </span>
         <span className={cn("mt-1 block font-serif font-bold group-hover:underline", large ? "text-2xl sm:text-3xl" : "text-xl")}>{exhibition.title}</span>
-        {large && <span className="mt-2 line-clamp-2 block max-w-xl text-[#F3E9D6]">{exhibition.description}</span>}
+        {large && <span className="mt-2 line-clamp-2 block max-w-xl text-[#E3E9F2]">{exhibition.description}</span>}
       </span>
     </Link>
   );

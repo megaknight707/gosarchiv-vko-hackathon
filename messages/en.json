@@ -1,12 +1,13 @@
 {
   "Metadata": {
     "siteName": "East Kazakhstan State Archive",
+    "fullSiteName": "State Archive of East Kazakhstan Region and Its Branches",
     "titleTemplate": "%s · East Kazakhstan State Archive",
     "description": "State Archive of East Kazakhstan Region: online catalogue, virtual exhibitions, the region's memory archive, branches and contacts."
   },
   "Brand": {
-    "name": "East Kazakhstan State Archive",
-    "tagline": "ШҚО мемлекеттік архиві",
+    "name": "State Archive of East Kazakhstan Region and Its Branches",
+    "tagline": "Шығыс Қазақстан облысының мемлекеттік архиві және оның филиалдары",
     "fullName": "State Archive of the Department of Digitalization and Archives of East Kazakhstan Region",
     "home": "Go to home page"
   },

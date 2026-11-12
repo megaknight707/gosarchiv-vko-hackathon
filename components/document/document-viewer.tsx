@@ -82,7 +82,7 @@ export function DocumentViewer({ pages, title }: { pages: ViewerPage[]; title: s
   }
 
   const button =
-    "grid h-9 min-w-9 place-items-center rounded-lg border border-white/15 bg-white/10 px-2 text-sm text-[#F3E9D6] transition-colors hover:bg-white/20 disabled:opacity-40";
+    "grid h-9 min-w-9 place-items-center rounded-lg border border-white/15 bg-white/10 px-2 text-sm text-[#E3E9F2] transition-colors hover:bg-white/20 disabled:opacity-40";
 
   return (
     <section
@@ -90,7 +90,7 @@ export function DocumentViewer({ pages, title }: { pages: ViewerPage[]; title: s
       aria-label={t("label")}
       aria-roledescription="carousel"
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-[18px] bg-[#2a241e] text-[#F3E9D6]",
+        "relative flex flex-col overflow-hidden rounded-[18px] bg-[#141C2C] text-[#E3E9F2]",
         fullscreen ? "h-dvh rounded-none" : "h-[70vh] min-h-[420px] lg:h-[calc(100vh-180px)] lg:max-h-[820px]",
       )}
     >
@@ -203,7 +203,7 @@ export function DocumentViewer({ pages, title }: { pages: ViewerPage[]; title: s
                 aria-current={i === index ? "true" : undefined}
                 className={cn(
                   "block h-16 w-12 overflow-hidden rounded-[3px] bg-[#d9ccb2] transition-opacity",
-                  i === index ? "opacity-100 outline-2 outline-offset-2 outline-[#D9A44A]" : "opacity-55 hover:opacity-90",
+                  i === index ? "opacity-100 outline-2 outline-offset-2 outline-[#D3A35E]" : "opacity-55 hover:opacity-90",
                 )}
               >
                 {p.previewUrl && (

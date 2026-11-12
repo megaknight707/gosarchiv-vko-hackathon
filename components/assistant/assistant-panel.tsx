@@ -133,7 +133,7 @@ export function AssistantPanel() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger className="fixed right-4 bottom-[calc(5rem+env(safe-area-inset-bottom))] z-40 inline-flex items-center gap-2 rounded-full bg-accent-2 px-[18px] py-3 font-bold text-white shadow-[0_12px_30px_rgba(0,0,0,.3)] transition-transform hover:-translate-y-0.5 sm:right-6 sm:bottom-6 dark:text-[#0f1a1c]">
+      <SheetTrigger className="fixed right-4 bottom-[calc(5rem+env(safe-area-inset-bottom))] z-40 inline-flex items-center gap-2 rounded-full bg-primary px-[18px] py-3 font-bold text-primary-foreground shadow-[0_12px_30px_rgba(0,0,0,.3)] transition-transform hover:-translate-y-0.5 sm:right-6 sm:bottom-6 dark:text-[#0f1a1c]">
         <Sparkles aria-hidden className="size-4" />
         {tHeader("askArchive")}
       </SheetTrigger>
@@ -147,7 +147,7 @@ export function AssistantPanel() {
         className="w-full gap-0 border-border bg-bg p-0 sm:max-w-md"
       >
         <header className="flex items-start gap-3 border-b border-border bg-surface px-4 py-3">
-          <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-2-soft text-accent-2">
+          <span className="grid size-9 shrink-0 place-items-center rounded-full bg-chip text-primary">
             <Sparkles aria-hidden className="size-4" />
           </span>
           <div className="min-w-0 flex-1">
@@ -199,7 +199,7 @@ export function AssistantPanel() {
                     <AssistantMarkdown text={message.content} onNavigate={close} />
                   ) : (
                     <span className="inline-flex items-center gap-2 text-muted-ink">
-                      <span className="size-2 animate-pulse rounded-full bg-accent-2" aria-hidden />
+                      <span className="size-2 animate-pulse rounded-full bg-primary" aria-hidden />
                       {t("thinking")}
                     </span>
                   )}

@@ -10,16 +10,16 @@
    Чтобы поменять цвет на всём сайте — поменяйте одну переменную здесь.
    ========================================================================== */
 :root {
-  --bg: #f7f3ea;
-  --surface: #fffdf8;
-  --text: #1e1a15;
-  --muted: #6b6257;
-  --border: #e2d9c8;
-  --accent: #8e2a1f; /* сургуч */
-  --accent-ink: #fff8ee;
-  --accent-2: #1f5e6b; /* бирюза */
-  --accent-2-soft: #e3eeef;
-  --chip: #efe8da;
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --text: #172033;
+  --muted: #566176;
+  --border: #dbe1ea;
+  --accent: #1f3a68; /* тёмно-синий */
+  --accent-ink: #ffffff;
+  --accent-2: #8a5e26; /* бронза */
+  --accent-2-soft: #f4ece1;
+  --chip: #e7ecf3;
   --ok: #2f6b3a;
   --ok-soft: #e2efe2;
   --lock: #8a5a12;
@@ -30,18 +30,18 @@
 }
 
 .dark {
-  --bg: #15130f;
-  --surface: #1f1c17;
-  --text: #ede6d8;
-  --muted: #a89f90;
-  --border: #2e2a23;
-  --accent: #d9a44a; /* янтарь */
-  --accent-ink: #1b1508;
-  --accent-2: #5fb3bf;
-  --accent-2-soft: #1c2b2d;
-  --chip: #29251e;
+  --bg: #0e1422;
+  --surface: #161e30;
+  --text: #e6ebf3;
+  --muted: #9ba7bb;
+  --border: #27324a;
+  --accent: #7fa6e8; /* светло-синий */
+  --accent-ink: #0b1426;
+  --accent-2: #d3a35e; /* бронза */
+  --accent-2-soft: #2a2317;
+  --chip: #1f2940;
   --ok: #8fcb98;
-  --ok-soft: #1d2a1f;
+  --ok-soft: #1a2a22;
   --lock: #e6b866;
   --lock-soft: #2d2416;
   --danger: #f08a7e;
@@ -52,14 +52,14 @@
 html.low-vision {
   font-size: 125%;
   --text: #000000;
-  --muted: #2b2620;
-  --border: #6b6253;
-  --bg: #fffdf8;
+  --muted: #1f2633;
+  --border: #5a6478;
+  --bg: #ffffff;
 }
 html.low-vision.dark {
   --text: #ffffff;
-  --muted: #e6dfd2;
-  --border: #8f8574;
+  --muted: #dfe5ee;
+  --border: #8a94a8;
   --bg: #000000;
 }
 html.low-vision main a {

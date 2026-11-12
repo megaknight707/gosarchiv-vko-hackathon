@@ -55,7 +55,7 @@ export function ExhibitLightbox({
           touchX.current = null;
           if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
         }}
-        className="flex h-[100dvh] max-h-none w-screen max-w-none flex-col gap-0 rounded-none border-0 bg-[#15130f] p-0 text-[#F3E9D6] sm:max-w-none"
+        className="flex h-[100dvh] max-h-none w-screen max-w-none flex-col gap-0 rounded-none border-0 bg-[#0B111D] p-0 text-[#E3E9F2] sm:max-w-none"
       >
         {exhibit && (
           <>
@@ -84,13 +84,13 @@ export function ExhibitLightbox({
             </div>
             <div className="mx-auto w-full max-w-3xl p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
               <DialogTitle className="font-serif text-xl font-bold">{exhibit.title}</DialogTitle>
-              <DialogDescription id="lightbox-caption" className="mt-1 text-[#d9ccb2]">
+              <DialogDescription id="lightbox-caption" className="mt-1 text-[#C2CBDA]">
                 {exhibit.text}
               </DialogDescription>
               {exhibit.document && (
                 <p className="mt-2 text-sm">
                   {t("source")}:{" "}
-                  <Link href={`/catalog/${exhibit.document.id}`} className="font-mono text-[#D9A44A] underline-offset-4 hover:underline">
+                  <Link href={`/catalog/${exhibit.document.id}`} className="font-mono text-[#D3A35E] underline-offset-4 hover:underline">
                     {exhibit.document.cipher}
                   </Link>
                 </p>

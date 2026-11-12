@@ -43,22 +43,22 @@ export default async function ExhibitionPage({ params }: PageProps<"/[locale]/ex
   return (
     <>
       {/* Обложка во весь экран */}
-      <section className="relative flex min-h-[calc(100svh-120px)] items-end overflow-hidden bg-[#2a241e] text-[#FFF8EE]">
+      <section className="relative flex min-h-[calc(100svh-120px)] items-end overflow-hidden bg-[#111A2C] text-[#FFFFFF]">
         {exhibition.coverUrl && (
           <Image src={exhibition.coverUrl} alt="" fill priority sizes="100vw" className="object-cover opacity-70" />
         )}
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,16,12,.1)_0%,rgba(20,16,12,.85)_80%)]" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,16,30,.1)_0%,rgba(10,16,30,.85)_80%)]" />
         <div className="relative mx-auto w-full max-w-7xl px-4 pt-10 pb-12 sm:px-8 sm:pb-16">
           <Breadcrumbs
-            className="mb-6 text-[#e8dcc4] [&_[aria-current]]:text-[#FFF8EE]"
+            className="mb-6 text-[#D3DCE9] [&_[aria-current]]:text-[#FFFFFF]"
             items={[{ label: tNav("home"), href: "/" }, { label: tNav("exhibitions"), href: "/exhibitions" }, { label: exhibition.title }]}
           />
           <p className="text-sm tracking-[.16em] uppercase opacity-85">
             {exhibition.period} · {t("exhibitsCount", { count: exhibition.exhibits.length })}
           </p>
           <h1 className="mt-3 max-w-4xl font-serif text-[34px] leading-[1.1] font-bold sm:text-5xl lg:text-6xl">{exhibition.title}</h1>
-          <p className="mt-5 max-w-2xl text-lg text-[#F3E9D6]">{exhibition.description}</p>
-          <a href="#exhibit-1" className="mt-8 inline-flex items-center gap-2 rounded-[12px] bg-[#FFF8EE] px-5 py-3 font-bold text-[#1E1A15] hover:opacity-90">
+          <p className="mt-5 max-w-2xl text-lg text-[#E3E9F2]">{exhibition.description}</p>
+          <a href="#exhibit-1" className="mt-8 inline-flex items-center gap-2 rounded-[12px] bg-[#FFFFFF] px-5 py-3 font-bold text-[#172033] hover:opacity-90">
             {t("start")}
             <ArrowDown aria-hidden className="size-4 motion-safe:animate-bounce" />
           </a>

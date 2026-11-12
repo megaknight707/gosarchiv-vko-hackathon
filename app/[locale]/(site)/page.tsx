@@ -121,13 +121,13 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd).replace(/</g, "\\u003c") }} />
       {/* ── Первый экран ── */}
-      <section className="relative overflow-hidden text-[#FFF8EE]">
+      <section className="relative overflow-hidden text-[#FFFFFF]">
         <HeroIllustration />
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(30,26,21,.15)_0%,rgba(30,26,21,.75)_78%)] dark:bg-[linear-gradient(180deg,rgba(10,9,7,.3)_0%,rgba(10,9,7,.85)_78%)]" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,20,36,.15)_0%,rgba(12,20,36,.75)_78%)] dark:bg-[linear-gradient(180deg,rgba(6,10,20,.3)_0%,rgba(6,10,20,.85)_78%)]" />
         <div className="relative mx-auto max-w-7xl px-4 pt-14 pb-10 sm:px-8 sm:pt-20 sm:pb-14">
-          <p className="mb-4 text-xs tracking-[.2em] text-[#F3E9D6] uppercase sm:text-sm">{t("eyebrow")}</p>
+          <p className="mb-4 text-xs tracking-[.2em] text-[#E3E9F2] uppercase sm:text-sm">{t("eyebrow")}</p>
           <h1 className="max-w-3xl font-serif text-[32px] leading-[1.1] font-bold sm:text-5xl lg:text-[56px]">{t("title")}</h1>
-          <p className="mt-5 max-w-2xl text-base text-[#F3E9D6] sm:text-lg">{t("lead")}</p>
+          <p className="mt-5 max-w-2xl text-base text-[#E3E9F2] sm:text-lg">{t("lead")}</p>
 
           <Form action={`/${locale}/catalog`} role="search" className="mt-8 flex max-w-3xl items-center gap-2 rounded-[16px] bg-surface p-2 text-ink shadow-[0_12px_40px_rgba(0,0,0,.25)]">
             <label htmlFor="home-ask" className="sr-only">
@@ -161,7 +161,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               </li>
             ))}
           </ul>
-          <p className="mt-10 text-right text-xs text-[#F3E9D6] italic opacity-80">{t("heroCaption")}</p>
+          <p className="mt-10 text-right text-xs text-[#E3E9F2] italic opacity-80">{t("heroCaption")}</p>
         </div>
       </section>
 
@@ -206,7 +206,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           <ul className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
             {exhibitions.map((exhibition, i) => (
               <li key={exhibition.id} className={i === 0 ? "lg:row-span-2" : undefined}>
-                <Link href={`/exhibitions/${exhibition.slug}`} className="group relative flex h-full min-h-40 items-end overflow-hidden rounded-[16px] bg-[#4b3b29] p-5 text-[#FFF8EE]">
+                <Link href={`/exhibitions/${exhibition.slug}`} className="group relative flex h-full min-h-40 items-end overflow-hidden rounded-[16px] bg-[#1B2B47] p-5 text-[#FFFFFF]">
                   <span>
                     <span className="block text-xs tracking-[.12em] uppercase opacity-80">{pickLocale(exhibition, "periodLabel", locale)}</span>
                     <span className="mt-1 block font-serif text-xl font-bold group-hover:underline">{pickLocale(exhibition, "title", locale)}</span>
