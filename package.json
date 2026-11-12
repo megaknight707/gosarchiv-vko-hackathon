@@ -34,6 +34,8 @@
     "prod:seed:funds": "tsx --env-file=.env.production.local prisma/seed-fund-registry.ts",
     "staff:password": "tsx scripts/set-staff-password.ts",
     "prod:staff:password": "tsx --env-file=.env.production.local scripts/set-staff-password.ts",
+    "analytics:remove": "tsx scripts/remove-search-queries.ts",
+    "prod:analytics:remove": "tsx --env-file=.env.production.local scripts/remove-search-queries.ts",
     "seed:restricted": "tsx scripts/seed-restricted-scan.ts",
     "prod:seed:restricted": "tsx --env-file=.env.production.local scripts/seed-restricted-scan.ts",
     "test": "vitest run",
