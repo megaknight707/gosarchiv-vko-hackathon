@@ -11,7 +11,7 @@ export function BarChart({ items, label }: { items: { label: string; value: numb
             {item.label}
           </span>
           <span className="h-3 rounded-full bg-chip" aria-hidden>
-            <span className="block h-3 rounded-full bg-accent-2" style={{ width: `${Math.max(2, (item.value / max) * 100)}%` }} />
+            <span className="block h-3 rounded-full bg-primary" style={{ width: `${Math.max(2, (item.value / max) * 100)}%` }} />
           </span>
           <span className="w-12 text-right font-mono text-xs">{item.value}</span>
         </li>
@@ -30,7 +30,7 @@ export function DailyColumns({ points, label }: { points: { day: string; count: 
       {points.map((p, i) => {
         const h = Math.max(2, (p.count / max) * 56);
         return (
-          <rect key={p.day} x={i * 12 + 2} y={60 - h} width={8} height={h} rx={2} fill="var(--accent-2)">
+          <rect key={p.day} x={i * 12 + 2} y={60 - h} width={8} height={h} rx={2} fill="var(--accent)">
             <title>{`${p.day}: ${p.count}`}</title>
           </rect>
         );

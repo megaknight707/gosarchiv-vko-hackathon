@@ -12,21 +12,21 @@ export function AiRecommendationsPanel({ locale, days }: { locale: string; days:
   const [state, action, pending] = useActionState(recommendationsAction, {} as RecommendationsState);
 
   return (
-    <section aria-labelledby="ai-recs" className="rounded-[12px] border border-accent-2/40 bg-accent-2-soft p-4">
+    <section aria-labelledby="ai-recs" className="rounded-[12px] border border-primary/25 bg-chip p-4">
       <h2 id="ai-recs" className="flex items-center gap-2 font-serif text-lg font-bold">
-        <Sparkles aria-hidden className="size-4 text-accent-2" />
+        <Sparkles aria-hidden className="size-4 text-primary" />
         {t("aiTitle")}
       </h2>
       <p className="mt-1 text-sm text-muted-ink">{t("aiIntro")}</p>
       <form action={action} className="mt-3 flex flex-wrap gap-2">
         <input type="hidden" name="locale" value={locale} />
         <input type="hidden" name="days" value={days} />
-        <button type="submit" disabled={pending} className="inline-flex items-center gap-2 rounded-full border border-accent-2 bg-surface px-4 py-2 text-sm font-bold text-accent-2 disabled:opacity-60">
+        <button type="submit" disabled={pending} className="inline-flex items-center gap-2 rounded-full border border-primary bg-surface px-4 py-2 text-sm font-bold text-primary disabled:opacity-60">
           <Sparkles aria-hidden className="size-4" />
           {pending ? t("aiLoading") : t("aiButton")}
         </button>
         {state.result && (
-          <button type="submit" name="refresh" value="1" disabled={pending} className="rounded-full px-3 py-2 text-sm text-accent-2 underline">
+          <button type="submit" name="refresh" value="1" disabled={pending} className="rounded-full px-3 py-2 text-sm text-primary underline">
             {t("aiRefresh")}
           </button>
         )}
