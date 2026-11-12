@@ -28,7 +28,7 @@ export async function ComplianceDocuments({ locale }: { locale: Locale }) {
             <li key={doc.key} className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center sm:gap-4">
               <FileText aria-hidden className="hidden size-5 shrink-0 text-primary sm:block" />
               <span className="flex-1">{doc.title}</span>
-              <span className="flex shrink-0 gap-2">
+              <span className="flex shrink-0 flex-wrap gap-2">
                 {doc.files.map((file) => (
                   <a
                     key={file.lang}

@@ -33,8 +33,8 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
       <Breadcrumbs className="mb-4" items={[{ label: tNav("home"), href: "/" }, { label: tPages("about.title") }]} />
       <SectionHeading as="h1" title={tPages("about.title")} subtitle={tPages("about.description")} />
 
-      <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
-        <nav aria-label={tContent("sections")} className="lg:sticky lg:top-4 lg:self-start">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[240px_minmax(0,1fr)]">
+        <nav aria-label={tContent("sections")} className="min-w-0 lg:sticky lg:top-4 lg:self-start">
           <ul className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible">
             {anchors.map((anchor) => (
               <li key={anchor.id} className="shrink-0">
